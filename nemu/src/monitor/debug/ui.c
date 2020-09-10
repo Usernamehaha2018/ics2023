@@ -33,6 +33,7 @@ static bool is_empty_arg(char *args){
   int arg_len = strlen(args);
      for(int i=0;i<arg_len;i++){
       if(args[i]=='\0')printf("chuxian");
+      if(args[i]==' ')printf("chuxian");
       if(args[i]!=' '&&args[i]!='\0'&&args[i]!='\t'&&args[i]!='\n'){
          return false;
       }
