@@ -28,9 +28,11 @@ static char* rl_gets() {
 }
 
 static bool is_empty_arg(char *args){
+  printf("%s\n", args);
   if(args==NULL)return true;
   int arg_len = strlen(args);
      for(int i=0;i<arg_len;i++){
+      if(args[i]=='\0')printf("chuxian");
       if(args[i]!=' '&&args[i]!='\0'&&args[i]!='\t'&&args[i]!='\n'){
          return false;
       }
@@ -53,7 +55,7 @@ static int cmd_si(char *args){
      cpu_exec(1);
      return 0;
    }
-  int sum = atoi( args );
+  int sum = atoi(args);
   if(sum <= 0){
     printf("invalid input: %s\n", args);
     return -1;
@@ -63,7 +65,9 @@ static int cmd_si(char *args){
     return 0;
   }
 }
-
+static int cmd_info(char *args){
+  return 0;
+}
 static int cmd_help(char *args);
 
 static struct {
@@ -75,6 +79,8 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "After displaying several commands, the program stops.", cmd_si},
+  { "info", "print values of the registers and the watchpoints.", cmd_info},
+
 
   /* TODO: Add more commands */
 
