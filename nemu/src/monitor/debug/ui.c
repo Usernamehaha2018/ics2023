@@ -31,9 +31,11 @@ static bool is_empty_arg(char *args){
   printf("%s\n", args);
   if(args==NULL)return true;
   int arg_len = strlen(args);
-     for(int i=0;i<arg_len;i++){
-      if(args[i]=='\0')printf("chuxian");
+       for(int i=0;i<arg_len;i++){
+      if(args[i]=='\0')printf("chuxian0");
       if(args[i]==' ')printf("chuxian");
+   }
+     for(int i=0;i<arg_len;i++){
       if(args[i]!=' '&&args[i]!='\0'&&args[i]!='\t'&&args[i]!='\n'){
          return false;
       }
