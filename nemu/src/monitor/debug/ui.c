@@ -72,8 +72,8 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_si(char *args){
-  printf("here");
-   if(is_empty_arg(args)){
+  assert(0);
+  if(is_empty_arg(args)){
      cpu_exec(1);
      return 0;
    }
@@ -171,7 +171,6 @@ void ui_mainloop() {
     int i;
     for (i = 0; i < NR_CMD; i ++) {
       if (strcmp(cmd, cmd_table[i].name) == 0) {
-        printf("Reach here\n");
         if (cmd_table[i].handler(args) < 0) { return; }
         break;
       }
