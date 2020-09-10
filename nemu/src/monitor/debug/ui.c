@@ -31,10 +31,6 @@ static bool is_empty_arg(char *args){
   printf("%s\n", args);
   if(args==NULL)return true;
   int arg_len = strlen(args);
-       for(int i=0;i<arg_len;i++){
-      if(args[i]=='\0')printf("chuxian0");
-      if(args[i]==' ')printf("chuxian");
-   }
      for(int i=0;i<arg_len;i++){
       if(args[i]!=' '&&args[i]!='\0'&&args[i]!='\t'&&args[i]!='\n'){
          return false;
@@ -42,6 +38,28 @@ static bool is_empty_arg(char *args){
    }
    return true;
 }
+
+static bool is_r_arg(char *args){
+  if(args==NULL){
+    return false;
+  }
+  bool flag = false;
+  for(int i=0;i<strlen(args);i++){
+    if(args[i]!='r'){
+      if(args[i]!=' '&&args[i]!='\t'){
+        continue;
+      }
+      else{
+        return false;
+      }
+    }
+    else{
+      flag = true;
+    }
+  }
+  return flag;
+}
+
 
 static int cmd_c(char *args) {
   cpu_exec(-1);
@@ -68,9 +86,17 @@ static int cmd_si(char *args){
     return 0;
   }
 }
+
 static int cmd_info(char *args){
-  return 0;
+  if(is_r_arg(args)){
+    isa_reg_display();
+    return 0;
+  }
+  else {
+    return -1;
+  }
 }
+
 static int cmd_help(char *args);
 
 static struct {
