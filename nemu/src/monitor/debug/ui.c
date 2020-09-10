@@ -30,7 +30,6 @@ static char* rl_gets() {
 static bool is_empty_arg(char *args){
   if(args==NULL)return true;
   int arg_len = strlen(args);
-  printf("%d", arg_len);
      for(int i=0;i<arg_len;i++){
       if(args[i]!=' '&&args[i]!='\0'&&args[i]!='\t'&&args[i]!='\n'){
          return false;
@@ -50,7 +49,6 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_si(char *args){
-  printf("%s\n\n",args);
    if(is_empty_arg(args)){
      cpu_exec(1);
      return 0;

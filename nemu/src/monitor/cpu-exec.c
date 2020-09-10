@@ -65,8 +65,6 @@ static uint64_t get_time() {
 
 /* Simulate how the CPU works. */
 void cpu_exec(uint64_t n) {
-      printf("%d \n",nemu_state.state);
-    printf("state!--init\n");
   switch (nemu_state.state) {
     case NEMU_END: case NEMU_ABORT:
       printf("Program execution has ended. To restart the program, exit NEMU and run again.\n");
@@ -77,7 +75,7 @@ void cpu_exec(uint64_t n) {
   uint64_t timer_start = get_time();
 
   for (; n > 0; n --) {
-    printf("here!!!!!!!!!!!!!!!!!!!!!");
+
     vaddr_t this_pc = cpu.pc;
 
     /* Execute one instruction, including instruction fetch,
@@ -104,8 +102,6 @@ void cpu_exec(uint64_t n) {
 
   uint64_t timer_end = get_time();
   g_timer += timer_end - timer_start;
-    printf("%d \n",nemu_state.state);
-    printf("state!\n");
   switch (nemu_state.state) {
     case NEMU_RUNNING: nemu_state.state = NEMU_STOP; break;
 
