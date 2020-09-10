@@ -2,6 +2,7 @@
 #include "expr.h"
 #include "watchpoint.h"
 
+#include <memory/paddr.h>
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -28,7 +29,6 @@ static char* rl_gets() {
 }
 
 static bool is_empty_arg(char *args){
-  printf("%s\n", args);
   if(args==NULL)return true;
   int arg_len = strlen(args);
      for(int i=0;i<arg_len;i++){
@@ -61,6 +61,7 @@ static bool is_r_arg(char *args){
 }
 
 
+
 static int cmd_c(char *args) {
   cpu_exec(-1);
   return 0;
@@ -72,7 +73,6 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_si(char *args){
-  printf("here\n");
   if(is_empty_arg(args)){
      cpu_exec(1);
      return 0;
@@ -91,12 +91,23 @@ static int cmd_si(char *args){
 static int cmd_info(char *args){
   if(is_r_arg(args)){
     isa_reg_display();
-    printf("yes!!\n");
     return 0;
   }
   else {
     return -1;
   }
+}
+
+static int cmd_x(char *args){
+  int nums = 10;
+  uint32_t addr = PMEM_BASE;
+  int i =0;
+  while(i<nums){
+  printf("%d\n",paddr_read(addr, 4));
+  addr += 4;
+  i+=1;
+  }
+  return 0;
 }
 
 static int cmd_help(char *args);
@@ -111,6 +122,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "After displaying several commands, the program stops.", cmd_si},
   { "info", "print values of the registers and the watchpoints.", cmd_info},
+  { "x", "cao", cmd_x},
 
 
   /* TODO: Add more commands */
