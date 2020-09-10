@@ -29,6 +29,7 @@ static char* rl_gets() {
 
 static bool is_empty_arg(char *args){
   int arg_len = strlen(args);
+  printf("%d", arg_len);
      for(int i=0;i<arg_len;i++){
       if(args[i]!=' '&&args[i]!='\0'&&args[i]!='\t'&&args[i]!='\n'){
          return false;
