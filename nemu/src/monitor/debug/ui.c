@@ -28,6 +28,7 @@ static char* rl_gets() {
 }
 
 static bool is_empty_arg(char *args){
+  if(args==NULL)return true;
   int arg_len = strlen(args);
   printf("%d", arg_len);
      for(int i=0;i<arg_len;i++){
