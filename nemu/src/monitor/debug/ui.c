@@ -27,9 +27,17 @@ static char* rl_gets() {
   return line_read;
 }
 
+static bool is_empty_arg(char *args){
+  int arg_len = strlen(args);
+     for(int i=0;i<arg_len;i++){
+      if(args[i]!=' '&&args[i]!='\0'&&args[i]!='\t'&&args[i]!='\n'){
+         return false;
+      }
+   }
+   return true;
+}
+
 static int cmd_c(char *args) {
-  printf("%s", args);
-  printf("args.\n");
   cpu_exec(-1);
   return 0;
 }
@@ -40,7 +48,19 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_si(char *args){
-  return 1;
+   if(is_empty_arg(args)){
+     cpu_exec(1);
+     return 0;
+   }
+  int sum = atoi( args );
+  if(sum <= 0){
+    printf("invalid input: %s\n", args);
+    return -1;
+  }
+  else{
+    cpu_exec(sum);
+    return 0;
+  }
 }
 
 static int cmd_help(char *args);
