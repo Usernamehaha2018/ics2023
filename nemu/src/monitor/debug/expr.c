@@ -188,13 +188,13 @@ int find_main_opt(word_t p, word_t q){
 }
 
 word_t eval(word_t p, word_t q){
-  if (p > q) {
+  if (p >= q) {
     if(tokens[p].type == DEREF){
       return 0;
     }
     else assert(0);
   }
-  else if (p == q) {
+  else if (p == q-1) {
     if(tokens[p].type==TK_HEX){
       word_t word_t_val = 0;          
       sscanf(tokens[p].str, "%x", &word_t_val); 
