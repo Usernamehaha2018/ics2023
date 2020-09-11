@@ -176,7 +176,7 @@ int find_main_opt(word_t p, word_t q){
         if(main_opt==-1){
           main_opt = i;
         }
-        else if(tokens[main_opt].type/2>=tokens[i].type){
+        else if(tokens[main_opt].type/2>=tokens[i].type/2){
           main_opt = i;
         }
       }
