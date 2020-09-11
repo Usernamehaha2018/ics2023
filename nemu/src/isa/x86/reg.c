@@ -57,6 +57,14 @@ void isa_reg_display() {
     printf
     ("%s   %x    %d\n", regsb[i], reg_b(i), reg_b(i));   
   }
+  printf("eax: %08x          %u\n",cpu.eax,cpu.eax);
+  printf("ecx: %08x          %u\n",cpu.ecx,cpu.ecx);
+  printf("edx: %08x          %u\n",cpu.edx,cpu.edx);
+  printf("ebx: %08x          %u\n",cpu.ebx,cpu.ebx);
+  printf("esp: %08x          %u\n",cpu.esp,cpu.esp);
+  printf("ebp: %08x          %u\n",cpu.ebp,cpu.ebp);
+  printf("esi: %08x          %u\n",cpu.esi,cpu.esi); 
+  printf("edi: %08x          %u\n",cpu.edi,cpu.edi);
 }
 
 char *ltrim(char *str)
