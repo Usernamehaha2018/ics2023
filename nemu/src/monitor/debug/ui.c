@@ -20,7 +20,6 @@ static char* rl_gets() {
     free(line_read);
     line_read = NULL;
   }
-  paddr_read((paddr_t)0x4b583aeb,4);
   line_read = readline("(nemu) ");
 
   if (line_read && *line_read) {
