@@ -112,7 +112,7 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  char *e = " 7 + 1 -2";
+  char *e = "7 + 1 -2";
   token_(e);
   return 0;
 }
