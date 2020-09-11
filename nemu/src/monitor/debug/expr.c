@@ -145,7 +145,7 @@ static bool make_token(char *e) {
 
 
 bool check_parentheses(word_t p, word_t q){
-  if(tokens[p].type==TK_LEFT_BRACKET&&tokens[q].type==TK_RIGHT_BRACKET){
+  if(tokens[p].type==TK_LEFT_BRACKET&&tokens[q-1].type==TK_RIGHT_BRACKET){
     return true;
   }
   else return false;
@@ -187,7 +187,7 @@ int find_main_opt(word_t p, word_t q){
   return main_opt;
 }
 
-word_t eval(word_t p, word_t q, char *s){
+word_t eval(word_t p, word_t q){
   if (p > q) {
     if(tokens[p].type == DEREF){
       return 0;
@@ -219,14 +219,14 @@ word_t eval(word_t p, word_t q, char *s){
     /* The expression is surrounded by a matched pair of parentheses.
      * If that is the case, just throw away the parentheses.
      */
-    return eval(p + 1, q - 1, s);
+    return eval(p + 1, q - 1);
   }
   else {
       int pos = find_main_opt(p,q);
       if(pos==-1)assert(0);
       else{
-        int left_val = eval(p, pos-1, s);
-        int right_val = eval(pos+1, q, s);
+        int left_val = eval(p, pos);
+        int right_val = eval(pos+1, q);
         switch(tokens[pos].type){
           case TK_MULTIPLE:return left_val*right_val;
           case TK_DIVIDE:return left_val/right_val;
@@ -264,9 +264,5 @@ word_t expr(char *e, bool *success) {
       }
     }    
   }
-  for(int j=0;j<nr_token;j++){
-      printf("%d, %s, %s,\n\n",tokens[j].type,tokens[j].str, tokens[j].str);
-    }
-  return 0;
-  return eval(0, strlen(e), e);
+  return eval(0, nr_token);
 }
