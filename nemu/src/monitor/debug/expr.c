@@ -109,14 +109,15 @@ static bool make_token(char *e) {
           case TK_EQ: tokens[nr_token++].type=TK_EQ;break;
           case TK_HEX: tokens[nr_token++].type=TK_HEX;break;
           case TK_REG: tokens[nr_token].type=TK_REG;
+              memset(res, 0, sizeof(res));
               memcpy(res, substr_start, substr_len);
               strcpy(tokens[nr_token++].str,res);
               break;
           case TK_UEQ: tokens[nr_token++].type=TK_UEQ;break;
           case NUM:tokens[nr_token].type=NUM;
+              memset(res, 0, sizeof(res));
           		memcpy(res, substr_start, substr_len);
               strcpy(tokens[nr_token++].str,res);
-              printf("%s\n\n\n\n\n\n",tokens[nr_token-1].str);
               break;
           case TK_ADD:tokens[nr_token++].type=TK_ADD;break;
           case TK_MINUS:tokens[nr_token++].type=TK_MINUS;break;
