@@ -188,6 +188,7 @@ int find_main_opt(word_t p, word_t q){
 }
 
 word_t eval(word_t p, word_t q){
+  printf("p pos: %d\n",p);
   if (p >= q) {
     if(tokens[p].type == DEREF){
       return 0;
