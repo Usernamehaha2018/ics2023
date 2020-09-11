@@ -112,8 +112,7 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  char *e = "700  -2 + 3*19 + 10";
-  printf("%d",expr(e, 0));
+  printf("%d",expr(args, 0));
   return 0;
 }
 
