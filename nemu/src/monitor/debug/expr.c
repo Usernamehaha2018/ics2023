@@ -224,7 +224,7 @@ word_t eval(word_t p, word_t q){
   else {
       int pos = find_main_opt(p,q);
       printf("pos:%d\n",pos);
-      if(pos==-1)assert(0);
+      if(pos==-1){printf("p and q: %d, %d\n",p,q);assert(0);}
       else{
         int left_val = eval(p, pos);
         int right_val = eval(pos+1, q);
