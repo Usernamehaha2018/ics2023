@@ -188,7 +188,7 @@ void ui_mainloop() {
 #endif
 
     int i;
-    paddr_read((paddr_t)0x1000000000,4);
+    paddr_read((paddr_t)0x0,4);
     for (i = 0; i < NR_CMD; i ++) {
       if (strcmp(cmd, cmd_table[i].name) == 0) {
         if (cmd_table[i].handler(args) < 0) { return; }
