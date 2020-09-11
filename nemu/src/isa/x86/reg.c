@@ -46,15 +46,22 @@ void isa_reg_display() {
     for (i = R_EAX; i <= R_EDI; i ++) {
     printf("%s   %x    %d\n", regsl[i], reg_l(i), reg_l(i));   
   }
-      for (i = R_EAX; i <= R_EDI; i ++) {
+      for (i = R_AX; i <= R_DI; i ++) {
     printf("%s   %x    %d\n", regsw[i], reg_w(i), reg_w(i));   
   }
-      for (i = R_EAX; i <= R_EDI; i ++) {
+      for (i = R_AL; i <= R_BH; i ++) {
     printf
     ("%s   %x    %d\n", regsb[i], reg_b(i), reg_b(i));   
   }
 }
 
+
 word_t isa_reg_str2val(const char *s, bool *success) {
+  for (int i = R_EAX; i <= R_EDI; i ++) {
+    if(!strcmp(s,regsl[i])){return reg_l(i); *success=true;}
+    if(!strcmp(s,regsw[i])){return reg_w(i); *success=true;}
+    if(!strcmp(s,regsb[i])){return reg_b(i); *success=true;}
+  }
+  *success=false;
   return 0;
 }
