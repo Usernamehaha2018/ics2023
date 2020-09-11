@@ -112,7 +112,7 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  char *e = "700  -2 + *($bp)*19 + 10";
+  char *e = "700  -2 + 3*19 + 10";
   expr(e, 0);
   return 0;
 }
