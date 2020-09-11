@@ -27,10 +27,10 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
   {"0x[0-9a-fA-F]+", TK_HEX},  // hexadecimal_number 
-  {" +[0-9]+ +", NUM},   // int
+  {"[0-9]+", NUM},   // int
   {"\\$[a-z]+", TK_REG},  // reg_name
-  {" +\\+ +", '+'},   // plus
-  {"\\-", '-'},   // minus
+  {" *\\+ *", '+'},   // plus
+  {" *\\- *", '-'},   // minus
   {"\\*", '*'},   // multiple
   {"\\/", '/'},   //devide
   {"\\(", '('},   // left bracket
