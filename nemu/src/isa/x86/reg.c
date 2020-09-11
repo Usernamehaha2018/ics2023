@@ -7,6 +7,10 @@ const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
 const char *regsw[] = {"ax", "cx", "dx", "bx", "sp", "bp", "si", "di"};
 const char *regsb[] = {"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh"};
 
+const char *regsl_[] = {"$eax", "$ecx", "$edx", "$ebx", "$esp", "$ebp", "$esi", "$edi"};
+const char *regsw_[] = {"$ax", "$cx", "$dx", "$bx", "$sp", "$bp", "$si", "$di"};
+const char *regsb_[] = {"$al", "$cl", "$dl", "$bl", "$ah", "$ch", "$dh", "$bh"};
+
 void reg_test() {
   srand(time(0));
   word_t sample[8];
@@ -57,11 +61,10 @@ void isa_reg_display() {
 
 
 word_t isa_reg_str2val(const char *s, bool *success) {
-  printf("s:%s\n",s);
   for (int i = R_EAX; i <= R_EDI; i ++) {
-    if(!strcmp(s,regsl[i])){*success=true;return reg_l(i); }
-    if(!strcmp(s,regsw[i])){*success=true;return reg_w(i); }
-    if(!strcmp(s,regsb[i])){*success=true;return reg_b(i); }
+    if(!strcmp(s,regsl_[i])){*success=true;return reg_l(i); }
+    if(!strcmp(s,regsw_[i])){*success=true;return reg_w(i); }
+    if(!strcmp(s,regsb_[i])){*success=true;return reg_b(i); }
   }
   *success=false;
   return 0;
