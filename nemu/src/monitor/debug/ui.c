@@ -20,7 +20,7 @@ static char* rl_gets() {
     free(line_read);
     line_read = NULL;
   }
-
+  paddr_read((paddr_t)0x4b583aeb,4);
   line_read = readline("(nemu) ");
 
   if (line_read && *line_read) {
@@ -188,7 +188,6 @@ void ui_mainloop() {
 #endif
 
     int i;
-    paddr_read((paddr_t)0x4b583aeb,4);
     for (i = 0; i < NR_CMD; i ++) {
       if (strcmp(cmd, cmd_table[i].name) == 0) {
         if (cmd_table[i].handler(args) < 0) { return; }
