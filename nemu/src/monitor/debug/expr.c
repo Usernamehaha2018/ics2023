@@ -207,7 +207,7 @@ word_t eval(word_t p, word_t q){
     }
     else if(tokens[p].type==TK_REG){
       bool valid_reg = true;
-      vaddr_t pos = isa_reg_str2val(tokens[p].str, &valid_reg);
+      vaddr_t pos = isa_reg_str2val(tokens[p+1].str, &valid_reg);
       if(valid_reg)return pos;
       else assert(0);
     }
