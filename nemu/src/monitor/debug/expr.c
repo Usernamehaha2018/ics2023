@@ -116,6 +116,7 @@ static bool make_token(char *e) {
           case NUM:tokens[nr_token].type=NUM;
           		memcpy(res, substr_start, substr_len);
               strcpy(tokens[nr_token++].str,res);
+              printf("%s\n\n\n\n\n\n",tokens[nr_token-1].str);
               break;
           case TK_ADD:tokens[nr_token++].type=TK_ADD;break;
           case TK_MINUS:tokens[nr_token++].type=TK_MINUS;break;
