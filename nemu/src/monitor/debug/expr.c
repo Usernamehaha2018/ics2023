@@ -263,7 +263,7 @@ word_t expr(char *e, bool *success) {
     }    
   }
   for(int j=0;j<nr_token;j++){
-      printf("%d, %s\n",tokens[j].type,tokens[j].str);
+      printf("%d, %s\n\n",tokens[j].type,tokens[j].str);
     }
   return 0;
   return eval(0, strlen(e), e);
