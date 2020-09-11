@@ -250,7 +250,7 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
-  for(int i=0;i<nr_token-1;i++){
+  for(int i=0;i<nr_token;i++){
     if(i==0&&tokens[i].type==TK_MULTIPLE){
       tokens[i].type = DEREF;
     }
@@ -262,7 +262,7 @@ word_t expr(char *e, bool *success) {
       }
     }    
   }
-  for(int j=0;j<nr_token-1;j++){
+  for(int j=0;j<nr_token;j++){
       printf("%d, %s\n",tokens[j].type,tokens[j].str);
     }
   return 0;
