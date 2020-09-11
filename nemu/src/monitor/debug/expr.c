@@ -67,7 +67,6 @@ void init_regex() {
       panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
     }
     else{
-      printf("true\n");
     }
   }
 }
@@ -188,7 +187,6 @@ int find_main_opt(word_t p, word_t q){
 }
 
 word_t eval(word_t p, word_t q){
-  printf("p pos: %d\n",p);
   if (p >= q) {
     if(tokens[p].type == DEREF){
       return 0;
