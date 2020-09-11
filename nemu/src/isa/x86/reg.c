@@ -57,6 +57,7 @@ void isa_reg_display() {
 
 
 word_t isa_reg_str2val(const char *s, bool *success) {
+  printf("s:%s\n",s);
   for (int i = R_EAX; i <= R_EDI; i ++) {
     if(!strcmp(s,regsl[i])){*success=true;return reg_l(i); }
     if(!strcmp(s,regsw[i])){*success=true;return reg_w(i); }
