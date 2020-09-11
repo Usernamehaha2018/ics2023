@@ -59,13 +59,56 @@ void isa_reg_display() {
   }
 }
 
+char *ltrim(char *str)
+{
+    if (str == NULL || *str == '\0')
+    {
+        return str;
+    }
+
+    int len = 0;
+    char *p = str;
+    while (*p != '\0' && *p==' ')
+    {
+        ++p;
+        ++len;
+    }
+
+    memmove(str, p, strlen(str) - len + 1);
+
+    return str;
+}
+
+char *rtrim(char *str)
+{
+    if (str == NULL || *str == '\0')
+    {
+        return str;
+    }
+
+    int len = strlen(str);
+    char *p = str + len - 1;
+    printf("%s\n",p);
+
+    while (p >= str  && (*p==' '))
+    {
+       *p = '\0';
+        --p;
+    }
+
+    return str;
+}
 
 word_t isa_reg_str2val(const char *s, bool *success) {
+  char ss[32];
+  strcpy(ss,s);
+  ltrim(ss);
+  rtrim(ss);
+  printf("ss:%s\n",ss);
   for (int i = R_EAX; i <= R_EDI; i ++) {
-    printf("s,s:%s,%s\n",s,regsl_[i]);
-    if(!strcmp(s,regsl_[i])){*success=true;return reg_l(i); }
-    if(!strcmp(s,regsw_[i])){*success=true;return reg_w(i); }
-    if(!strcmp(s,regsb_[i])){*success=true;return reg_b(i); }
+    if(!strcmp(ss,regsl_[i])){*success=true;return reg_l(i); }
+    if(!strcmp(ss,regsw_[i])){*success=true;return reg_w(i); }
+    if(!strcmp(ss,regsb_[i])){*success=true;return reg_b(i); }
   }
   *success=false;
   return 0;
