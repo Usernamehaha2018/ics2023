@@ -6,9 +6,11 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "expr.h"
 
 void cpu_exec(uint64_t);
 int is_batch_mode();
+void token_(char*);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -80,12 +82,11 @@ static int cmd_si(char *args){
   int sum = atoi(args);
   if(sum <= 0){
     printf("invalid input: %s\n", args);
-    return -1;
   }
   else{
     cpu_exec(sum);
-    return 0;
   }
+  return 0;
 }
 
 static int cmd_info(char *args){
@@ -110,6 +111,12 @@ static int cmd_x(char *args){
   return 0;
 }
 
+static int cmd_p(char *args){
+  char *e = " 7 + 1 -2";
+  token_(e);
+  return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -123,6 +130,7 @@ static struct {
   { "si", "After displaying several commands, the program stops.", cmd_si},
   { "info", "print values of the registers and the watchpoints.", cmd_info},
   { "x", "cao", cmd_x},
+  { "p", "calculate", cmd_p},
 
 
   /* TODO: Add more commands */

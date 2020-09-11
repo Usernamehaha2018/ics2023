@@ -5,11 +5,17 @@
  */
 #include <regex.h>
 
+
 enum {
-  TK_NOTYPE = 256, TK_EQ,
-
+  TK_NOTYPE = 256, 
+  TK_EQ,
   /* TODO: Add more token types */
-
+  NUM,
+  TK_HEX,
+  TK_REG,
+  DEREF,
+  TK_UEQ,
+  TK_AND,
 };
 
 static struct rule {
@@ -20,10 +26,18 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-
-  {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
-  {"==", TK_EQ},        // equal
+  {"0x[0-9a-fA-F]+", TK_HEX},  // hexadecimal_number 
+  {" +[0-9]+ +", NUM},   // int
+  {"\\$[a-z]+", TK_REG},  // reg_name
+  {" +\\+ +", '+'},   // plus
+  {"\\-", '-'},   // minus
+  {"\\*", '*'},   // multiple
+  {"\\/", '/'},   //devide
+  {"\\(", '('},   // left bracket
+  {"\\)", ')'},   // right bracket
+  {"==", TK_EQ},   // equal
+  {"!=", TK_UEQ},  // not equal
+  {"&&", TK_AND}  // logical and
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -39,10 +53,13 @@ void init_regex() {
   int ret;
 
   for (i = 0; i < NR_REGEX; i ++) {
-    ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
+    ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);    
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
       panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
+    }
+    else{
+      printf("true\n");
     }
   }
 }
@@ -69,7 +86,7 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
+        printf("match rules[%d] = \"%s\" at position %d with len %d: %.*s\n",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
@@ -95,6 +112,11 @@ static bool make_token(char *e) {
 
   return true;
 }
+
+void token_(char *e){
+  make_token(e);
+}
+
 
 
 word_t expr(char *e, bool *success) {
