@@ -10,7 +10,7 @@
 
 void cpu_exec(uint64_t);
 int is_batch_mode();
-void token_(char*);
+word_t expr(char *, bool *);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -113,7 +113,7 @@ static int cmd_x(char *args){
 
 static int cmd_p(char *args){
   char *e = "7 + 1 -2";
-  token_(e);
+  expr(e, 0);
   return 0;
 }
 

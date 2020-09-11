@@ -4,6 +4,5 @@
 #include <common.h>
 
 word_t expr(char *, bool *);
-void token_(char *);
 
 #endif

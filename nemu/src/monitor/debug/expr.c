@@ -6,8 +6,7 @@
 #include <regex.h>
 
 
-enum {
-  TK_NOTYPE = 256, 
+enum { 
   TK_EQ,
   /* TODO: Add more token types */
   NUM,
@@ -16,6 +15,12 @@ enum {
   DEREF,
   TK_UEQ,
   TK_AND,
+  TK_ADD,
+  TK_MINUS,
+  TK_MULTIPLE,
+  TK_DIVIDE,
+  TK_LEFT_BRACKET,
+  TK_RIGHT_BRACKET,
 };
 
 static struct rule {
@@ -26,18 +31,18 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-  {"0x[0-9a-fA-F]+", TK_HEX},  // hexadecimal_number 
-  {"[0-9]+", NUM},   // int
-  {"\\$[a-z]+", TK_REG},  // reg_name
-  {" *\\+ *", '+'},   // plus
-  {" *\\- *", '-'},   // minus
-  {"\\*", '*'},   // multiple
-  {"\\/", '/'},   //devide
-  {"\\(", '('},   // left bracket
-  {"\\)", ')'},   // right bracket
-  {"==", TK_EQ},   // equal
-  {"!=", TK_UEQ},  // not equal
-  {"&&", TK_AND}  // logical and
+  {" *0x[0-9a-fA-F]+ *", TK_HEX},  // hexadecimal_number 
+  {" *[0-9]+ *", NUM},   // int
+  {" *\\$[a-z]+ *", TK_REG},  // reg_name
+  {" *\\+ *", TK_ADD},   // plus
+  {" *\\- *", TK_MINUS},   // minus
+  {" *\\* *", TK_MULTIPLE},   // multiple
+  {" *\\/ *", TK_DIVIDE},   //devide
+  {" *\\( *", TK_LEFT_BRACKET},   // left bracket
+  {" *\\) *", TK_RIGHT_BRACKET},   // right bracket
+  {" *== *", TK_EQ},   // equal
+  {" *!= *", TK_UEQ},  // not equal
+  {" *&& *", TK_AND}  // logical and
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -85,8 +90,8 @@ static bool make_token(char *e) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
-
-        printf("match rules[%d] = \"%s\" at position %d with len %d: %.*s\n",
+        int token_count = 0;
+        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
@@ -96,9 +101,23 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
 
-        //switch (rules[i].token_type) {
-         // default: TODO();
-        //}
+        switch (rules[i].token_type) {
+          case TK_AND: tokens[token_count++].type=TK_AND;break;
+          case TK_EQ: tokens[token_count++].type=TK_EQ;break;
+          case TK_HEX: tokens[token_count++].type=TK_HEX;break;
+          case TK_REG: tokens[token_count++].type=TK_REG;break;
+          case TK_UEQ: tokens[token_count++].type=TK_UEQ;break;
+          case NUM:tokens[token_count++].type=NUM;break;
+          case TK_ADD:tokens[token_count++].type=TK_ADD;break;
+          case TK_MINUS:tokens[token_count++].type=TK_MINUS;break;
+          case TK_MULTIPLE:tokens[token_count++].type=TK_MULTIPLE;break;
+          case TK_DIVIDE:tokens[token_count++].type=TK_DIVIDE;break;
+          case TK_LEFT_BRACKET:tokens[token_count++].type=TK_LEFT_BRACKET;break;
+          case TK_RIGHT_BRACKET:tokens[token_count++].type=TK_RIGHT_BRACKET;break;
+
+
+         default: TODO();
+        }
 
         break;
       }
@@ -111,9 +130,6 @@ static bool make_token(char *e) {
   }
 
   return true;
-}
-void token_(char *e){
-  make_token(e);
 }
 
 
