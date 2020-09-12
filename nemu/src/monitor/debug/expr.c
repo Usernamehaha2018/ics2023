@@ -229,6 +229,7 @@ word_t eval(word_t p, word_t q){
       else{
         int left_val = eval(p, pos);
         int right_val = eval(pos+1, q);
+        printf("left&right,%d, %d\n",left_val,right_val);
         switch(tokens[pos].type){
           case TK_MULTIPLE:return left_val*right_val;
           case TK_DIVIDE:return left_val/right_val;
@@ -272,6 +273,7 @@ word_t expr(char *e, bool *success) {
         ||(tokens[i-1].type==TK_MULTIPLE)||(tokens[i-1].type==TK_DIVIDE)||
         (tokens[i-1].type==DEREF)){
           tokens[i].type = NEG;
+          printf("%d\n", i);
         }
       }   
     } 
