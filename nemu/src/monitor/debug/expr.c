@@ -21,6 +21,7 @@ enum {
   TK_HEX,
   TK_REG,
   DEREF,  //11
+  NEG,    //12
   TK_LEFT_BRACKET,
   TK_RIGHT_BRACKET,
 };
@@ -170,7 +171,7 @@ int find_main_opt(word_t p, word_t q){
       }
       else if (left_bracket_num < right_bracket_num )return -1;
       break;
-      case TK_EQ: case TK_UEQ: case TK_AND: case TK_ADD: case TK_MINUS: case TK_MULTIPLE: case TK_DIVIDE: case DEREF:
+      case TK_EQ: case TK_UEQ: case TK_AND: case TK_ADD: case TK_MINUS: case TK_MULTIPLE: case TK_DIVIDE: case DEREF: case NEG:
       if(!in_bracket_state){
         if(main_opt==-1){
           main_opt = i;
@@ -188,7 +189,7 @@ int find_main_opt(word_t p, word_t q){
 
 word_t eval(word_t p, word_t q){
   if (p >= q) {
-    if(tokens[p].type == DEREF){
+    if(tokens[p].type == DEREF||tokens[p].type == NEG){
       return 0;
     }
     else assert(0);
@@ -237,6 +238,7 @@ word_t eval(word_t p, word_t q){
           case TK_EQ: return left_val==right_val;
           case TK_UEQ: return left_val!=right_val;
           case DEREF: return paddr_read(right_val, 4);
+          case NEG: return -1*right_val;
           default:assert(0);
         }
       }
@@ -254,16 +256,25 @@ word_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
   for(int i=0;i<nr_token;i++){
-    if(i==0&&tokens[i].type==TK_MULTIPLE){
-      tokens[i].type = DEREF;
-    }
-    else{
-      if((tokens[i].type==TK_MULTIPLE)&&((tokens[i-1].type==TK_ADD)||
-      (tokens[i-1].type==TK_MINUS)||(tokens[i-1].type==TK_MULTIPLE)||
-      (tokens[i-1].type==TK_DIVIDE))){
+    if(tokens[i].type==TK_MULTIPLE){
+      if(i==0)tokens[i].type = DEREF;
+      else{
+        if((tokens[i-1].type==TK_ADD)||(tokens[i-1].type==TK_MINUS)
+        ||(tokens[i-1].type==TK_MULTIPLE)||(tokens[i-1].type==TK_DIVIDE)){
         tokens[i].type = DEREF;
-      }
-    }    
+        }
+      }   
+    } 
+    if(tokens[i].type==TK_MINUS){
+      if(i==0)tokens[i].type = NEG;
+      else{
+        if((tokens[i-1].type==TK_ADD)||(tokens[i-1].type==TK_MINUS)
+        ||(tokens[i-1].type==TK_MULTIPLE)||(tokens[i-1].type==TK_DIVIDE)||
+        (tokens[i-1].type==DEREF)){
+          tokens[i].type = NEG;
+        }
+      }   
+    } 
   }
   return eval(0, nr_token);
 }
