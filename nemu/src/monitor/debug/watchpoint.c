@@ -81,6 +81,7 @@ void free_wp(int num, bool *success){
 }
 
 bool check_watchpoint(){
+  if(head==NULL)return false;
   bool flag = false;
   for(WP* i = head;;i++){
     int val = paddr_read(i->address,4);
