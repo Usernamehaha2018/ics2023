@@ -239,7 +239,7 @@ word_t eval(word_t p, word_t q){
           case TK_EQ: return left_val==right_val;
           case TK_UEQ: return left_val!=right_val;
           case DEREF: return paddr_read(right_val, 4);
-          case NEG: return -1*right_val;
+          case NEG: printf("%d\n",-1*right_val);return -1*right_val;
           default:assert(0);
         }
       }
