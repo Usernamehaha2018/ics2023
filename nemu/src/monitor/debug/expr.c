@@ -271,7 +271,7 @@ word_t expr(char *e, bool *success) {
       else{
         if((tokens[i-1].type==TK_ADD)||(tokens[i-1].type==TK_MINUS)
         ||(tokens[i-1].type==TK_MULTIPLE)||(tokens[i-1].type==TK_DIVIDE)||
-        (tokens[i-1].type==DEREF)){
+        (tokens[i-1].type==DEREF)||(tokens[i-1].type==NEG)){
           tokens[i].type = NEG;
           printf("%d\n", i);
         }
