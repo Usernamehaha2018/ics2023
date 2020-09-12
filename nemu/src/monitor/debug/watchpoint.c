@@ -35,6 +35,7 @@ WP* new_wp(int addr,int val, char *reg){
       head->address = addr;
       head->cur_val = val;
       strcpy(head->s, reg);
+      
     }
     else{
       int num = tail->NO + 1;
@@ -48,9 +49,8 @@ WP* new_wp(int addr,int val, char *reg){
     if(free_->next)free_ = free_->next;
       else free_ = NULL; 
   }
-  else{
-    assert(0);
-  }
+  else assert(0);
+  info_watchpoints();
   return tail;
 }
 
