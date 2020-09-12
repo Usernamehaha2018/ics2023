@@ -190,7 +190,7 @@ int find_main_opt(word_t p, word_t q){
 word_t eval(word_t p, word_t q){
   if (p >= q) {
     if(tokens[p].type == DEREF||tokens[p].type == NEG){
-      return 0;
+      return 1;
     }
     else assert(0);
   }
@@ -213,7 +213,9 @@ word_t eval(word_t p, word_t q){
       else assert(0);
     }
     else{
-      return 0;
+      if(tokens[p].type==NEG)
+        return -1;
+      else assert(0);
     }
   }
   else if (check_parentheses(p, q) == true) {
@@ -239,7 +241,7 @@ word_t eval(word_t p, word_t q){
           case TK_EQ: return left_val==right_val;
           case TK_UEQ: return left_val!=right_val;
           case DEREF: return paddr_read(right_val, 4);
-          case NEG: printf("%d\n",-1*right_val);return -1*right_val;
+          case NEG: printf("%d\n",-1*right_val);return left_val*(-1)*right_val;
           default:assert(0);
         }
       }
