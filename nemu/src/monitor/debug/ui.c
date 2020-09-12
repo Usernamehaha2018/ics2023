@@ -40,25 +40,29 @@ static bool is_empty_arg(char *args){
    return true;
 }
 
-static bool is_r_arg(char *args){
+static int is_r_arg(char *args){
   if(args==NULL){
     return false;
   }
-  bool flag = false;
+  bool flag_r = false, flag_w = false;
   for(int i=0;i<strlen(args);i++){
-    if(args[i]!='r'){
-      if(args[i]!=' '&&args[i]!='\t'){
+    if(args[i]==' '&&args[i]=='\t'){
         continue;
       }
-      else{
-        return false;
-      }
-    }
     else{
-      flag = true;
+      if(args[i]=='r'){
+        if(flag_r)return 0;
+        flag_r=true;}
+      else if(args[i]=='w'){
+        if(flag_w)return 0;
+        flag_w = true;}
+      else return 0;
+      if(flag_w&&flag_r)return 0;
     }
   }
-  return flag;
+  if(flag_r)return 1;
+  if(flag_w)return 2;
+  return 0;
 }
 
 
@@ -89,11 +93,15 @@ static int cmd_si(char *args){
 }
 
 static int cmd_info(char *args){
-  if(is_r_arg(args)){
+  if(is_r_arg(args)==1){
     isa_reg_display();
     return 0;
   }
-  else {
+  else if(is_r_arg(args)==2) {
+    info_watchpoints();
+    return 0;
+  }
+  else{
     return -1;
   }
 }
@@ -111,7 +119,32 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  printf("%d",expr(args, 0));
+  bool success = true;
+  int ans = expr(args, &success);
+  if(success)printf("%d",ans);
+  else assert(0);
+  return 0;
+}
+
+static int cmd_w(char *args){
+  bool success = true;
+  int val = expr(args, &success);
+  if(!success){
+    assert(0);
+  }
+  else{
+    int word_t_val;
+    sscanf(args, "%d", &word_t_val); 
+    new_wp(word_t_val, val,args);
+    return 0;
+  }
+}
+static int cmd_d(char* args){
+  int word_t_val;
+  sscanf(args, "%d", &word_t_val); 
+  bool success = true;
+  free_wp(word_t_val, &success);
+  if(!success)assert(0);
   return 0;
 }
 
@@ -129,6 +162,8 @@ static struct {
   { "info", "print values of the registers and the watchpoints.", cmd_info},
   { "x", "cao", cmd_x},
   { "p", "calculate", cmd_p},
+  { "watch", "add a watchpoint", cmd_w},
+  { "d", "delete a watchpoint", cmd_d},
 
 
   /* TODO: Add more commands */
