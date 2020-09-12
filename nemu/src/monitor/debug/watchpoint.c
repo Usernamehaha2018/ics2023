@@ -97,6 +97,10 @@ bool check_watchpoint(){
 }
 
 void info_watchpoints(){
+  if(head==NULL){
+    printf("\n");
+    return;
+  }
   for(WP* i = head;;i++){
     printf("Num\tType\tWhat\n");
     printf("%d\thw watchpoint\t%s\n",i->NO,i->s);
