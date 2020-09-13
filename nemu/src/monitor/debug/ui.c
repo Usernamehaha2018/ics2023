@@ -124,7 +124,8 @@ static int cmd_x(char *args){
   printf("%d\n",addr);
   int i = 0;
   while(i<nums){
-    printf("%d\n",paddr_read(addr, 4));
+    printf("%#x\t", addr);   
+	  printf("%#08x\r\n", paddr_read(addr, 4));
     addr += 4;
     i+=1;
   }
