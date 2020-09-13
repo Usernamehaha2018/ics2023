@@ -120,6 +120,7 @@ static int cmd_x(char *args){
   uint32_t addr;
   char *address = num + strlen(num) + 1;
   sscanf(address, "%x", &addr); 
+  printf("%u\n",addr);
   int i = 0;
   while(i<nums){
     printf("%#x\t", addr);   
