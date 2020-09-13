@@ -115,13 +115,11 @@ static int cmd_info(char *args){
 
 static int cmd_x(char *args){
   char *num = strtok(args, " ");
-  printf("%s\n",num);
   uint32_t nums;
   sscanf(num, "%d", &nums); 
   uint32_t addr;
   char *address = num + strlen(num) + 1;
   sscanf(address, "%x", &addr); 
-  printf("%d\n",addr);
   int i = 0;
   while(i<nums){
     printf("%#x\t", addr);   
