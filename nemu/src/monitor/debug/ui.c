@@ -29,6 +29,10 @@ static char* rl_gets() {
   return line_read;
 }
 
+/*
+ * check if the str is empty, which means 
+ * it only contains '\n', '\t', ' '
+ */ 
 static bool is_empty_arg(char *args){
   if(args==NULL)return true;
   int arg_len = strlen(args);
@@ -40,6 +44,9 @@ static bool is_empty_arg(char *args){
    return true;
 }
 
+/*
+ * check if the "info " function is valid
+ */
 static int is_r_arg(char *args){
   if(args==NULL){
     return false;
@@ -78,7 +85,6 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_si(char *args){
-  printf("??\n");
   if(is_empty_arg(args)){
      cpu_exec(1);
      return 0;
@@ -108,13 +114,19 @@ static int cmd_info(char *args){
 }
 
 static int cmd_x(char *args){
-  int nums = 10;
-  uint32_t addr = PMEM_BASE;
-  int i =0;
+  char *num = strtok(args, " ");
+  printf("%s\n",num);
+  uint32_t nums;
+  sscanf(num, "%d", &nums); 
+  uint32_t addr;
+  char *address = num + strlen(num) + 1;
+  sscanf(address, "%x", &addr); 
+  printf("%d\n",addr);
+  int i = 0;
   while(i<nums){
-  printf("%d\n",paddr_read(addr, 4));
-  addr += 4;
-  i+=1;
+    printf("%d\n",paddr_read(addr, 4));
+    addr += 4;
+    i+=1;
   }
   return 0;
 }

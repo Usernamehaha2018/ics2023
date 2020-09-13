@@ -47,18 +47,21 @@ void reg_test() {
 
 void isa_reg_display() {
   int i=0;
-    for (i = R_EAX; i <= R_EDI; i ++) {
-    printf("%s   %x    %d\n", regsl[i], reg_l(i), reg_l(i));   
+  for (i = R_EAX; i <= R_EDI; i ++) {
+    printf("%s\t%x\t%u\n", regsl[i], reg_l(i), reg_l(i));   
   }
-      for (i = R_AX; i <= R_DI; i ++) {
-    printf("%s   %x    %d\n", regsw[i], reg_w(i), reg_w(i));   
+  for (i = R_AX; i <= R_DI; i ++) {
+    printf("%s\t%x\t%u\n", regsw[i], reg_w(i), reg_w(i));   
   }
-      for (i = R_AL; i <= R_BH; i ++) {
-    printf
-    ("%s   %x    %d\n", regsb[i], reg_b(i), reg_b(i));   
+  for (i = R_AL; i <= R_BH; i ++) {
+    printf("%s\t%x\t%u\n", regsb[i], reg_b(i), reg_b(i));   
   }
-  printf("%d\n",cpu.pc);
 }
+
+
+/* 
+ * kill the spaces in the string, eg. "   $eax    " -> "$eax"
+ */
 
 char *ltrim(char *str)
 {
@@ -79,7 +82,6 @@ char *ltrim(char *str)
 
     return str;
 }
-
 char *rtrim(char *str)
 {
     if (str == NULL || *str == '\0')
