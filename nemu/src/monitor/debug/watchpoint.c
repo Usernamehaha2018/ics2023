@@ -22,7 +22,7 @@ void init_wp_pool() {
 
 /* TODO: Implement the functionality of watchpoint */
 /* add a watchpoint */
-WP* new_wp(int addr,int val, char *reg){
+WP* new_wp(int val, char *reg){
   /* if there is no free wp 
    * for convenience 
    * assert(0)
@@ -32,7 +32,6 @@ WP* new_wp(int addr,int val, char *reg){
       head=free_;
       tail = free_;  
       head->NO = 1; 
-      head->address = addr;
       head->cur_val = val;
       strcpy(head->s, reg);
       
@@ -42,7 +41,6 @@ WP* new_wp(int addr,int val, char *reg){
       tail->next = free_;
       tail = free_;
       tail->NO = num; 
-      tail->address = addr;
       tail->cur_val = val;
       strcpy(tail->s, reg);   
     }
@@ -84,7 +82,8 @@ bool check_watchpoint(){
   if(head==NULL)return false;
   bool flag = false;
   for(WP* i = head;;i++){
-    int val = paddr_read(i->address,4);
+    bool  success = true;
+    int val = expr(i->s, &success);
     if(val!=i->cur_val){
       flag = true;
       printf("Hardware watchpoint %d: %s\n",i->NO,i->s);

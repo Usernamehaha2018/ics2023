@@ -91,15 +91,15 @@ void cpu_exec(uint64_t n) {
     asm_print(this_pc, seq_pc - this_pc, n < MAX_INSTR_TO_PRINT);
 
     /* TODO: check watchpoints here. */
+      if(check_watchpoint()){
+  nemu_state.state =  NEMU_STOP;
+  }
 #endif
 
 #ifdef HAS_IOE
     extern void device_update();
     device_update();
 #endif
-  if(check_watchpoint()){
-  nemu_state.state =  NEMU_STOP;
-  }
 
     if (nemu_state.state != NEMU_RUNNING) break;
   }

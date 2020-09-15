@@ -133,7 +133,7 @@ static int cmd_x(char *args){
 static int cmd_p(char *args){
   bool success = true;
   int ans = expr(args, &success);
-  if(success)printf("%d",ans);
+  if(success)printf("%d\n",ans);
   else assert(0);
   return 0;
 }
@@ -147,10 +147,11 @@ static int cmd_w(char *args){
   else{
     int word_t_val;
     sscanf(args, "%d", &word_t_val); 
-    new_wp(word_t_val, val,args);
+    new_wp(val,args);
     return 0;
   }
 }
+
 static int cmd_d(char* args){
   int word_t_val;
   sscanf(args, "%d", &word_t_val); 
