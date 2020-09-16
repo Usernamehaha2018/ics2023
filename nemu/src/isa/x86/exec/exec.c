@@ -71,8 +71,8 @@ static inline def_EHelper(2byte_esc) {
 static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
-  opcode = instr_fetch(&s->seq_pc, 1);
-  s->opcode = opcode;
+  opcode = instr_fetch(&s->seq_pc, 1); // 取指
+  s->opcode = opcode;  //操作码
   switch (opcode) {
     EX   (0x0f, 2byte_esc)
     IDEXW(0x80, I2E, gp1, 1)

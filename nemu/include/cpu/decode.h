@@ -20,9 +20,9 @@ typedef struct {
 } Operand;
 
 typedef struct {
-  uint32_t opcode;
+  uint32_t opcode; // operating code
   vaddr_t seq_pc;  // sequential pc
-  uint32_t is_jmp;
+  uint32_t is_jmp; // a ins that shows is jumping
   vaddr_t jmp_pc;
   Operand src1, dest, src2;
   int width;

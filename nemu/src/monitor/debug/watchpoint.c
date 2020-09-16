@@ -53,7 +53,7 @@ WP* new_wp(int val, char *reg){
 }
 
 void free_wp(int num, bool *success){
-  if(head==tail){
+  if(head==tail&&head!=NULL){
     if(head->NO!=num){
       *success = false;
       return;
@@ -62,9 +62,19 @@ void free_wp(int num, bool *success){
     free_tail = free_tail->next;
     head = NULL;
     tail =  NULL;
-  }
+  } bnnnn
   else{
     WP* i = head;
+    if(head==NULL){
+      *success = false;
+      return;
+    }
+    if(i->NO==num){
+      head = i->next;
+      free_tail->next = i;
+      free_tail = i;
+      return;
+    }
     WP* j = head->next;
     for(;j->NO!=num&&j!=tail;j++);
     if(j->NO!=num){
