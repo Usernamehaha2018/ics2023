@@ -25,10 +25,15 @@ static inline def_rtl(neg, rtlreg_t *dest, const rtlreg_t* src1) {
   TODO();
 }
 
+// Sign extension
 static inline def_rtl(sext, rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
-  TODO();
+  int src = *src1;
+  src <<= 32 - (8 * width);
+  src >>= 32 - (8 * width);
+  *dest = src; 
 }
+
 
 static inline def_rtl(zext, rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- zeroext(src1[(width * 8 - 1) .. 0])
@@ -37,7 +42,13 @@ static inline def_rtl(zext, rtlreg_t* dest, const rtlreg_t* src1, int width) {
 
 static inline def_rtl(msb, rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
-  TODO();
+  int ans = (1<<(width*8-1));
+  if((*src1 & ans)==ans){
+    *dest = 1;
+  }
+  else{
+    *dest = 0;
+  }
 }
 
 #endif

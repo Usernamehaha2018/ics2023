@@ -19,7 +19,7 @@ static inline def_EHelper(gp1) {
 }
 
 /* 0xc0, 0xc1, 0xd0, 0xd1, 0xd2, 0xd3 */
-static inline def_EHelper(gp2) {
+static inline def_(gp2) {
   switch (s->isa.ext_opcode) {
     EMPTY(0) EMPTY(1) EMPTY(2) EMPTY(3)
     EMPTY(4) EMPTY(5) EMPTY(6) EMPTY(7)
@@ -27,7 +27,7 @@ static inline def_EHelper(gp2) {
 }
 
 /* 0xf6, 0xf7 */
-static inline def_EHelper(gp3) {
+static inline def_(gp3) {
   switch (s->isa.ext_opcode) {
     EMPTY(0) EMPTY(1) EMPTY(2) EMPTY(3)
     EMPTY(4) EMPTY(5) EMPTY(6) EMPTY(7)
@@ -71,9 +71,19 @@ static inline def_EHelper(2byte_esc) {
 static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
+  printf("fetch\n");
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
+  printf("%x\n",opcode);
   switch (opcode) {
+    IDEXW(0x2c, I2a, sub, 1)
+    IDEX (0x2d, I2a, sub)
+    IDEXW(0x30, G2E, xor, 1)
+    IDEX (0x31, G2E, xor)
+    IDEXW(0x32, E2G, xor, 1)
+    IDEX (0x33, E2G, xor)
+    IDEX (0x50, r, push)
+    IDEX (0x68, I, push)
     EX   (0x0f, 2byte_esc)
     IDEXW(0x80, I2E, gp1, 1)
     IDEX (0x81, I2E, gp1)
@@ -104,6 +114,7 @@ again:
     IDEX (0xbf, mov_I2r, mov)
     IDEXW(0xc0, gp2_Ib2E, gp2, 1)
     IDEX (0xc1, gp2_Ib2E, gp2)
+    EX   (0xc3, ret)
     IDEXW(0xc6, mov_I2E, mov, 1)
     IDEX (0xc7, mov_I2E, mov)
     IDEXW(0xd0, gp2_1_E, gp2, 1)
@@ -111,6 +122,7 @@ again:
     IDEXW(0xd2, gp2_cl2E, gp2, 1)
     IDEX (0xd3, gp2_cl2E, gp2)
     EX   (0xd6, nemu_trap)
+    IDEX (0xe8, J, call)
     IDEXW(0xf6, E, gp3, 1)
     IDEX (0xf7, E, gp3)
     IDEXW(0xfe, E, gp4, 1)
@@ -122,6 +134,7 @@ again:
 
 vaddr_t isa_exec_once() {
   DecodeExecState s;
+  assert(0);
   s.is_jmp = 0;
   s.isa = (ISADecodeInfo) { 0 };
   s.seq_pc = cpu.pc;

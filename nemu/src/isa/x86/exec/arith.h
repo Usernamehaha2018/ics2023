@@ -17,7 +17,13 @@ static inline void cmp_internal(DecodeExecState *s) {
  
 
 static inline def_EHelper(sub) {
-  TODO();
+  rtl_sub(s, s0, &id_dest->val, &id_src1->val);
+  operand_write(s,id_dest,s0);
+  rtl_update_ZFSF(s, s0, id_dest->width);
+  rtl_is_sub_carry(s, s1, &id_dest->val, &id_src1->val);
+  rtl_set_CF(s, s1);
+  rtl_is_sub_overflow(s, s1, s0, &id_dest->val, &id_src1->val, id_dest->width);
+  rtl_set_OF(s, s1);
 }
 
 static inline def_EHelper(cmp) {
