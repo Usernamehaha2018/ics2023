@@ -42,7 +42,7 @@ static inline long load_img() {
   FILE *fp = fopen(img_file, "rb");
   Assert(fp, "Can not open '%s'", img_file);
 
-  Log("The image isaaa %s", img_file);
+  Log("The image is %s", img_file);
 
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
