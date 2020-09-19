@@ -41,9 +41,9 @@ static inline def_rtl(pop, rtlreg_t* dest) {
 static inline def_rtl(is_sub_overflow, rtlreg_t* dest,
     const rtlreg_t* res, const rtlreg_t* src1, const rtlreg_t* src2, int width) {
   // dest <- is_overflow(src1 - src2)
-  rtl_msb(s, &t0, src1, width);
-  rtl_msb(s, &t1, src2, width);
-  rtl_msb(s, &t2, res, width);
+  rtl_msb(s, t0, src1, width);
+  rtl_msb(s, t1, src2, width);
+  rtl_msb(s, t2, res, width);
   if (t0 && !t1 && !t2)
     *dest = 1;
   else if (!t0 && t1 && t2)
@@ -96,8 +96,8 @@ static inline def_rtl(update_ZF, const rtlreg_t* result, int width) {
 
 static inline def_rtl(update_SF, const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
-  rtl_msb(s, &t0, result, width);
-  cpu.eflags.SF = t0;
+  rtl_msb(s, t0, result, width);
+  //cpu.eflags.SF = (unsigned char)t0;
 }
 
 static inline def_rtl(update_ZFSF, const rtlreg_t* result, int width) {

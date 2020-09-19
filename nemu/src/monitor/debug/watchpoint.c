@@ -62,7 +62,7 @@ void free_wp(int num, bool *success){
     free_tail = free_tail->next;
     head = NULL;
     tail =  NULL;
-  } bnnnn
+  } 
   else{
     WP* i = head;
     if(head==NULL){

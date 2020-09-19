@@ -54,7 +54,7 @@ static inline def_DopHelper(SI) {
    *
    operand_imm(s, op, load_val, ???, op->width);
    */
-  printf('cao!\n');
+  printf("cao!\n");
   TODO();
 }
 
