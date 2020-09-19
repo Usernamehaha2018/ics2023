@@ -35,14 +35,14 @@ static inline void welcome() {
 
 static inline long load_img() {
   if (img_file == NULL) {
-    Log("No image is given. Use the default build-in image.");
+    Log("No image is givena. Use the default build-in image.");
     return 4096; // built-in image size
   }
 
   FILE *fp = fopen(img_file, "rb");
   Assert(fp, "Can not open '%s'", img_file);
 
-  Log("The image is!!! %s", img_file);
+  Log("The image is %s", img_file);
 
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
