@@ -88,6 +88,7 @@ again:
     IDEXW(0x32, E2G, xor, 1)
     IDEX (0x33, E2G, xor)
     IDEX (0x50, r, push)
+    IDEX (0x55, r, push)
     IDEX (0x68, I, push)
     EX   (0x0f, 2byte_esc)
     IDEXW(0x80, I2E, gp1, 1)
