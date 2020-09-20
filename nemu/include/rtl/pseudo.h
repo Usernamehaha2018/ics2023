@@ -42,13 +42,7 @@ static inline def_rtl(zext, rtlreg_t* dest, const rtlreg_t* src1, int width) {
 
 static inline def_rtl(msb, rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
-  int ans = (1<<(width*8-1));
-  if((*src1 & ans)==ans){
-    *dest = 1;
-  }
-  else{
-    *dest = 0;
-  }
+  rtl_shri(s, dest, src1, width*8 - 1);
 }
 
 #endif
