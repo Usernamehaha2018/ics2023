@@ -33,7 +33,7 @@ static inline def_EHelper(call) {
 
 static inline def_EHelper(ret) {
   rtl_pop(s, &s->jmp_pc);
-  rtl_j(s, s->jmp_pc+6);
+  rtl_j(s, s->jmp_pc);
   print_asm("ret");
 }
 
