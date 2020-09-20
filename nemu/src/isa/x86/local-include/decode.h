@@ -54,8 +54,9 @@ static inline def_DopHelper(SI) {
    *
    operand_imm(s, op, load_val, ???, op->width);
    */
-  printf("cao!\n");
-  TODO();
+  op->simm = instr_fetch(&s->seq_pc,op->width);
+  operand_imm(s,op,load_val,op->simm,op->width);
+  
 }
 
 /* I386 manual does not contain this abbreviation.
