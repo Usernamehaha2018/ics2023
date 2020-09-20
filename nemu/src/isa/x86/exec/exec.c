@@ -13,7 +13,6 @@ static inline void set_width(DecodeExecState *s, int width) {
 
 /* 0x80, 0x81, 0x83 */
 static inline def_EHelper(gp1) {
-  printf("gp1:%x\n",s->isa.ext_opcode);
   switch (s->isa.ext_opcode) {
     EMPTY(0) EMPTY(1) EMPTY(2) EMPTY(3)
     EMPTY(4) EX(0x5,sub) EMPTY(6) EMPTY(7)
@@ -75,10 +74,10 @@ static inline void fetch_decode_exec(DecodeExecState *s) {
 again:
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
-  printf("%x\n",cpu.pc);
+  printf("pc:%x\n",cpu.pc);
   printf("op:%x\n",opcode);
   if(opcode==0x83||opcode==0x68||opcode==0x55){
-    isa_reg_display();
+    //isa_reg_display();
   }
   switch (opcode) {
     IDEXW(0x2c, I2a, sub, 1)
