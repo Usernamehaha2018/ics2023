@@ -72,6 +72,7 @@ static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
+  printf("opcode:%x\n",opcode);
   s->opcode = opcode;  //操作码
   switch (opcode) {
     IDEXW(0x2c, I2a, sub, 1)
