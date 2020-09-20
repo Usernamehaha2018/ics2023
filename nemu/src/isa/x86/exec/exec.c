@@ -72,7 +72,6 @@ static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
-  printf("opcode:%x\n",opcode);
   s->opcode = opcode;  //操作码
   switch (opcode) {
     IDEXW(0x2c, I2a, sub, 1)
@@ -126,7 +125,7 @@ again:
     IDEX (0xf7, E, gp3)
     IDEXW(0xfe, E, gp4, 1)
     IDEX (0xff, E, gp5)
-  case 0xf3: goto again;
+    EX (0xf3, nop);
   case 0x66: s->isa.is_operand_size_16 = true; goto again;
   default: exec_inv(s);
   }
