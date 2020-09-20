@@ -77,7 +77,7 @@ again:
   printf("pc:%x\n",cpu.pc);
   printf("op:%x\n",opcode);
   if(opcode==0x83||opcode==0x68||opcode==0x55){
-    //isa_reg_display();
+    isa_reg_display();
   }
   switch (opcode) {
     IDEXW(0x2c, I2a, sub, 1)
