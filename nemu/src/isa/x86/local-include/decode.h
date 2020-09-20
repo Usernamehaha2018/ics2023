@@ -176,7 +176,7 @@ static inline def_DHelper(I) {
 
 static inline def_DHelper(r) {
   decode_op_r(s, id_dest, true);
-  id_dest->val = *id_dest->preg;
+  //id_dest->val = *id_dest->preg;
 }
 
 static inline def_DHelper(E) {
@@ -204,7 +204,7 @@ static inline def_DHelper(SI2E) {
   if (id_dest->width == 2) {
     *dsrc1 &= 0xffff;
   }
-  id_dest->val = *id_dest->preg;
+  //id_dest->val = *id_dest->preg;
 }
 
 static inline def_DHelper(SI_E2G) {

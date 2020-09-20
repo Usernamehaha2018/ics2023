@@ -12,7 +12,7 @@ static inline def_EHelper(and) {
 }
 
 static inline def_EHelper(xor) {
-  rtl_xor(s, s0, &id_dest->val, &id_src1->val);
+  rtl_xor(s, s0, id_dest->preg, id_src1->preg);
   operand_write(s, id_dest, s0);
 }
 
