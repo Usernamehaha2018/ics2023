@@ -58,7 +58,7 @@ static inline def_DopHelper(SI) {
   printf("%x\n",s->seq_pc);
   printf("%x\n",op->simm);
   operand_imm(s,op,load_val,op->simm,op->width);
-  
+  printf("%x\n",op->imm); 
 }
 
 /* I386 manual does not contain this abbreviation.
