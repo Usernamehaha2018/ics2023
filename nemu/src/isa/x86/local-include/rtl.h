@@ -28,13 +28,13 @@ static inline def_rtl(push, const rtlreg_t* src1) {
   // esp <- esp - 4
   // M[esp] <- src1
   cpu.esp -= 4;
-  rtl_sm(s,&cpu.esp,0,src1,4);
+  rtl_sm(s, &cpu.esp, 0, src1, 4);
 }
 
 static inline def_rtl(pop, rtlreg_t* dest) {
   // dest <- M[esp]
   // esp <- esp + 4
-  rtl_lm(s,dest,&cpu.esp,0,4);
+  rtl_lm(s, dest, &cpu.esp, 0, 4);
   cpu.esp += 4;
 }
 
