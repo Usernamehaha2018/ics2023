@@ -29,7 +29,7 @@ static inline def_rtl(push, const rtlreg_t* src1) {
   // M[esp] <- src1
   cpu.esp -= 4;
   rtl_sm(s,&cpu.esp,0,src1,4);
-  printf("cpuesp:%x\n",cpu.esp);
+  printf("cpuesp:%x\nsrc1:%x",cpu.esp,*src1);
 }
 
 static inline def_rtl(pop, rtlreg_t* dest) {
