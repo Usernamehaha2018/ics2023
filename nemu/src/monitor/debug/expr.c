@@ -4,12 +4,26 @@
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
+#include <memory/paddr.h>
 
-enum {
-  TK_NOTYPE = 256, TK_EQ,
+enum { 
+  TK_SPACE, //0
+  TK_AND,  //1
+  TK_EQ,   //2
+  /* TODO: Add more token types and dont change the order*/
+  TK_UEQ,  //3
+  TK_ADD,  //4
+  TK_MINUS, //5
+  TK_MULTIPLE,  //6
+  TK_DIVIDE,  //7
 
-  /* TODO: Add more token types */
-
+  NUM,
+  TK_HEX,
+  TK_REG,
+  DEREF,  //11
+  NEG,    //12
+  TK_LEFT_BRACKET,
+  TK_RIGHT_BRACKET,
 };
 
 static struct rule {
@@ -20,10 +34,19 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
+  {" *0x[0-9a-fA-F]+ *", TK_HEX},  // hexadecimal_number 
+  {" *[0-9]+ *", NUM},   // int
+  {" *\\$[a-z]+ *", TK_REG},  // reg_name
+  {" *\\( *", TK_LEFT_BRACKET},   // left bracket
+  {" *\\) *", TK_RIGHT_BRACKET},   // right bracket
 
-  {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
-  {"==", TK_EQ},        // equal
+  {" *\\+ *", TK_ADD},   // plus
+  {" *\\- *", TK_MINUS},   // minus
+  {" *\\* *", TK_MULTIPLE},   // multiple
+  {" *\\/ *", TK_DIVIDE},   //devide
+  {" *== *", TK_EQ},   // equal
+  {" *!= *", TK_UEQ},  // not equal
+  {" *&& *", TK_AND}  // logical and
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -39,10 +62,12 @@ void init_regex() {
   int ret;
 
   for (i = 0; i < NR_REGEX; i ++) {
-    ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
+    ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);    
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
       panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
+    }
+    else{
     }
   }
 }
@@ -68,7 +93,7 @@ static bool make_token(char *e) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
-
+        char res[32];
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
@@ -80,7 +105,29 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default: TODO();
+          case TK_AND: tokens[nr_token++].type=TK_AND;break;
+          case TK_EQ: tokens[nr_token++].type=TK_EQ;break;
+          case TK_HEX: tokens[nr_token++].type=TK_HEX;break;
+          case TK_REG: tokens[nr_token].type=TK_REG;
+              memset(res, 0, sizeof(res));
+              memcpy(res, substr_start, substr_len);
+              strcpy(tokens[nr_token++].str,res);
+              break;
+          case TK_UEQ: tokens[nr_token++].type=TK_UEQ;break;
+          case NUM:tokens[nr_token].type=NUM;
+              memset(res, 0, sizeof(res));
+          		memcpy(res, substr_start, substr_len);
+              strcpy(tokens[nr_token++].str,res);
+              break;
+          case TK_ADD:tokens[nr_token++].type=TK_ADD;break;
+          case TK_MINUS:tokens[nr_token++].type=TK_MINUS;break;
+          case TK_MULTIPLE:tokens[nr_token++].type=TK_MULTIPLE;break;
+          case TK_DIVIDE:tokens[nr_token++].type=TK_DIVIDE;break;
+          case TK_LEFT_BRACKET:tokens[nr_token++].type=TK_LEFT_BRACKET;break;
+          case TK_RIGHT_BRACKET:tokens[nr_token++].type=TK_RIGHT_BRACKET;break;
+
+
+         default: TODO();
         }
 
         break;
@@ -97,6 +144,112 @@ static bool make_token(char *e) {
 }
 
 
+bool check_parentheses(word_t p, word_t q){
+  if(tokens[p].type==TK_LEFT_BRACKET&&tokens[q-1].type==TK_RIGHT_BRACKET){
+    return true;
+  }
+  else return false;
+}
+
+
+int find_main_opt(word_t p, word_t q){
+  word_t left_bracket_num = 0, right_bracket_num = 0;
+  int main_opt=-1;
+  bool in_bracket_state = false;
+  for(int i=p;i<q;i++){
+    switch (tokens[i].type) {
+      case TK_LEFT_BRACKET: left_bracket_num +=1;
+      if(left_bracket_num > right_bracket_num ){
+        in_bracket_state = true;
+        break;
+      }
+      else return -1;
+      case TK_RIGHT_BRACKET: 
+      right_bracket_num += 1;
+      if(left_bracket_num == right_bracket_num ){
+        in_bracket_state = false;
+      }
+      else if (left_bracket_num < right_bracket_num )return -1;
+      break;
+      case TK_EQ: case TK_UEQ: case TK_AND: case TK_ADD: case TK_MINUS: case TK_MULTIPLE: case TK_DIVIDE: case DEREF: case NEG:
+      if(!in_bracket_state){
+        if(main_opt==-1){
+          main_opt = i;
+        }
+        else if(tokens[main_opt].type/2>=tokens[i].type/2){
+          main_opt = i;
+        }
+      }
+      break;
+      default: continue;
+    }
+  }
+  return main_opt;
+}
+
+word_t eval(word_t p, word_t q){
+  if (p >= q) {
+    if(tokens[p].type == DEREF||tokens[p].type == NEG){
+      return 1;
+    }
+    else assert(0);
+  }
+  else if (p == q-1) {
+    if(tokens[p].type==TK_HEX){
+      word_t word_t_val = 0;          
+      sscanf(tokens[p].str, "%x", &word_t_val); 
+      return word_t_val;    
+    }
+    else if(tokens[p].type==NUM){
+      word_t word_t_val = 0; 
+      sscanf(tokens[p].str, "%d", &word_t_val); 
+      return word_t_val;
+    }
+    else if(tokens[p].type==TK_REG){
+      bool valid_reg = true;
+      printf("p:%s\n",tokens[p].str);
+      vaddr_t pos = isa_reg_str2val(tokens[p].str, &valid_reg);
+      if(valid_reg)return pos;
+      else assert(0);
+    }
+    else{
+      if(tokens[p].type==NEG)
+        return -1;
+      else assert(0);
+    }
+  }
+  else if (check_parentheses(p, q) == true) {
+    /* The expression is surrounded by a matched pair of parentheses.
+     * If that is the case, just throw away the parentheses.
+     */
+    return eval(p + 1, q - 1);
+  }
+  else {
+      int pos = find_main_opt(p,q);
+      printf("pos:%d\n",pos);
+      if(pos==-1){printf("p and q: %d, %d\n",p,q);assert(0);}
+      else{
+        int left_val = eval(p, pos);
+        int right_val = eval(pos+1, q);
+        printf("left&right,%d, %d\n",left_val,right_val);
+        switch(tokens[pos].type){
+          case TK_MULTIPLE:return left_val*right_val;
+          case TK_DIVIDE:return left_val/right_val;
+          case TK_ADD: return left_val+right_val;
+          case TK_MINUS: return left_val-right_val;
+          case TK_AND: return left_val&& right_val;
+          case TK_EQ: return left_val==right_val;
+          case TK_UEQ: return left_val!=right_val;
+          case DEREF: return paddr_read(right_val, 4);
+          case NEG: printf("%d\n",-1*right_val);return left_val*(-1)*right_val;
+          default:assert(0);
+        }
+      }
+    /* We should do more things here. */
+  }
+}
+
+
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
@@ -104,7 +257,28 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
-
-  return 0;
+  //TODO();
+  for(int i=0;i<nr_token;i++){
+    if(tokens[i].type==TK_MULTIPLE){
+      if(i==0)tokens[i].type = DEREF;
+      else{
+        if((tokens[i-1].type==TK_ADD)||(tokens[i-1].type==TK_MINUS)
+        ||(tokens[i-1].type==TK_MULTIPLE)||(tokens[i-1].type==TK_DIVIDE)){
+        tokens[i].type = DEREF;
+        }
+      }   
+    } 
+    if(tokens[i].type==TK_MINUS){
+      if(i==0)tokens[i].type = NEG;
+      else{
+        if((tokens[i-1].type==TK_ADD)||(tokens[i-1].type==TK_MINUS)
+        ||(tokens[i-1].type==TK_MULTIPLE)||(tokens[i-1].type==TK_DIVIDE)||
+        (tokens[i-1].type==DEREF)||(tokens[i-1].type==NEG)){
+          tokens[i].type = NEG;
+          printf("%d\n", i);
+        }
+      }   
+    } 
+  }
+  return eval(0, nr_token);
 }
