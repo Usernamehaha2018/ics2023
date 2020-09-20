@@ -25,7 +25,7 @@ static inline def_EHelper(jmp_rm) {
 static inline def_EHelper(call) {
   // the target address is calculated at the decode stage
   printf("pcseq:%x\n",s->seq_pc);
-  rtl_push(s, &s->seq_pc);
+  // rtl_push(s, &s->seq_pc);
   s->is_jmp = 1;
   rtl_j(s,s->jmp_pc);
   print_asm("call %x", s->jmp_pc);
