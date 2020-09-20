@@ -267,7 +267,6 @@ static inline def_DHelper(J) {
 }
 
 static inline def_DHelper(push_SI) {
-  printf("push\n");
   decode_op_SI(s, id_dest, true);
 }
 
