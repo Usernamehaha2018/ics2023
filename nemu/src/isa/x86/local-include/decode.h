@@ -176,7 +176,7 @@ static inline def_DHelper(I) {
 
 static inline def_DHelper(r) {
   decode_op_r(s, id_dest, true);
-  printf("iddest55:%x\n",*id_dest->preg);
+  id_dest->val = *id_dest->preg;
 }
 
 static inline def_DHelper(E) {
