@@ -76,7 +76,7 @@ again:
   s->opcode = opcode;  //操作码
   printf("pc:%x\n",cpu.pc);
   printf("op:%x\n",opcode);
-  if(opcode==0x83||opcode==0x68||opcode==0x55){
+  if(opcode==0x83||opcode==0x89||opcode==0x55){
     isa_reg_display();
   }
   switch (opcode) {
