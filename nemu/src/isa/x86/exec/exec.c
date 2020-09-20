@@ -1,6 +1,7 @@
 #include <cpu/exec.h>
 #include "../local-include/decode.h"
 #include "all-instr.h"
+#include <isa.h>
 
 static inline void set_width(DecodeExecState *s, int width) {
   if (width == -1) return;
@@ -75,6 +76,9 @@ again:
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
   printf("op:%x\n",opcode);
+  if(opcode==0x83||opcode==0x68){
+    isa_reg_display();
+  }
   switch (opcode) {
     IDEXW(0x2c, I2a, sub, 1)
     IDEX (0x2d, I2a, sub)
