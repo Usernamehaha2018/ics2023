@@ -203,7 +203,7 @@ static inline def_DHelper(SI2E) {
   if (id_dest->width == 2) {
     *dsrc1 &= 0xffff;
   }
-  printf("iddestval : %x\n",id_dest->val);
+  printf("iddestval : %x\n",id_src1->val);
 }
 
 static inline def_DHelper(SI_E2G) {
