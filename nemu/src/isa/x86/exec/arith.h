@@ -17,7 +17,6 @@ static inline void cmp_internal(DecodeExecState *s) {
  
 
 static inline def_EHelper(sub) {
-  printf("heresub\n");
   rtl_sub(s, s0, &id_dest->val, &id_src1->val);
   operand_write(s,id_dest,s0);
   rtl_update_ZFSF(s, s0, id_dest->width);
