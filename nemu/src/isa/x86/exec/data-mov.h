@@ -12,7 +12,7 @@ static inline def_EHelper(push) {
 
 static inline def_EHelper(pop) {
   rtl_pop(s, &id_src1->val);
-  operand_write(s, id_dest, &id_src1->val);
+  operand_write(s, id_dest, dsrc1);
   print_asm_template1(pop);
 }
 
