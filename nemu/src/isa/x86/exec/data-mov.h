@@ -4,15 +4,15 @@ static inline def_EHelper(mov) {
 }
 
 static inline def_EHelper(push) {
-  rtl_sext(s, &id_dest->val,&id_dest->val, id_dest->width);
-  printf("push-val:%x",id_dest->val);
-  rtl_push(s,&id_dest->val);
+  rtl_sext(s, &id_dest->val, &id_dest->val, id_dest->width);
+  printf("push-val:%x", id_dest->val);
+  rtl_push(s, &id_dest->val);
   print_asm_template1(push);
 }
 
 static inline def_EHelper(pop) {
-  TODO();
-
+  rtl_pop(s, dsrc1);
+  operand_write(s, id_dest, dsrc1);
   print_asm_template1(pop);
 }
 
