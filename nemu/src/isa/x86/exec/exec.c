@@ -137,6 +137,7 @@ again:
     EX   (0xc3, ret)
     IDEXW(0xc6, mov_I2E, mov, 1)
     IDEX (0xc7, mov_I2E, mov)
+    EX   (0xc9, leave)
     IDEXW(0xd0, gp2_1_E, gp2, 1)
     IDEX (0xd1, gp2_1_E, gp2)
     IDEXW(0xd2, gp2_cl2E, gp2, 1)
