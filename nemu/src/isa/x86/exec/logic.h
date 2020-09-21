@@ -7,8 +7,12 @@ static inline def_EHelper(test) {
 }
 
 static inline def_EHelper(and) {
-  rtl_and(s,s0,id_dest->preg,id_src1->preg);
+  rtl_and(s,s0,ddest,dsrc1);
   operand_write(s,id_dest, s0); 
+  rtl_update_ZFSF(s,ddest,id_dest->width);
+  *s1 = 0;
+  rtl_set_CF(s,s1);
+  rtl_set_OF(s,s1);
   print_asm_template2(and);
 }
 
@@ -18,8 +22,12 @@ static inline def_EHelper(xor) {
 }
 
 static inline def_EHelper(or) {
-  TODO();
-
+  rtl_or(s,s0,ddest,dsrc1);
+  operand_write(s,id_dest, s0); 
+  rtl_update_ZFSF(s,ddest,id_dest->width);
+  *s1 = 0;
+  rtl_set_CF(s,s1);
+  rtl_set_OF(s,s1);
   print_asm_template2(or);
 }
 
@@ -38,9 +46,11 @@ static inline def_EHelper(shl) {
 }
 
 static inline def_EHelper(shr) {
-  TODO();
   // unnecessary to update CF and OF in NEMU
-
+  rtl_shr(s,s0,ddest,dsrc1);
+  operand_write(s, id_dest, s0);
+  rtl_update_ZFSF(s,ddest,id_dest->width);
+  
   print_asm_template2(shr);
 }
 
@@ -54,8 +64,8 @@ static inline def_EHelper(setcc) {
 }
 
 static inline def_EHelper(not) {
-  TODO();
-
+  rtl_not(s,s0,ddest);
+  operand_write(s,id_dest,s0);
   print_asm_template1(not);
 }
 

@@ -14,16 +14,16 @@ static inline void set_width(DecodeExecState *s, int width) {
 /* 0x80, 0x81, 0x83 */
 static inline def_EHelper(gp1) {
   switch (s->isa.ext_opcode) {
-    EMPTY(0) EMPTY(1) EMPTY(2) EMPTY(3)
-    EX(0x4, and) EX(0x5, sub) EMPTY(6) EMPTY(7)
+    EX(0x0,add) EX(0x1,or) EX(0x2,adc) EX(0x3,sbb)
+    EX(0x4, and) EX(0x5,sub) EX(0x6,xor) EX(0x7,cmp)
   }
 }
 
 /* 0xc0, 0xc1, 0xd0, 0xd1, 0xd2, 0xd3 */
 static inline def_EHelper(gp2) {
   switch (s->isa.ext_opcode) {
-    EMPTY(0) EMPTY(1) EMPTY(2) EMPTY(3)
-    EMPTY(4) EMPTY(5) EMPTY(6) EMPTY(7)
+    //EX(0x0,add) EX(0x1,or) EX(0x2,adc) EX(0x3,sbb)
+   // EX(0x4, and) EX(0x5,sub) EX(0x6,xor) EX(0x7,cmp)
   }
 }
 
@@ -46,8 +46,8 @@ static inline def_EHelper(gp4) {
 /* 0xff */
 static inline def_EHelper(gp5) {
   switch (s->isa.ext_opcode) {
-    EMPTY(0) EMPTY(1) EMPTY(2) EMPTY(3)
-    EMPTY(4) EMPTY(5) EMPTY(6) EMPTY(7)
+    EX(0x0,inc) EMPTY(1) EMPTY(2) EMPTY(3)
+    EMPTY(4) EMPTY(5) EX(0x6,push) EMPTY(7)
   }
 }
 
@@ -65,6 +65,8 @@ static inline def_EHelper(2byte_esc) {
   switch (opcode) {
   /* TODO: Add more instructions!!! */
     IDEX (0x01, gp7_E, gp7)
+    IDEXW(0x94, setcc_E, setcc, 1)
+    IDEXW (0xb6, mov_E2G, movzx, 1)
     default: exec_inv(s);
   }
 }
@@ -80,6 +82,7 @@ again:
   //   isa_reg_display();
   // }
   switch (opcode) {
+    IDEX (0x03, E2G, add)
     IDEXW(0x2c, I2a, sub, 1)
     IDEX (0x2d, I2a, sub)
     IDEXW(0x30, G2E, xor, 1)
@@ -87,8 +90,18 @@ again:
     IDEXW(0x32, E2G, xor, 1)
     IDEX (0x33, E2G, xor)
     IDEX (0x50, r, push)
+    IDEX (0x51, r, push)
+    IDEX (0x52, r, push)
+    IDEX (0x53, r, push)
+    IDEX (0x54, r, push)
     IDEX (0x55, r, push)
+    IDEX (0x56, r, push)
+    IDEX (0x57, r, push)
+    IDEX (0x5d, r, pop)
     IDEX (0x68, I, push)
+    IDEXW(0x6a, I, push, 1)
+    /* 74 */
+    IDEXW(0x74, J, jcc, 1)
     EX   (0x0f, 2byte_esc)
     IDEXW(0x80, I2E, gp1, 1)
     IDEX (0x81, I2E, gp1)
