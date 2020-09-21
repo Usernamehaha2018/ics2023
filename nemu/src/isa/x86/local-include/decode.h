@@ -54,7 +54,10 @@ static inline def_DopHelper(SI) {
    *
    operand_imm(s, op, load_val, ???, op->width);
    */
-  op->simm = instr_fetch(&s->seq_pc,op->width);
+  *t0 = instr_fetch(&s->seq_pc,op->width);
+  rtl_sext(s, t0, t0, op->width);
+  op->simm = *t0;
+  
   operand_imm(s,op,load_val,op->simm,op->width);
 }
 
@@ -265,7 +268,7 @@ static inline def_DHelper(a2O) {
 static inline def_DHelper(J) {
   decode_op_SI(s, id_dest, false);
   // the target address can be computed in the decode stage
-  printf("simm:%x,s,seqpc:%x\n",id_dest->simm,s->seq_pc);
+  printf("simm:%u,s,seqpc:%x\n",id_dest->simm,s->seq_pc);
   s->jmp_pc = id_dest->simm + s->seq_pc;
 }
 
