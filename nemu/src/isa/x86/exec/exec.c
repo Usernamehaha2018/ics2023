@@ -82,6 +82,7 @@ again:
   //   isa_reg_display();
   // }
   switch (opcode) {
+    IDEX (0x01, G2E, add)
     IDEX (0x03, E2G, add)
     IDEXW(0x2c, I2a, sub, 1)
     IDEX (0x2d, I2a, sub)
