@@ -207,7 +207,6 @@ static inline def_DHelper(SI2E) {
   if (id_dest->width == 2) {
     *dsrc1 &= 0xffff;
   }
-  //id_dest->val = *id_dest->preg;
 }
 
 static inline def_DHelper(SI_E2G) {

@@ -81,10 +81,19 @@ again:
   // if(opcode==0x83||opcode==0x89||opcode==0x55||opcode==0x68){
   //   isa_reg_display();
   // }
+  /*
+   * I:imm
+   * r:reg
+   * G:register
+   * E:r/m
+   * a:al ax
+   * 0:moff
+   */
   switch (opcode) {
     IDEXW (0x00, G2E, add, 1)
     IDEX (0x01, G2E, add)
     IDEX (0x03, E2G, add)
+    IDEX (0x13, E2G, adc)
     IDEXW(0x2c, I2a, sub, 1)
     IDEX (0x2d, I2a, sub)
     IDEXW(0x30, G2E, xor, 1)
