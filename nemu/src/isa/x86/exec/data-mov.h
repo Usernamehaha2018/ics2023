@@ -70,7 +70,7 @@ static inline def_EHelper(movzx) {
 }
 
 static inline def_EHelper(lea) {
-  rtl_addi(s, ddest, s->isa.mbase, s->isa.moff);
+  //rtl_addi(s, ddest, s->isa.mbase, s->isa.moff);
   operand_write(s, id_dest, ddest);
   print_asm_template2(lea);
 }
