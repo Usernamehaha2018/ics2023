@@ -92,6 +92,7 @@ if(opcode==0x80){
    */
   switch (opcode) {
     IDEXW (0x00, G2E, add, 1)
+    IDEXW (0x0a, E2G, or, 1)
     IDEX (0x01, G2E, add)
     IDEX (0x03, E2G, add)
     IDEX (0x09, G2E, or)
