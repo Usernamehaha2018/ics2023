@@ -32,11 +32,10 @@ static inline void rtl_setcc(DecodeExecState *s, rtlreg_t* dest, uint32_t subcod
     case CC_O: rtl_get_OF(s,dest);break;
     case CC_B: rtl_get_CF(s,dest);break;
     case CC_E: rtl_get_ZF(s,dest);break;
-    case CC_BE:
+    case CC_BE: 
     case CC_S:
     case CC_L:
     case CC_LE:
-       TODO();
     default: panic("should not reach here");
     case CC_P: panic("PF is not supported");
   }
