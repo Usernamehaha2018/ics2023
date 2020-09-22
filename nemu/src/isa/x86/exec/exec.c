@@ -155,6 +155,7 @@ again:
     IDEX (0xf7, E, gp3)
     IDEXW(0xfe, E, gp4, 1)
     IDEX (0xff, E, gp5)
+  case 0x90: break;
   case 0xf3: s->seq_pc += 3;break;
   case 0x66: s->isa.is_operand_size_16 = true; goto again;
   default: exec_inv(s);
