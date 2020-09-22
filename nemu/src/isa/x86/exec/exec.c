@@ -93,6 +93,7 @@ again:
     IDEXW (0x00, G2E, add, 1)
     IDEX (0x01, G2E, add)
     IDEX (0x03, E2G, add)
+    IDEX (0x09, G2E, or)
     IDEX (0x13, E2G, adc)
     IDEXW(0x2c, I2a, sub, 1)
     IDEX (0x2d, I2a, sub)
