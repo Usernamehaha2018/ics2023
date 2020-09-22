@@ -102,6 +102,7 @@ again:
     IDEXW(0x32, E2G, xor, 1)
     IDEX (0x33, E2G, xor)
     IDEX (0x3b, E2G, cmp)
+    IDEX (0x43, r, inc)
     IDEX (0x47, r, inc)
     IDEX (0x50, r, push)
     IDEX (0x51, r, push)
