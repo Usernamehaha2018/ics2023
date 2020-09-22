@@ -113,6 +113,7 @@ if(opcode==0x80){
     IDEX (0x55, r, push)
     IDEX (0x56, r, push)
     IDEX (0x57, r, push)
+    IDEX (0x58, r, pop)
     IDEX (0x59, r, pop)
     IDEX (0x5b, r, pop)
     IDEX (0x5d, r, pop)
