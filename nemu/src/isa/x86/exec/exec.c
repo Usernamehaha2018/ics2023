@@ -129,6 +129,7 @@ again:
     IDEXW(0x84, G2E, test, 1)
     IDEXW(0x88, mov_G2E, mov, 1)
     IDEX (0x89, mov_G2E, mov)
+    EX   (0x90, nop)
     IDEXW(0x8a, mov_E2G, mov, 1)
     IDEX (0x8b, mov_E2G, mov)
     IDEX (0x8d, lea_M2G, lea)
@@ -168,7 +169,6 @@ again:
     IDEX (0xf7, E, gp3)
     IDEXW(0xfe, E, gp4, 1)
     IDEX (0xff, E, gp5)
-  case 0x90: break;
   case 0xf3: s->seq_pc += 3;break;
   case 0x66: s->isa.is_operand_size_16 = true; goto again;
   default: exec_inv(s);
