@@ -12,9 +12,9 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   }
   printf("reg:\n");
   for(int i=0;i<8;i++){
-    printf("%d:%x\n",i,ref_r->gpr[i]._32);
-    printf("pc:%x\n",ref_r->pc);
+    printf("%d:%x\n",i,ref_r->gpr[i]._32); 
   }
+  printf("pc:%x\n",ref_r->pc);
   return false;
 }
 
