@@ -2,7 +2,8 @@
 
 
 static inline def_EHelper(test) {
-  rtl_and(s,s0,ddest,dsrc1);printf("here\n");
+  printf("deat,src:%u, %u\n",*ddest, *dsrc1);
+  rtl_and(s,s0,ddest,dsrc1);
   rtl_update_ZFSF(s,s0,id_dest->width);
   
   *s1 = 0;
