@@ -1,8 +1,8 @@
 #include "cc.h"
 
 
-static inline def_EHelper(test) {printf("here\n");
-  rtl_and(s,s0,ddest,dsrc1);
+static inline def_EHelper(test) {
+  rtl_and(s,s0,ddest,dsrc1);printf("here\n");
   rtl_update_ZFSF(s,s0,id_dest->width);
   
   *s1 = 0;
