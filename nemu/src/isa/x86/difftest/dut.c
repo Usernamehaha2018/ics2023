@@ -4,6 +4,12 @@
 #include "difftest.h"
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
+  if(cpu.eax == ref_r->eax&&cpu.ebx == ref_r->ebx
+  &&cpu.ecx == ref_r->ecx&&cpu.edx == ref_r->edx
+  &&cpu.esp == ref_r->esp&&cpu.ebp == ref_r->ebp
+  &&cpu.esi == ref_r->esi&&cpu.edi == ref_r->edi){  
+    return true;
+  }
   return false;
 }
 
