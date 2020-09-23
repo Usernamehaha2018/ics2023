@@ -39,6 +39,7 @@ static inline void rtl_setcc(DecodeExecState *s, rtlreg_t* dest, uint32_t subcod
       rtl_get_ZF(s,t0); 
       rtl_get_OF(s,t1); 
       rtl_get_SF(s,t2);
+      printf("ZOS:%u,%u,%u\n",*t0,*t1,*t2);
       if(!*t0&&(*t1==*t2))
       *dest = 0;
       else *dest = 1;
