@@ -57,8 +57,8 @@ static inline def_DopHelper(SI) {
   *t0 = instr_fetch(&s->seq_pc,op->width);
   rtl_sext(s, t0, t0, op->width);
   op->simm = *t0;
-  op->val = op->simm;
-  //rtl_li(s,op->preg, op->simm);
+  rtl_li(s,&op->val, op->simm);
+  op->preg = &op->val;
   operand_imm(s,op,load_val,op->simm,op->width);
 }
 
