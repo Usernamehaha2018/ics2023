@@ -40,12 +40,9 @@ static inline void rtl_setcc(DecodeExecState *s, rtlreg_t* dest, uint32_t subcod
       rtl_get_OF(s,t1); 
       rtl_get_SF(s,t2);
       if(!*t0&&(*t1==*t2))
-      *dest = 1;
-      else *dest = 0;
-      if(subcode==14){
-        *dest = 1- *dest;
-      }
-      printf("dest:%d\n",*dest);
+      *dest = 0;
+      else *dest = 1;
+      
       break;
     }
     default: panic("should not reach here");
@@ -55,6 +52,7 @@ static inline void rtl_setcc(DecodeExecState *s, rtlreg_t* dest, uint32_t subcod
   if (invert) {
     rtl_xori(s, dest, dest, 0x1);
   }
+  printf("dest:%d\n",*dest);
   assert(*dest == 0 || *dest == 1);
 }
 
