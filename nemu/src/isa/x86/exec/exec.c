@@ -133,6 +133,7 @@ again:
     IDEXW(0x74, J, jcc, 1)
     IDEXW(0x75, J, jcc, 1)
     IDEXW(0x7e, J, jcc, 1)
+    IDEXW(0x7f, J, jcc, 1)
     EX   (0x0f, 2byte_esc)
     IDEXW(0x80, I2E, gp1, 1)
     IDEX (0x81, I2E, gp1)
