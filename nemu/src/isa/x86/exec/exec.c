@@ -137,7 +137,7 @@ again:
     IDEX (0x81, I2E, gp1)
     IDEX (0x83, SI2E, gp1)
     IDEXW(0x84, G2E, test, 1)
-    IDEXW(0x85, G2E, test, 1)
+    IDEX(0x85, G2E, test)
     IDEXW(0x88, mov_G2E, mov, 1)
     IDEX (0x89, mov_G2E, mov)
     EX   (0x90, nop)
