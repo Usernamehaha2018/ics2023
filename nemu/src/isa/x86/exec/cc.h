@@ -25,7 +25,6 @@ static inline const char* get_cc_name(int subcode) {
 
 static inline void rtl_setcc(DecodeExecState *s, rtlreg_t* dest, uint32_t subcode) {
   uint32_t invert = subcode & 0x1;
-  uint32_t a,b;
   // TODO: Query EFLAGS to determine whether the condition code is satisfied.
   // dest <- ( cc is satisfied ? 1 : 0)
   switch (subcode & 0xe) {
@@ -35,11 +34,13 @@ static inline void rtl_setcc(DecodeExecState *s, rtlreg_t* dest, uint32_t subcod
     case CC_BE: 
     case CC_S:
     case CC_L: 
-    case CC_LE:
-      rtl_get_OF(s,&a);rtl_get_SF(s,&b);
-      rtl_get_ZF(s,dest);
-      if(a!=b)*dest = 1;
-      break;
+    case CC_LE:{
+      rtl_get_ZF(s,t0); 
+      rtl_get_OF(s,t1); 
+      rtl_get_SF(s,t2);
+      rtl_xor(s,t1, t1, t2);
+      rtl_or(s, dest, t0, t1);
+    }
     default: panic("should not reach here");
     case CC_P: panic("PF is not supported");
   }
