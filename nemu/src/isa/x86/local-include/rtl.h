@@ -58,6 +58,7 @@ static inline def_rtl(is_sub_carry, rtlreg_t* dest,
   printf("sub:%u,%u\n",*src1,*src2);
   if(*src1 > *src2) *dest = 1;
   else *dest = 0;
+  printf("%u\n",*dest);
 }
 
 static inline def_rtl(is_add_overflow, rtlreg_t* dest,
