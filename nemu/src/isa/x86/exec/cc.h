@@ -38,8 +38,9 @@ static inline void rtl_setcc(DecodeExecState *s, rtlreg_t* dest, uint32_t subcod
       rtl_get_ZF(s,t0); 
       rtl_get_OF(s,t1); 
       rtl_get_SF(s,t2);
-      rtl_xor(s,t1, t1, t2);
-      rtl_or(s, dest, t0, t1);
+      if(!*t0&&(*t1==*t2))
+      *dest = 1;
+      else *dest = 0;
       break;
     }
     default: panic("should not reach here");
