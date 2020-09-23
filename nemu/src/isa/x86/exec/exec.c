@@ -106,8 +106,10 @@ again:
     IDEX (0x09, G2E, or)
     IDEX (0x13, E2G, adc)
     IDEXW(0x22, E2G, and, 1)
+    IDEX (0x29, G2E, sub)
     IDEXW(0x2c, I2a, sub, 1)
     IDEX (0x2d, I2a, sub)
+    
     IDEXW(0x30, G2E, xor, 1)
     IDEX (0x31, G2E, xor)
     IDEXW(0x32, E2G, xor, 1)
