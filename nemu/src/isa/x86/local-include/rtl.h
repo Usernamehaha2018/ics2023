@@ -110,8 +110,9 @@ static inline def_rtl(update_ZF, const rtlreg_t* result, int width) {
 static inline def_rtl(update_SF, const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
   rtl_msb(s, t0, result, width);
+  printf("cmps0:%d,%u\n",*t0,*t0);
   if(t0)cpu.eflags.SF = 1;
-  else cpu.eflags.SF = 0;
+  else cpu.eflags.SF =0;
 }
 
 static inline def_rtl(update_ZFSF, const rtlreg_t* result, int width) {

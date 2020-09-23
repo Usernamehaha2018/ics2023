@@ -42,6 +42,7 @@ static inline def_EHelper(sub) {
 
 static inline def_EHelper(cmp) {
   rtl_sub(s, s0, ddest, dsrc1);
+  printf("cmps0:%d,%u\n",*s0,*t0);
   if (id_dest->width != 4) {
     rtl_andi(s, s0, s0, 0xffffffffu >> ((4 - id_dest->width) * 8));
   }
