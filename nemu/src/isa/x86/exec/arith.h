@@ -32,7 +32,7 @@ static inline def_EHelper(sub) {
   }
   operand_write(s,id_dest,s0);
   rtl_update_ZFSF(s, s0, id_dest->width);
-  rtl_is_sub_carry(s, s1, s0, ddest);
+  rtl_is_sub_carry(s, s1, ddest, dsrc1);
   rtl_set_CF(s, s1);
   rtl_is_sub_overflow(s, s1, s0, ddest, dsrc1, id_dest->width);
   rtl_set_OF(s, s1);
@@ -113,9 +113,6 @@ static inline def_EHelper(sbb) {
   rtl_update_ZFSF(s, s1, id_dest->width);
   rtl_is_sub_overflow(s, s2, s1, ddest, dsrc1, id_dest->width);
   rtl_set_OF(s, s2);
-    if (id_dest->width != 4) {
-    rtl_andi(s, s1, s1, 0xffffffffu >> ((4 - id_dest->width) * 8));
-  }
   rtl_is_add_carry(s, s2, s0, dsrc1);
   rtl_is_sub_carry(s, s0, ddest, s0);
   rtl_or(s, s0, s0, s2);
