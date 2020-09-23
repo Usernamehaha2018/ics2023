@@ -32,7 +32,7 @@ static inline def_EHelper(sub) {
   }
   operand_write(s,id_dest,s0);
   rtl_update_ZFSF(s, s0, id_dest->width);
-  rtl_is_sub_carry(s, s1, ddest, dsrc1);
+  rtl_is_sub_carry(s, s1, s0, ddest);
   rtl_set_CF(s, s1);
   rtl_is_sub_overflow(s, s1, s0, ddest, dsrc1, id_dest->width);
   rtl_set_OF(s, s1);
