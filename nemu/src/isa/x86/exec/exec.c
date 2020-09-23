@@ -111,6 +111,7 @@ again:
     IDEX (0x42, r, inc)
     IDEX (0x43, r, inc)
     IDEX (0x47, r, inc)
+    IDEX (0x4b, r, dec)
     IDEX (0x50, r, push)
     IDEX (0x51, r, push)
     IDEX (0x52, r, push)
