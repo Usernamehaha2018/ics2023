@@ -7,14 +7,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   if(cpu.eax == ref_r->eax&&cpu.ebx == ref_r->ebx
   &&cpu.ecx == ref_r->ecx&&cpu.edx == ref_r->edx
   &&cpu.esp == ref_r->esp&&cpu.ebp == ref_r->ebp
-  &&cpu.esi == ref_r->esi&&cpu.edi == ref_r->edi/*&&cpu.pc == ref_r->pc*/){  
-    if(cpu.pc==0x10009f){
-      printf("reg:\n");
-  for(int i=0;i<8;i++){
-    printf("%d:%x\n",i,ref_r->gpr[i]._32); 
-  }
-  printf("pc:%x\n",ref_r->pc);
-    }
+  &&cpu.esi == ref_r->esi&&cpu.edi == ref_r->edi&&cpu.pc == ref_r->pc){  
     return true;
   }
   printf("reg:\n");
