@@ -27,7 +27,7 @@ static inline def_EHelper(xor) {
   *s1 = 0;
   rtl_set_CF(s,s1);
   rtl_set_OF(s,s1);
-  print_asm_template2(or);
+  print_asm_template2(xor);
 }
 
 static inline def_EHelper(or) {
