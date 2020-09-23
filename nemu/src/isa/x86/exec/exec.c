@@ -79,12 +79,12 @@ again:
   s->opcode = opcode;  //操作码
  // printf("pc:%x\n",cpu.pc);
  // printf("op:%x\n",opcode);
-if(opcode==0x31){
-    isa_reg_display();
-  }
-  if(opcode==0x90){
+// if(opcode==0x31){
+//     isa_reg_display();
+//   }
+//   if(opcode==0x90){
     
-  }
+//   }
   /*
    * I:imm
    * r:reg
