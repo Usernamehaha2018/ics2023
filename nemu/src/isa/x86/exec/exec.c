@@ -105,6 +105,7 @@ again:
     IDEX (0x03, E2G, add)
     IDEX (0x09, G2E, or)
     IDEX (0x13, E2G, adc)
+    IDEX (0x1b, E2G, sbb)
     IDEXW(0x22, E2G, and, 1)
     IDEX (0x29, G2E, sub)
     IDEX (0x2b, E2G, sub)
