@@ -83,7 +83,7 @@ if(opcode==0x31){
     isa_reg_display();
   }
   if(opcode==0x90){
-    assert(0);
+    
   }
   /*
    * I:imm
