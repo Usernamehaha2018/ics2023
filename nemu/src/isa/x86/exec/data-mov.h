@@ -11,8 +11,8 @@ static inline def_EHelper(push) {
 }
 
 static inline def_EHelper(pop) {
-  rtl_pop(s, id_src1->preg);
-  operand_write(s, id_dest, id_src1->preg);
+  rtl_pop(s, id_dest->preg);
+  operand_write(s, id_dest, id_dest->preg);
   print_asm_template1(pop);
 }
 
