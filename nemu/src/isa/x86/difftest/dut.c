@@ -10,6 +10,10 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   &&cpu.esi == ref_r->esi&&cpu.edi == ref_r->edi){  
     return true;
   }
+  printf("reg:\n");
+  for(int i=0;i<8;i++){
+    printf("%d:%x\n",i,ref_r->gpr[i]._32);
+  }
   return false;
 }
 
