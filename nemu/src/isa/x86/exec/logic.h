@@ -21,7 +21,8 @@ static inline def_EHelper(and) {
 }
 
 static inline def_EHelper(xor) {
-  rtl_xor(s, s0, id_dest->preg, id_src1->preg);
+  rtl_xor(s, s0, ddest, dsrc1);
+  printf("eax:%u and %u\n",*ddest,*dsrc1);
   operand_write(s, id_dest, s0);
   rtl_update_ZFSF(s,s0,id_dest->width);
   *s1 = 0;
