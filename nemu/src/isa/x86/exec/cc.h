@@ -42,7 +42,7 @@ static inline void rtl_setcc(DecodeExecState *s, rtlreg_t* dest, uint32_t subcod
       if(!*t0&&(*t1==*t2))
       *dest = 1;
       else *dest = 0;
-      if(subcode==15){
+      if(subcode==14){
         *dest = 1- *dest;
       }
       printf("dest:%d\n",*dest);
