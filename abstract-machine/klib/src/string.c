@@ -46,7 +46,7 @@ char* strcat(char* dst, const char* src) {
 }
 
 int strcmp(const char* s1, const char* s2) {
-  	if((s1!=NULL) || (s2!=NULL)){
+  	if((s1==NULL) || (s2==NULL)){
       assert(0);
     };
     while(*s1 == *s2)
