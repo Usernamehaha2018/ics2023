@@ -85,9 +85,12 @@ static inline def_EHelper(dec) {
 }
 
 static inline def_EHelper(neg) {
-  printf("FRFRFRFRFRFR\n");
-  //rtl_neg(s,s0,dsrc1);
-  printf("dsrc1:%d+++++++%d\n",*dsrc1,*ddest);
+  rtl_neg(s,s0,dsrc1);
+  *s1 = 0;
+  if(*ddest!=0)*s1 = 1;
+  rtl_set_CF(s,s1);
+  rtl_update_ZFSF(s,s0, id_dest->width);
+  operand_write(s,id_dest,s0);
   print_asm_template1(neg);
 }
 
