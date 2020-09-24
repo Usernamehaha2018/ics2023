@@ -1,4 +1,5 @@
 #include <monitor/difftest.h>
+#include <isa.h>
 
 static inline def_EHelper(lidt) {
   TODO();
@@ -57,6 +58,7 @@ static inline def_EHelper(in) {
 
 static inline def_EHelper(out) {
   printf("%u,%u,\n",*id_dest->preg,*id_src1->preg);
+  isa_reg_display();
   switch (id_dest->width)
   {
   case 1:
