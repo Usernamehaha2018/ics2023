@@ -5,10 +5,10 @@ static inline def_EHelper(add) {
   if (id_dest->width != 4) {
     rtl_andi(s, s0, s0, 0xffffffffu >> ((4 - id_dest->width) * 8));
   }
+  operand_write(s,id_dest,s0);
   rtl_update_ZFSF(s, s0, id_dest->width);
   rtl_is_add_carry(s, s1, ddest, dsrc1);
   rtl_set_CF(s, s1);
-  operand_write(s,id_dest,s0);
   rtl_is_add_overflow(s, s1, s0, ddest, dsrc1, id_dest->width);
   rtl_set_OF(s, s1);
   print_asm_template2(add);
@@ -30,14 +30,13 @@ static inline def_EHelper(sub) {
   if (id_dest->width != 4) {
     rtl_andi(s, s0, s0, 0xffffffffu >> ((4 - id_dest->width) * 8));
   }
+  rtl_is_sub_overflow(s, s1, s0, ddest, dsrc1, id_dest->width);
+  rtl_set_OF(s, s1);
   rtl_update_ZFSF(s, s0, id_dest->width);
   rtl_is_sub_carry(s, s1, ddest, dsrc1);
   rtl_set_CF(s, s1);
   operand_write(s,id_dest,s0);
   printf("current cf:%u\n",cpu.eflags.CF);
-  rtl_is_sub_overflow(s, s1, s0, ddest, dsrc1, id_dest->width);
-  rtl_set_OF(s, s1);
-  
   print_asm_template2(sub);
 }
 
@@ -75,13 +74,12 @@ static inline def_EHelper(dec) {
   if (id_dest->width != 4) {
     rtl_andi(s, s0, s0, 0xffffffffu >> ((4 - id_dest->width) * 8));
   }
-  
+  rtl_is_sub_overflow(s, s1, s0, ddest, s2, id_dest->width);
+  rtl_set_OF(s, s1); 
   rtl_update_ZFSF(s, s0, id_dest->width);
   rtl_is_sub_carry(s, s1, ddest, s2);
   rtl_set_CF(s, s1);
-  
-  rtl_is_sub_overflow(s, s1, s0, ddest, s2, id_dest->width);
-  rtl_set_OF(s, s1);operand_write(s,id_dest,s0);
+  operand_write(s,id_dest,s0);
   print_asm_template1(dec);
 }
 
