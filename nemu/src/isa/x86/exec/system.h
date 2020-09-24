@@ -62,11 +62,14 @@ static inline def_EHelper(out) {
   switch (id_dest->width)
   {
   case 1:
+    printf("1\n");
     pio_write_b(*id_dest->preg,*id_src1->preg);
     break;
   case 2:
+  printf("2\n");
     pio_write_w(*id_dest->preg,*id_src1->preg);
   case 4:
+  printf("4\n");
     pio_write_l(*id_dest->preg,*id_src1->preg);
   default:
     assert(0);
