@@ -69,9 +69,11 @@ static inline def_EHelper(out) {
   case 2:
   printf("2\n");
     pio_write_w(*id_dest->preg,*id_src1->preg);
+    break;
   case 4:
   printf("4\n");
     pio_write_l(*id_dest->preg,*id_src1->preg);
+    break;
   default:
     assert(0);
   }

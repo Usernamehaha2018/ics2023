@@ -4,11 +4,11 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 size_t strlen(const char *s) {\
-  if(s==NULL){return 0;}
-  unsigned long i = 0;
+  assert(s != NULL);
+	int len = 0;
 	while((*s++) != '\0')
-		++i;
-	return i;
+		++len;
+	return len;
 }
 
 size_t strnlen(const char *s, size_t count)
@@ -20,7 +20,7 @@ size_t strnlen(const char *s, size_t count)
 
 char *strcpy(char* dst,const char* src) {
   if(dst==NULL||src==NULL)
-        return NULL;
+        assert(0);
   char *address = dst;  
 	while((*dst++ = *src++) != '\0');  
 	return address;
@@ -60,18 +60,6 @@ int strcmp(const char* s1, const char* s2) {
 }
 
 int strncmp(const char* s1, const char* s2, size_t n) {
-  assert(s1 != NULL && s2 != NULL && n>0);
-  
-  while( *s1 == *s2 && n-1 > 0){
-    s1 ++;
-    s2 ++;
-    n --;
-  }
-  if (*s1 < *s2)
-    return -1;
-  else if(*s1 > *s2)
-    return 1;
-
   return 0;
 }
 
