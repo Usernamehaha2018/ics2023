@@ -16,14 +16,12 @@ typedef struct {
 } IOMap;
 
 static inline bool map_inside(IOMap *map, paddr_t addr) {
-  printf("lox,high:%u,%u\n", map->low, map->high);
   return (addr >= map->low && addr <= map->high);
 }
 
 static inline int find_mapid_by_addr(IOMap *maps, int size, paddr_t addr) {
   int i;
   for (i = 0; i < size; i ++) {
-    printf("i:%u\n",i);
     if (map_inside(maps + i, addr)) {
       difftest_skip_ref();
       return i;
