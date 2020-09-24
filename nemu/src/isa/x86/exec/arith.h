@@ -87,7 +87,7 @@ static inline def_EHelper(dec) {
 static inline def_EHelper(neg) {
   printf("FRFRFRFRFRFR\n");
   //rtl_neg(s,s0,dsrc1);
-  printf("dsrc1:%d\n",*dsrc1);
+  printf("dsrc1:%d+++++++%d\n",*dsrc1,*ddest);
   print_asm_template1(neg);
 }
 
