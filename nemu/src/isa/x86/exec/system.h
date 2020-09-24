@@ -56,10 +56,11 @@ static inline def_EHelper(in) {
 }
 
 static inline def_EHelper(out) {
+  printf("%u,%u,\n",*id_dest->preg,*id_src1->preg);
   switch (id_dest->width)
   {
   case 1:
-    pio_write_b(id_dest->val,id_src1->val);
+    pio_write_b(*id_dest->preg,*id_src1->preg);
     break;
   case 2:
     pio_write_w(*id_dest->preg,*id_src1->preg);
