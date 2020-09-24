@@ -46,7 +46,7 @@ static inline def_EHelper(gp4) {
 /* 0xff */
 static inline def_EHelper(gp5) {
   switch (s->isa.ext_opcode) {
-    EX(0x0,inc) EMPTY(1) EX(0x2,call_rm) EMPTY(3)
+    EX(0x0,inc) EX(0x1,dec) EX(0x2,call_rm) EMPTY(3)
     EX(0x4,jmp_rm) EMPTY(5) EX(0x6,push) EMPTY(7)
   }
 }
