@@ -85,7 +85,7 @@ static inline def_EHelper(dec) {
 }
 
 static inline def_EHelper(neg) {
-  TODO();
+  printf("FRFRFRFRFRFR\n");
   print_asm_template1(neg);
 }
 
