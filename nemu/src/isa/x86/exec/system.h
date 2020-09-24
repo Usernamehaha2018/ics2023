@@ -56,7 +56,18 @@ static inline def_EHelper(in) {
 }
 
 static inline def_EHelper(out) {
-  TODO();
+  switch (id_dest->width)
+  {
+  case 1:
+    pio_write_b(*id_dest->preg,*id_src1->preg);
+    break;
+  case 2:
+    pio_write_w(*id_dest->preg,*id_src1->preg);
+  case 4:
+    pio_write_l(*id_dest->preg,*id_src1->preg);
+  default:
+    assert(0);
+  }
 
   print_asm_template2(out);
 }
