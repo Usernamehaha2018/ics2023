@@ -124,6 +124,7 @@ static inline def_rtl(host_sm, void *addr, const rtlreg_t *src1, int len) {
 
 static inline def_rtl(j, vaddr_t target) {
   s->jmp_pc = target;
+  if(s->jmp_pc>0x10002c&&s->jmp_pc<0x10017b)
   printf("jump:%x\n",s->jmp_pc);
   s->is_jmp = true;
 }
