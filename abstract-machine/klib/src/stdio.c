@@ -16,12 +16,7 @@ int vsprintf(char *buf, const char *fmt, va_list args) {
 }
 
 int sprintf(char *out, const char *fmt, ...) {
-  va_list args;
-  int val;  
-  va_start(args, fmt);
-  val = vsprintf(out, fmt, args);
-  va_end(args);
-  return val;
+  return 0;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
