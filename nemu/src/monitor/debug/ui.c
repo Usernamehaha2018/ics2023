@@ -119,6 +119,7 @@ static int cmd_x(char *args){
   uint32_t nums;
   sscanf(num, "%d", &nums); 
   char *address = num + strlen(num) + 1;
+  printf("addr:%s\n",address);
   word_t ans = expr(address, &success);
   if(!success){
     printf("Fail in expr\n");
