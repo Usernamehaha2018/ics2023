@@ -118,10 +118,8 @@ static int cmd_x(char *args){
   char *num = strtok(args, " ");
   uint32_t nums;
   sscanf(num, "%d", &nums); 
-  char* addr = NULL;
   char *address = num + strlen(num) + 1;
-  sscanf(address, "%s", addr); 
-  word_t ans = expr(addr, &success);
+  word_t ans = expr(address, &success);
   if(!success){
     printf("Fail in expr\n");
     return 0;
