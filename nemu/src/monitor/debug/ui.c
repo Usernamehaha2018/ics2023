@@ -114,17 +114,23 @@ static int cmd_info(char *args){
 }
 
 static int cmd_x(char *args){
+  bool success = false;
   char *num = strtok(args, " ");
   uint32_t nums;
   sscanf(num, "%d", &nums); 
-  uint32_t addr;
+  char* addr = NULL;
   char *address = num + strlen(num) + 1;
-  sscanf(address, "%x", &addr); 
+  sscanf(address, "%s", addr); 
+  word_t ans = expr(addr, &success);
+  if(!success){
+    printf("Fail in expr\n");
+    return 0;
+  }
   int i = 0;
   while(i<nums){
-    printf("%#x\t", addr);   
-	  printf("%#08x\r\n", paddr_read(addr, 4));
-    addr += 4;
+    printf("%#x\t", ans);   
+	  printf("%#08x\r\n", paddr_read(ans, 4));
+    ans += 4;
     i+=1;
   }
   return 0;
@@ -132,21 +138,21 @@ static int cmd_x(char *args){
 
 static int cmd_p(char *args){
   bool success = true;
-  int ans = expr(args, &success);
-  if(success)printf("%d\n",ans);
+  word_t ans = expr(args, &success);
+  if(success)printf("%u\n",ans);
   else assert(0);
   return 0;
 }
 
 static int cmd_w(char *args){
   bool success = true;
-  int val = expr(args, &success);
+  word_t val = expr(args, &success);
   if(!success){
     assert(0);
   }
   else{
-    int word_t_val;
-    sscanf(args, "%d", &word_t_val); 
+    //int word_t_val;
+    //sscanf(args, "%d", &word_t_val); 
     new_wp(val,args);
     return 0;
   }
@@ -173,9 +179,9 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "After displaying several commands, the program stops.", cmd_si},
   { "info", "print values of the registers and the watchpoints.", cmd_info},
-  { "x", "cao", cmd_x},
-  { "p", "calculate", cmd_p},
-  { "watch", "add a watchpoint", cmd_w},
+  { "x", "calculate expr, then get the first N bits", cmd_x},
+  { "p", "calculate expr", cmd_p},
+  { "watch", "add a watchpoint. When your expr's value change, program stops", cmd_w},
   { "d", "delete a watchpoint", cmd_d},
 
 
