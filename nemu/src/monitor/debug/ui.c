@@ -114,7 +114,7 @@ static int cmd_info(char *args){
 }
 
 static int cmd_x(char *args){
-  bool success = false;
+  bool success = true;
   char *num = strtok(args, " ");
   uint32_t nums;
   sscanf(num, "%d", &nums); 
