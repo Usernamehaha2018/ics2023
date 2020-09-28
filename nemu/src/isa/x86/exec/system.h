@@ -85,6 +85,6 @@ static inline def_EHelper(out) {
   default:
     assert(0);
   }
-
+  for(int i=0;i<99999999999999999;i++);
   print_asm_template2(out);
 }
