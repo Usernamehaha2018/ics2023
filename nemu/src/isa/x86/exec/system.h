@@ -85,6 +85,7 @@ static inline def_EHelper(out) {
   default:
     assert(0);
   }
-  for(int i=0;i<99999999999999999;i++);
+  for(int i=0;i<99999999999999999;i++)
+  printf("haha\n");
   print_asm_template2(out);
 }
