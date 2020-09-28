@@ -39,7 +39,11 @@ static inline void update_screen() {
 
 static void vga_io_handler(uint32_t offset, int len, bool is_write) {
   // TODO: call `update_screen()` when writing to the sync register
-  TODO();
+  //TODO();
+  int i;
+  uint32_t *fb = (uint32_t *)(uintptr_t)VMEM;
+  for (i = 0; i < SCREEN_SIZE; i ++) fb[i] = i;
+  update_screen();
 }
 
 void init_vga() {
