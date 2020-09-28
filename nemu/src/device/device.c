@@ -55,7 +55,7 @@ void init_device() {
   init_serial();
   init_timer();
   init_vga();
-  init_i8042();
+  init_i8042(); //keyboard
   init_audio();
 
   add_alarm_handle(set_device_update_flag);

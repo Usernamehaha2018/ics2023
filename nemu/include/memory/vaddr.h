@@ -28,7 +28,6 @@ static inline void vaddr_write(vaddr_t addr, word_t data, int len) {
 }
 
 static inline word_t vaddr_ifetch(vaddr_t addr, int len) {
-  // TODO
   word_t vaddr_ifetch1(vaddr_t addr);
   word_t vaddr_ifetch2(vaddr_t addr);
   word_t vaddr_ifetch4(vaddr_t addr);
