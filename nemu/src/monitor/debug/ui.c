@@ -81,6 +81,7 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
+  cmd_c("");
   return -1;
 }
 
@@ -183,7 +184,7 @@ static struct {
   { "info", "print values of the registers and the watchpoints.", cmd_info},
   { "x", "calculate expr, then get the first N bits", cmd_x},
   { "p", "calculate expr", cmd_p},
-  { "watch", "add a watchpoint. When your expr's value change, program stops", cmd_w},
+  { "w", "add a watchpoint. When your expr's value change, program stops", cmd_w},
   { "d", "delete a watchpoint", cmd_d},
 
 

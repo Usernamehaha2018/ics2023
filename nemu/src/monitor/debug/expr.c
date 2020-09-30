@@ -239,7 +239,7 @@ word_t eval(word_t p, word_t q){
           case TK_ADD: return left_val+right_val;
           case TK_MINUS: return left_val-right_val;
           case TK_AND: return left_val&& right_val;
-          case TK_EQ: {printf("l&r:%d,%d\n",left_val,right_val);return left_val==right_val;}
+          case TK_EQ: return left_val==right_val;
           case TK_UEQ: return left_val!=right_val;
           case DEREF: return paddr_read(right_val, 4);
           case NEG: return left_val*(-1)*right_val;
