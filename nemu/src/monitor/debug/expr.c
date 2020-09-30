@@ -107,7 +107,7 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
           case TK_AND: tokens[nr_token++].type=TK_AND;break;
           case TK_EQ: tokens[nr_token++].type=TK_EQ;break;
-          case TK_HEX: tokens[nr_token++].type=TK_HEX;
+          case TK_HEX: tokens[nr_token].type=TK_HEX;
               memset(res, 0, sizeof(res));
               memcpy(res, substr_start, substr_len);
               strcpy(tokens[nr_token++].str,res);
