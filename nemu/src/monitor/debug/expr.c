@@ -149,13 +149,28 @@ static bool make_token(char *e) {
 
 
 bool check_parentheses(word_t p, word_t q){
-  if(tokens[p].type==TK_LEFT_BRACKET&&tokens[q-1].type==TK_RIGHT_BRACKET){
+  int left_num=0,right_num = 0;
+  bool flag = 1, flag_first = 0;
+  for(int i = p;i<q;i++){
+    if(tokens[i].type==TK_LEFT_BRACKET)left_num += 1;
+    if(tokens[i].type==TK_RIGHT_BRACKET){
+      right_num += 1;
+          if(!flag_first&&left_num==right_num){
+            flag_first = 1;
+            if(i!=q-1){
+              flag = false;
+            }
+          }
+    }
+    if(right_num >left_num)assert(0);
+  }
+  if(tokens[p].type==TK_LEFT_BRACKET&&tokens[q-1].type==TK_RIGHT_BRACKET&&flag){
     return true;
   }
   else return false;
 }
 
-
+//((0*23))-1+30*2/3+$eax-(37)
 int find_main_opt(word_t p, word_t q){
   word_t left_bracket_num = 0, right_bracket_num = 0;
   int main_opt=-1;
