@@ -1,6 +1,6 @@
 #include <am.h>
 #include <nemu.h>
-static long long int current_time=0 ;
+static int current_time=0 ;
 
 void __am_timer_init() {
   current_time = inl(0x48);
