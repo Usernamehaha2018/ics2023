@@ -77,7 +77,7 @@ typedef struct token {
   char str[32];
 } Token;
 
-static Token tokens[32] __attribute__((used)) = {};
+static Token tokens[3662] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
@@ -107,7 +107,11 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
           case TK_AND: tokens[nr_token++].type=TK_AND;break;
           case TK_EQ: tokens[nr_token++].type=TK_EQ;break;
-          case TK_HEX: tokens[nr_token++].type=TK_HEX;break;
+          case TK_HEX: tokens[nr_token].type=TK_HEX;
+              memset(res, 0, sizeof(res));
+              memcpy(res, substr_start, substr_len);
+              strcpy(tokens[nr_token++].str,res);
+              break;
           case TK_REG: tokens[nr_token].type=TK_REG;
               memset(res, 0, sizeof(res));
               memcpy(res, substr_start, substr_len);
@@ -145,13 +149,28 @@ static bool make_token(char *e) {
 
 
 bool check_parentheses(word_t p, word_t q){
-  if(tokens[p].type==TK_LEFT_BRACKET&&tokens[q-1].type==TK_RIGHT_BRACKET){
+  int left_num=0,right_num = 0;
+  bool flag = 1, flag_first = 0;
+  for(int i = p;i<q;i++){
+    if(tokens[i].type==TK_LEFT_BRACKET)left_num += 1;
+    if(tokens[i].type==TK_RIGHT_BRACKET){
+      right_num += 1;
+          if(!flag_first&&left_num==right_num){
+            flag_first = 1;
+            if(i!=q-1){
+              flag = false;
+            }
+          }
+    }
+    if(right_num >left_num)assert(0);
+  }
+  if(tokens[p].type==TK_LEFT_BRACKET&&tokens[q-1].type==TK_RIGHT_BRACKET&&flag){
     return true;
   }
   else return false;
 }
 
-
+//((0*23))-1+30*2/3+$eax-(37)
 int find_main_opt(word_t p, word_t q){
   word_t left_bracket_num = 0, right_bracket_num = 0;
   int main_opt=-1;
@@ -192,7 +211,7 @@ word_t eval(word_t p, word_t q){
     if(tokens[p].type == DEREF||tokens[p].type == NEG){
       return 1;
     }
-    else assert(0);
+    else return 0;
   }
   else if (p == q-1) {
     if(tokens[p].type==TK_HEX){
@@ -202,12 +221,11 @@ word_t eval(word_t p, word_t q){
     }
     else if(tokens[p].type==NUM){
       word_t word_t_val = 0; 
-      sscanf(tokens[p].str, "%d", &word_t_val); 
+      sscanf(tokens[p].str, "%u", &word_t_val); 
       return word_t_val;
     }
     else if(tokens[p].type==TK_REG){
       bool valid_reg = true;
-      printf("p:%s\n",tokens[p].str);
       vaddr_t pos = isa_reg_str2val(tokens[p].str, &valid_reg);
       if(valid_reg)return pos;
       else assert(0);
@@ -226,12 +244,10 @@ word_t eval(word_t p, word_t q){
   }
   else {
       int pos = find_main_opt(p,q);
-      printf("pos:%d\n",pos);
       if(pos==-1){printf("p and q: %d, %d\n",p,q);assert(0);}
       else{
-        int left_val = eval(p, pos);
-        int right_val = eval(pos+1, q);
-        printf("left&right,%d, %d\n",left_val,right_val);
+        word_t left_val = eval(p, pos);
+        word_t right_val = eval(pos+1, q);
         switch(tokens[pos].type){
           case TK_MULTIPLE:return left_val*right_val;
           case TK_DIVIDE:return left_val/right_val;
@@ -241,7 +257,7 @@ word_t eval(word_t p, word_t q){
           case TK_EQ: return left_val==right_val;
           case TK_UEQ: return left_val!=right_val;
           case DEREF: return paddr_read(right_val, 4);
-          case NEG: printf("%d\n",-1*right_val);return left_val*(-1)*right_val;
+          case NEG: return left_val*(-1)*right_val;
           default:assert(0);
         }
       }
@@ -275,10 +291,10 @@ word_t expr(char *e, bool *success) {
         ||(tokens[i-1].type==TK_MULTIPLE)||(tokens[i-1].type==TK_DIVIDE)||
         (tokens[i-1].type==DEREF)||(tokens[i-1].type==NEG)){
           tokens[i].type = NEG;
-          printf("%d\n", i);
         }
       }   
     } 
   }
+  *success = true;
   return eval(0, nr_token);
 }

@@ -81,6 +81,7 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
+  cmd_c("");
   return -1;
 }
 
@@ -109,22 +110,28 @@ static int cmd_info(char *args){
     return 0;
   }
   else{
-    return -1;
+    printf("invalid input: %s\n", args);
+    return 0;
   }
 }
 
 static int cmd_x(char *args){
+  bool success = true;
   char *num = strtok(args, " ");
   uint32_t nums;
   sscanf(num, "%d", &nums); 
-  uint32_t addr;
   char *address = num + strlen(num) + 1;
-  sscanf(address, "%x", &addr); 
+  printf("addr:%s\n",address);
+  word_t ans = expr(address, &success);
+  if(!success){
+    printf("Fail in expr\n");
+    return 0;
+  }
   int i = 0;
   while(i<nums){
-    printf("%#x\t", addr);   
-	  printf("%#08x\r\n", paddr_read(addr, 4));
-    addr += 4;
+    printf("%#x\t", ans);   
+	  printf("%#08x\r\n", paddr_read(ans, 4));
+    ans += 4;
     i+=1;
   }
   return 0;
@@ -132,21 +139,47 @@ static int cmd_x(char *args){
 
 static int cmd_p(char *args){
   bool success = true;
-  int ans = expr(args, &success);
-  if(success)printf("%d\n",ans);
-  else assert(0);
+  word_t ans = expr(args, &success);
+  if(success)printf("%u\n",ans);
+  else {
+    printf("invalid expr");
+    return 0;}
   return 0;
+
+      // FILE *fp;
+      //  char line[1024];
+      //  fp = fopen("input.txt", "r");
+      //  while (!feof(fp))
+      //  {
+      //          if(fgets(line,1024,fp));	
+      //          char *cmd = strtok(line, " ");
+      //          unsigned int val;
+      //          sscanf(cmd, "%d", &val); 
+      //          char *ar = cmd + strlen(cmd) + 1;
+      //          printf("strlen:%ld\n",strlen(ar));
+      //          char *ad = ar+strlen(ar);
+      //          *ad = '\0';
+      //          bool *success = 0;
+      //          word_t ans = expr(ar,success);
+      //          if(ans!=val){
+      //            printf("WAAAAAAAAAAAA:%s is %u,yours %u\n\n\n",ar,val,ans);
+      //            assert(0);
+      //          }
+      //          printf("\n");
+      //  }
+      //  fclose(fp);
+      //  return 0;
 }
 
 static int cmd_w(char *args){
   bool success = true;
-  int val = expr(args, &success);
+  word_t val = expr(args, &success);
   if(!success){
     assert(0);
   }
   else{
-    int word_t_val;
-    sscanf(args, "%d", &word_t_val); 
+    //int word_t_val;
+    //sscanf(args, "%d", &word_t_val); 
     new_wp(val,args);
     return 0;
   }
@@ -173,9 +206,9 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "After displaying several commands, the program stops.", cmd_si},
   { "info", "print values of the registers and the watchpoints.", cmd_info},
-  { "x", "cao", cmd_x},
-  { "p", "calculate", cmd_p},
-  { "watch", "add a watchpoint", cmd_w},
+  { "x", "calculate expr, then get the first N bits", cmd_x},
+  { "p", "calculate expr", cmd_p},
+  { "w", "add a watchpoint. When your expr's value change, program stops", cmd_w},
   { "d", "delete a watchpoint", cmd_d},
 
 
