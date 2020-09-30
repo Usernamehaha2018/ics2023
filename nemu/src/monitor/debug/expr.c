@@ -250,6 +250,7 @@ word_t eval(word_t p, word_t q){
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
+    printf("False!\n\n\n\n\n");
     return 0;
   }
 
