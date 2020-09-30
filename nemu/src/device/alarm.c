@@ -26,7 +26,6 @@ static void alarm_sig_handler(int signum) {
   }
 
   jiffy ++;
-  printf("jiffy:%d\n",jiffy);
 }
 
 void init_alarm() {
