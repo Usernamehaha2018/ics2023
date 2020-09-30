@@ -109,7 +109,8 @@ static int cmd_info(char *args){
     return 0;
   }
   else{
-    return -1;
+    printf("invalid input: %s\n", args);
+    return 0;
   }
 }
 
