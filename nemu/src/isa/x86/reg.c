@@ -100,7 +100,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
     if(!strcmp(ss,regsw_[i])){*success=true;return reg_w(i); }
     if(!strcmp(ss,regsb_[i])){*success=true;return reg_b(i); }
   }
-  if(!strcmp(ss,"pc")){
+  if(!strcmp(ss,"$pc")){
     printf("cpu.pc:%x\n",cpu.pc);
     return cpu.pc;
   }
