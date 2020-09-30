@@ -140,7 +140,9 @@ static int cmd_p(char *args){
   bool success = true;
   word_t ans = expr(args, &success);
   if(success)printf("%u\n",ans);
-  else assert(0);
+  else {
+    printf("invalid expr");
+    return 0;}
   return 0;
 }
 

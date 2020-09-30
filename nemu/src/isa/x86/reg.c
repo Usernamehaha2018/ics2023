@@ -91,7 +91,6 @@ char *rtrim(char *str)
 
     int len = strlen(str);
     char *p = str + len - 1;
-    printf("%s\n",p);
 
     while (p >= str  && (*p==' '))
     {
@@ -107,7 +106,6 @@ word_t isa_reg_str2val(const char *s, bool *success) {
   strcpy(ss,s);
   ltrim(ss);
   rtrim(ss);
-  printf("ss:%s\n",ss);
   for (int i = R_EAX; i <= R_EDI; i ++) {
     if(!strcmp(ss,regsl_[i])){*success=true;return reg_l(i); }
     if(!strcmp(ss,regsw_[i])){*success=true;return reg_w(i); }
