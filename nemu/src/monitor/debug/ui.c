@@ -151,7 +151,7 @@ static int cmd_p(char *args){
        fp = fopen("input", "r");
        while (!feof(fp))
        {
-               readline(line);
+               if(fgets(line,1024,fp));	
                printf("???\n");
                 printf("%s\n",line);
                char *cmd = strtok(line, " ");
