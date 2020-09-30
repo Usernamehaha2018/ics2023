@@ -1,6 +1,6 @@
 #include <am.h>
 #include <nemu.h>
-static uint64_t current_time=4294754952 ;
+static uint64_t current_time=0 ;
 
 void __am_timer_init() {
   uint32_t addr = 0x48;
