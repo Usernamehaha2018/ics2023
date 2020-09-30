@@ -86,7 +86,7 @@ bool check_watchpoint(){
   bool flag = false;
   for(WP* i = head;;i++){
     bool  success = true;
-    word_t val = expr(i->s, &success);
+    word_t val = expr("$pc==0x10000c", &success);
     if(val==i->cur_val){
       flag = true;
       printf("Hardware watchpoint %d: %s\n",i->NO,i->s);
