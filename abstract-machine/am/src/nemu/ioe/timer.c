@@ -1,13 +1,13 @@
 #include <am.h>
 #include <nemu.h>
-static long long int current_time=99999999 ;
+static long long int current_time=0 ;
 
 void __am_timer_init() {
   current_time = inl(0x48);
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  uptime->us = inl(0x48) - current_time;
+  uptime->us = inl(0x48);
 }
 
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
