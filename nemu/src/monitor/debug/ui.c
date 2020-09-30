@@ -138,37 +138,37 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  // bool success = true;
-  // word_t ans = expr(args, &success);
-  // if(success)printf("%u\n",ans);
-  // else {
-  //   printf("invalid expr");
-  //   return 0;}
-  // return 0;
+  bool success = true;
+  word_t ans = expr(args, &success);
+  if(success)printf("%u\n",ans);
+  else {
+    printf("invalid expr");
+    return 0;}
+  return 0;
 
-      FILE *fp;
-       char line[1024];
-       fp = fopen("input.txt", "r");
-       while (!feof(fp))
-       {
-               if(fgets(line,1024,fp));	
-               char *cmd = strtok(line, " ");
-               unsigned int val;
-               sscanf(cmd, "%d", &val); 
-               char *ar = cmd + strlen(cmd) + 1;
-               printf("strlen:%ld\n",strlen(ar));
-               char *ad = ar+strlen(ar);
-               *ad = '\0';
-               bool *success = 0;
-               word_t ans = expr(ar,success);
-               if(ans!=val){
-                 printf("WAAAAAAAAAAAA:%s is %u,yours %u\n\n\n",ar,val,ans);
-                 assert(0);
-               }
-               printf("\n");
-       }
-       fclose(fp);
-       return 0;
+      // FILE *fp;
+      //  char line[1024];
+      //  fp = fopen("input.txt", "r");
+      //  while (!feof(fp))
+      //  {
+      //          if(fgets(line,1024,fp));	
+      //          char *cmd = strtok(line, " ");
+      //          unsigned int val;
+      //          sscanf(cmd, "%d", &val); 
+      //          char *ar = cmd + strlen(cmd) + 1;
+      //          printf("strlen:%ld\n",strlen(ar));
+      //          char *ad = ar+strlen(ar);
+      //          *ad = '\0';
+      //          bool *success = 0;
+      //          word_t ans = expr(ar,success);
+      //          if(ans!=val){
+      //            printf("WAAAAAAAAAAAA:%s is %u,yours %u\n\n\n",ar,val,ans);
+      //            assert(0);
+      //          }
+      //          printf("\n");
+      //  }
+      //  fclose(fp);
+      //  return 0;
 }
 
 static int cmd_w(char *args){
