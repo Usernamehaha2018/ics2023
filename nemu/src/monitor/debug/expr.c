@@ -198,6 +198,7 @@ word_t eval(word_t p, word_t q){
     if(tokens[p].type==TK_HEX){
       word_t word_t_val = 0;          
       sscanf(tokens[p].str, "%x", &word_t_val); 
+      printf("it:%d,\n", word_t_val);
       return word_t_val;    
     }
     else if(tokens[p].type==NUM){
@@ -235,7 +236,7 @@ word_t eval(word_t p, word_t q){
           case TK_ADD: return left_val+right_val;
           case TK_MINUS: return left_val-right_val;
           case TK_AND: return left_val&& right_val;
-          case TK_EQ: return left_val==right_val;
+          case TK_EQ: {printf("l&r:%d,%d\n",left_val,right_val);return left_val==right_val;}
           case TK_UEQ: return left_val!=right_val;
           case DEREF: return paddr_read(right_val, 4);
           case NEG: return left_val*(-1)*right_val;
