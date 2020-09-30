@@ -149,13 +149,12 @@ static int cmd_p(char *args){
       FILE *fp;
        char line[1024];
        fp = fopen("input", "r");
-       printf(">>>\n");
        while (!feof(fp))
        {
                readline(line);
                char *cmd = strtok(line, " ");
-               char *args = cmd + strlen(cmd) + 1;
-               printf("%s,,,%s",cmd,args);
+               char *ar = cmd + strlen(cmd) + 1;
+               printf("%s,,,%s",cmd,ar);
                printf("\n");
        }
        fclose(fp);
