@@ -152,6 +152,7 @@ static int cmd_p(char *args){
        while (!feof(fp))
        {
                readline(line);
+                printf("%s\n",line);
                char *cmd = strtok(line, " ");
                char *ar = cmd + strlen(cmd) + 1;
                printf("%s,,,%s",cmd,ar);
