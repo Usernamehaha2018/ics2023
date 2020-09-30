@@ -1,7 +1,7 @@
 #include <am.h>
 #include <nemu.h>
 static uint64_t current_time=11 ;
-
+static int flag = 0;
 void __am_timer_init() {
   uint32_t addr = 0xa1000048;
   uint64_t t = *(volatile uint64_t *)addr;
@@ -9,6 +9,9 @@ void __am_timer_init() {
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
+  if(!flag){
+    
+  }
   uint32_t addr = 0xa1000048;
   uint64_t t = *(volatile uint64_t *)addr;
   uptime->us = (t-current_time);
