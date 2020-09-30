@@ -198,7 +198,7 @@ word_t eval(word_t p, word_t q){
     if(tokens[p].type==TK_HEX){
       word_t word_t_val = 0;          
       sscanf(tokens[p].str, "%x", &word_t_val); 
-      printf("it:%d,\n", word_t_val);
+      printf("it:%d,,,,%s\n", word_t_val,tokens[p].str);
       return word_t_val;    
     }
     else if(tokens[p].type==NUM){
