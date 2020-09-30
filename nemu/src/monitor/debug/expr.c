@@ -207,7 +207,6 @@ word_t eval(word_t p, word_t q){
     }
     else if(tokens[p].type==TK_REG){
       bool valid_reg = true;
-      printf("p:%s\n",tokens[p].str);
       vaddr_t pos = isa_reg_str2val(tokens[p].str, &valid_reg);
       if(valid_reg)return pos;
       else assert(0);
@@ -226,12 +225,10 @@ word_t eval(word_t p, word_t q){
   }
   else {
       int pos = find_main_opt(p,q);
-      printf("pos:%d\n",pos);
       if(pos==-1){printf("p and q: %d, %d\n",p,q);assert(0);}
       else{
         int left_val = eval(p, pos);
         int right_val = eval(pos+1, q);
-        printf("left&right,%d, %d\n",left_val,right_val);
         switch(tokens[pos].type){
           case TK_MULTIPLE:return left_val*right_val;
           case TK_DIVIDE:return left_val/right_val;
@@ -241,7 +238,7 @@ word_t eval(word_t p, word_t q){
           case TK_EQ: return left_val==right_val;
           case TK_UEQ: return left_val!=right_val;
           case DEREF: return paddr_read(right_val, 4);
-          case NEG: printf("%d\n",-1*right_val);return left_val*(-1)*right_val;
+          case NEG: return left_val*(-1)*right_val;
           default:assert(0);
         }
       }
