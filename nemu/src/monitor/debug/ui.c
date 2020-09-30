@@ -156,7 +156,7 @@ static int cmd_p(char *args){
                unsigned int val;
                sscanf(cmd, "%d", &val); 
                char *ar = cmd + strlen(cmd) + 1;
-               printf("ar:%s\n",ar);
+               printf("strlen:%ld\n",strlen(ar));
                bool *success = 0;
                word_t ans = expr(ar,success);
                if(ans!=val){
