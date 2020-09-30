@@ -211,7 +211,7 @@ word_t eval(word_t p, word_t q){
     if(tokens[p].type == DEREF||tokens[p].type == NEG){
       return 1;
     }
-    else assert(0);
+    else return 0;
   }
   else if (p == q-1) {
     if(tokens[p].type==TK_HEX){
