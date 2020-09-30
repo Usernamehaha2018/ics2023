@@ -138,13 +138,27 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  bool success = true;
-  word_t ans = expr(args, &success);
-  if(success)printf("%u\n",ans);
-  else {
-    printf("invalid expr");
-    return 0;}
-  return 0;
+  // bool success = true;
+  // word_t ans = expr(args, &success);
+  // if(success)printf("%u\n",ans);
+  // else {
+  //   printf("invalid expr");
+  //   return 0;}
+  // return 0;
+
+      FILE *fp;
+       char line[1024];
+       fp = fopen("input", "r");
+       while (!feof(fp))
+       {
+               readline(line);
+               char *cmd = strtok(line, " ");
+               char *args = cmd + strlen(cmd) + 1;
+               printf("%s,,,%s",cmd,args);
+               printf("\n");
+       }
+       fclose(fp);
+       return 0;
 }
 
 static int cmd_w(char *args){
