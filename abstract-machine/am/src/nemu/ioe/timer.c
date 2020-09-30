@@ -6,8 +6,8 @@ void __am_timer_init() {
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  //uint32_t addr = 0xa1000048;
-  //uint64_t t = *(volatile uint64_t *)addr;
+  // uint32_t addr = 0xa1000048;
+  // uint64_t t = *(volatile uint64_t *)addr;
   if(inl(0x48)>4294318559){
     uptime->us = 9999999;
     return;
