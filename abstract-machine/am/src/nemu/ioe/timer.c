@@ -1,13 +1,13 @@
 #include <am.h>
 #include <nemu.h>
-static int time_passed = 0;
+static int current_time = 0;
 
 void __am_timer_init() {
-  time_passed += 100;
+  current_time = inl(0x48);
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  uptime->us = 1000000;
+  uptime->us = inl(0x48) - current_time;
 }
 
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
