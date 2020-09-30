@@ -65,11 +65,7 @@ void isa_reg_display() {
 
 char *ltrim(char *str)
 {
-    if (str == NULL || *str == '\0')
-    {
-        return str;
-    }
-
+    if (str == NULL || *str == '\0')return str;
     int len = 0;
     char *p = str;
     while (*p != '\0' && *p==' ')
@@ -77,27 +73,19 @@ char *ltrim(char *str)
         ++p;
         ++len;
     }
-
     memmove(str, p, strlen(str) - len + 1);
-
     return str;
 }
 char *rtrim(char *str)
 {
-    if (str == NULL || *str == '\0')
-    {
-        return str;
-    }
-
+    if (str == NULL || *str == '\0')return str;
     int len = strlen(str);
     char *p = str + len - 1;
-
     while (p >= str  && (*p==' '))
     {
        *p = '\0';
         --p;
     }
-
     return str;
 }
 
