@@ -149,6 +149,7 @@ static int cmd_p(char *args){
       FILE *fp;
        char line[1024];
        fp = fopen("input", "r");
+       printf(">>>\n");
        while (!feof(fp))
        {
                readline(line);
