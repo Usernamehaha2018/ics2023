@@ -217,6 +217,7 @@ again:
     IDEX (0xe9, J, jmp)
     IDEXW(0xeb, J, jmp, 1)
     IDEXW(0xee, out_a2dx, out, 1)
+    IDEX (0xef, out_a2dx, out)
     IDEXW(0xf6, E, gp3, 1)
     IDEX (0xf7, E, gp3)
     IDEXW(0xfe, E, gp4, 1)
