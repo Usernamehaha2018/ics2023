@@ -157,6 +157,8 @@ static int cmd_p(char *args){
                sscanf(cmd, "%d", &val); 
                char *ar = cmd + strlen(cmd) + 1;
                printf("strlen:%ld\n",strlen(ar));
+               char *ad = ar+strlen(ar);
+               *ad = '\0';
                bool *success = 0;
                word_t ans = expr(ar,success);
                if(ans!=val){
