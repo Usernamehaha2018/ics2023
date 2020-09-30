@@ -9,6 +9,7 @@ void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
   //uint32_t addr = 0xa1000048;
   //uint64_t t = *(volatile uint64_t *)addr;
   uptime->us = (uint64_t)((uint32_t)inl(0x48)-current_time);
+  uptime->us = 99999999;
 }
 
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
