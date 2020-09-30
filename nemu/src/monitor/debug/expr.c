@@ -246,8 +246,8 @@ word_t eval(word_t p, word_t q){
       int pos = find_main_opt(p,q);
       if(pos==-1){printf("p and q: %d, %d\n",p,q);assert(0);}
       else{
-        int left_val = eval(p, pos);
-        int right_val = eval(pos+1, q);
+        word_t left_val = eval(p, pos);
+        word_t right_val = eval(pos+1, q);
         switch(tokens[pos].type){
           case TK_MULTIPLE:return left_val*right_val;
           case TK_DIVIDE:return left_val/right_val;
