@@ -87,7 +87,7 @@ bool check_watchpoint(){
   for(WP* i = head;;i++){
     bool  success = true;
     word_t val = expr(i->s, &success);
-    if(val==i->cur_val){
+    if(val!=i->cur_val){
       flag = true;
       printf("Hardware watchpoint %d: %s\n",i->NO,i->s);
       printf("Old value:%d\n",i->cur_val);
