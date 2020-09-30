@@ -1,5 +1,6 @@
 #include <am.h>
 #include <nemu.h>
+#include <stdio.h>
 static int current_time = 0;
 
 void __am_timer_init() {
