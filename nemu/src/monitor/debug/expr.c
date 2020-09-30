@@ -221,7 +221,7 @@ word_t eval(word_t p, word_t q){
     }
     else if(tokens[p].type==NUM){
       word_t word_t_val = 0; 
-      sscanf(tokens[p].str, "%d", &word_t_val); 
+      sscanf(tokens[p].str, "%u", &word_t_val); 
       return word_t_val;
     }
     else if(tokens[p].type==TK_REG){

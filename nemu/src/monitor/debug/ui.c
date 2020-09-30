@@ -152,11 +152,16 @@ static int cmd_p(char *args){
        while (!feof(fp))
        {
                if(fgets(line,1024,fp));	
-               printf("???\n");
-                printf("%s\n",line);
                char *cmd = strtok(line, " ");
+               unsigned int val;
+               sscanf(cmd, "%d", &val); 
                char *ar = cmd + strlen(cmd) + 1;
-               printf("%s,,,%s",cmd,ar);
+               bool *success = 0;
+               word_t ans = expr(ar,success);
+               if(ans!=val){
+                 printf("WAAAAAAAAAAAA:%s is %u,yours %u\n\n\n",ar,val,ans);
+                 assert(0);
+               }
                printf("\n");
        }
        fclose(fp);
