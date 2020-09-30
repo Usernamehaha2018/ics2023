@@ -3,12 +3,11 @@
 static uint32_t current_time=4294754952 ;
 
 void __am_timer_init() {
-  current_time = inl(0x48);
+  current_time = inl(0x52);
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  current_time=4294754952;
-  uptime->us = (inl(0x48)-current_time);
+  uptime->us = (inl(0x52)-current_time);
 }
 
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
