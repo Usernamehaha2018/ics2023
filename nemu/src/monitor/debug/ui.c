@@ -149,7 +149,6 @@ static int cmd_p(char *args){
       FILE *fp;
        char line[1024];
        fp = fopen("input.txt", "r");
-       if(fp==NULL)printf("null!\n");
        while (!feof(fp))
        {
                if(fgets(line,1024,fp));	
