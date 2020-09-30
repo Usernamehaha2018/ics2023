@@ -90,6 +90,7 @@ char *rtrim(char *str)
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {
+  *success = true;
   char ss[32];
   strcpy(ss,s);
   ltrim(ss);
@@ -98,6 +99,9 @@ word_t isa_reg_str2val(const char *s, bool *success) {
     if(!strcmp(ss,regsl_[i])){*success=true;return reg_l(i); }
     if(!strcmp(ss,regsw_[i])){*success=true;return reg_w(i); }
     if(!strcmp(ss,regsb_[i])){*success=true;return reg_b(i); }
+  }
+  if(!strcmp(ss,"$pc")){
+    return cpu.pc;
   }
   *success=false;
   return 0;
