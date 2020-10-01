@@ -111,7 +111,7 @@ static void input_keybrd(AM_INPUT_KEYBRD_T *ev) {
   if (inb(0x64) & 0x1) {
     int code = inb(0x60) & 0x7f;
     ev->keydown = code < 128;
-    ev->keycode = code & 0x7f;
+    ev->keycode = code;
   } else {
     ev->keydown = false;
     ev->keycode = AM_KEY_NONE;
