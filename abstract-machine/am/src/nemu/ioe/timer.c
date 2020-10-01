@@ -10,8 +10,8 @@ void __am_timer_init() {
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) { 
   uint32_t lo = inl(0x48);
-  uint32_t hi = inl(0x4c) - sec;
-  uptime->us = hi * 1000000 + lo - usec;
+  uint32_t hi = inl(0x4c);
+  uptime->us = (hi - sec) * 1000000 + lo - usec;
 }
 
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
