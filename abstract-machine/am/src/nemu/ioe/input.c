@@ -4,7 +4,7 @@
 #define KEYDOWN_MASK 0x8000
 
 void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
-  if(inb(0x64)){
+  if(inb(0x60)){
     int code = inb(0x60) & 0xff;
     kbd->keydown = (code < 128);
     kbd->keycode = code;
