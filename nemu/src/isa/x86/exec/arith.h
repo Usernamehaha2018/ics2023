@@ -1,5 +1,29 @@
 #include "cc.h"
 
+
+static inline def_EHelper(bsr){
+  if(!*ddest){
+    *s0 = 1;
+    rtl_set_ZF(s,s0);
+    return;
+  }
+   rtl_msb(s,s1,dsrc1,id_src1->width);
+  if(*s1){
+    *s0 = id_src1->width *8 -1;
+    operand_write(s,id_dest,s0);}
+  else{
+    *s0 = 1;
+    while(!*s1){
+      *s0 += 1;
+      *dsrc1 *=2;
+      rtl_msb(s,s1,dsrc1,id_src1->width);
+    }
+    operand_write(s,id_dest,s0);
+  }
+    *s0 = 0;
+    rtl_set_ZF(s,s0);
+}
+
 static inline def_EHelper(add) {
   rtl_add(s, s0, ddest, dsrc1);
   if (id_dest->width != 4) {
