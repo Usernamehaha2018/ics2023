@@ -9,7 +9,8 @@ void __am_timer_init() {
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) { 
-  uint64_t new_time = ((uint64_t)0 << 32) | uptsc;
+  uint32_t cur = inl(0x48);
+  uint64_t new_time = ((uint64_t)0 << 32) | cur;
   uptime->us = new_time - uptsc;
 }
 
