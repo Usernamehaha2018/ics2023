@@ -18,7 +18,7 @@ static inline def_EHelper(bsr){
       *dsrc1 *=2;
       rtl_msb(s,s1,dsrc1,id_src1->width);
     }
-    *s0 = id_dest->width - *s0;
+    *s0 = id_dest->width*8 - *s0;
     operand_write(s,id_dest,s0);
   }
     *s0 = 0;
