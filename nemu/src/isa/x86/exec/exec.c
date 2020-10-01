@@ -114,6 +114,7 @@ again:
     IDEX (0x01, G2E, add)
     IDEX (0x03, E2G, add)
     IDEX (0x09, G2E, or)
+    IDEX (0x0b, E2G, or)
     IDEX (0x13, E2G, adc)
     IDEX (0x19, G2E, sbb)
     IDEX (0x1b, E2G, sbb)
