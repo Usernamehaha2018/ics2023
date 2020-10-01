@@ -6,6 +6,8 @@
 void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
   if(inl(0x60)){
     int code = inl(0x60);
+    code <<= 24;
+    code >>= 24;
     kbd->keydown = 1;
     kbd->keycode = code;
   }
