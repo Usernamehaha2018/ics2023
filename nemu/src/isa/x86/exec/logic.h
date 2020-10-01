@@ -33,6 +33,7 @@ static inline def_EHelper(xor) {
 
 static inline def_EHelper(or) {
   rtl_or(s,s0,ddest,dsrc1);
+  printf("%d,%d,%d,\n",*ddest,*dsrc1,*s0);
   operand_write(s,id_dest, s0); 
   rtl_update_ZFSF(s,s0,id_dest->width);
   *s1 = 0;
