@@ -9,7 +9,6 @@ static inline void set_width(DecodeExecState *s, int width) {
     width = s->isa.is_operand_size_16 ? 2 : 4;
   }
   s->src1.width = s->dest.width = s->src2.width = width;
-  if(s->opcode==0x80)printf("opcode:%x,width:%d\n",s->opcode,s->dest.width);
 }
 
 /* 0x80, 0x81, 0x83 */
