@@ -32,8 +32,8 @@ static int keylut[128] = {
 };
 
 void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
-  uint8_t code = inb(0x60) & 0xff;
-  kbd->keydown = code < 128;
+  int code = inb(0x60) & 0xff;
+  kbd->keydown = 1;
   if(kbd->keydown){
     kbd->keycode =  keylut[code & 0x7f]; ;
   }
