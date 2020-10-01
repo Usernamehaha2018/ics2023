@@ -1,12 +1,14 @@
 #include <am.h>
 #include <nemu.h>
-uint32_t init_time = 0;
+static uint32_t freq_mhz = 2000;
+static uint64_t uptsc;
+
 void __am_timer_init() {
-  init_time = inl(0x48);
+  uptsc = rdtsc();
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) { 
-  uptime->us = (inl(0x48)-init_time);
+ uptime->us = (rdtsc() - uptsc) / freq_mhz;
 }
 
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
