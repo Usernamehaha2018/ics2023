@@ -164,6 +164,7 @@ again:
     IDEX (0x5e, r, pop)
     IDEX (0x5f, r, pop)
     IDEX (0x68, I, push)
+    IDEX (0x69,I2r, imul1)
     IDEXW(0x6a, I, push, 1)
     IDEXW(0x72, J, jcc, 1)
     IDEXW(0x73, J, jcc, 1)
