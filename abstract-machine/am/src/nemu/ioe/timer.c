@@ -11,11 +11,11 @@ void __am_timer_init() {
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) { 
   uint32_t hi = inl(0x4c);
   uint32_t lo = inl(0x48);
-  uint64_t new_time = ((uint64_t)hi << 32) | lo;
-  if(new_time < uptime->us%1000000){
-    uptime->us = new_time + (1000000-uptime->us%1000000)+ uptime->us;
-  }
-  else uptime->us = new_time ;
+  uptime->us = hi * 1000000 + lo;
+  // if(new_time < uptime->us%1000000){
+  //   uptime->us = new_time + (1000000-uptime->us%1000000)+ uptime->us;
+  // }
+  // else uptime->us = new_time ;
 }
 
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
