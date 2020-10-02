@@ -58,6 +58,13 @@ static inline def_EHelper(gp3) {
 
 /* 0xfe */
 static inline def_EHelper(gp4) {
+  if(s->opcode==0xfe){
+      switch (s->isa.ext_opcode) {
+    EMPTY(0) IDEXW(0x1,empt, dec, 1) EMPTY(2) EMPTY(3)
+    EMPTY(4) EMPTY(5) EMPTY(6) EMPTY(7)
+    }
+    return;
+  }
   switch (s->isa.ext_opcode) {
     EMPTY(0) EX(0x1, dec) EMPTY(2) EMPTY(3)
     EMPTY(4) EMPTY(5) EMPTY(6) EMPTY(7)
