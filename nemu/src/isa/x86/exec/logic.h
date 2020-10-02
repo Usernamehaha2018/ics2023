@@ -63,7 +63,7 @@ static inline def_EHelper(sar) {
   if(id_dest->width==1&&*ddest&128){
     *s1 = get_sar(*dsrc1,id_dest->width*8-1);
   }
-   printf("widthsar:%d,times:%u\n",id_dest->width,*dsrc1);
+   printf("widthsar:%d,times:%u,des:%u\n",id_dest->width,*dsrc1,*ddest);
    rtl_sar(s, s0, id_dest->preg, id_src1->preg);
    printf("widthsar:%d,val-s0:%u--%u\n",id_dest->width,*s0,*s1);
   if(*s1)*s0 |= *s1;
