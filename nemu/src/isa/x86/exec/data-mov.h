@@ -82,6 +82,7 @@ static inline def_EHelper(movsx) {
 
 static inline def_EHelper(movzx) {
   id_dest->width = s->isa.is_operand_size_16 ? 2 : 4;
+  printf("movzbl:%u,%u\n",*ddest,*dsrc1);
   operand_write(s, id_dest, dsrc1);
   print_asm_template2(movzx);
 }
