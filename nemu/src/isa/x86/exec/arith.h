@@ -111,7 +111,7 @@ static inline def_EHelper(dec) {
 
 static inline def_EHelper(neg) {
   *s2 = *ddest;
-  rtl_neg(s,s0,dsrc1); 
+  rtl_neg(s,s0,ddest); 
    if (id_dest->width != 4) {
     rtl_andi(s, s0, s0, 0xffffffffu >> ((4 - id_dest->width) * 8));
   }
