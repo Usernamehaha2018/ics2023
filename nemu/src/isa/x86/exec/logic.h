@@ -124,6 +124,6 @@ static inline def_EHelper(rol) {
     rtl_addi(s, ddest, ddest, *s1);
   }
   operand_write(s, id_dest, ddest);
-
+  printf("rol\n");
   print_asm_template1(rol);
 }
