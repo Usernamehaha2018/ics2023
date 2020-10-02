@@ -108,6 +108,7 @@ void read_ModR_M(DecodeExecState *s, Operand *rm, bool load_rm_val, Operand *reg
     load_addr(s, &m, rm);
     if(cpu.pc>=0x001048bd&&cpu.pc<=0x001048c4)printf("%x:rm->width:%u\n",cpu.pc,rm->width);
     if (load_rm_val) rtl_lm(s, &rm->val, s->isa.mbase, s->isa.moff, rm->width);
+    printf("val:%u,%u\n",id_src1->val,rm->val);
     rm->preg = &rm->val;
   }
 }
