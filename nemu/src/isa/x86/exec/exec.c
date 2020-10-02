@@ -125,6 +125,7 @@ again:
     IDEX (0x11, G2E, adc)
     IDEX (0x13, E2G, adc)
     IDEX (0x19, G2E, sbb)
+    IDEXW(0x20, G2E, and, 1)
     IDEX (0x1b, E2G, sbb)
     IDEX (0x21, G2E, and)
     IDEXW(0x22, E2G, and, 1)
