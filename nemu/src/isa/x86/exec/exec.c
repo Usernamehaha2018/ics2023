@@ -10,7 +10,7 @@ static inline void set_width(DecodeExecState *s, int width) {
   }
   s->src1.width = s->dest.width = s->src2.width = width;
 }
-
+//8d60ad19153200e7c --git log
 /* 0x80, 0x81, 0x83 */
 static inline def_EHelper(gp1) {
   switch (s->isa.ext_opcode) {
@@ -23,15 +23,15 @@ static inline def_EHelper(gp1) {
 static inline def_EHelper(gp2) {
   switch (s->isa.ext_opcode) {
     IDEXW(0,empt,rol,-1) EMPTY(1) EMPTY(2) EMPTY(3)
-    EX(0x4,shl) IDEXW(0x5,empt, shr, -1) EMPTY(6) IDEXW(0x7, empt, sar, -1)
+    IDEXW(0x4,empt,shl,-1) IDEXW(0x5,empt, shr, -1) EMPTY(6) IDEXW(0x7, empt, sar, -1)
   }
 }
 
 /* 0xf6, 0xf7 */
 static inline def_EHelper(gp3) {
   switch (s->isa.ext_opcode) {
-    IDEXW (0x0, test_I, test, -1) EMPTY(1) EX(0x2,not) IDEXW(0x3,empt,neg,-1)
-    EX(0x4, mul) EX(0x5,imul1) EX(0x6,div) EX(0x7,idiv)
+    IDEXW (0x0, test_I, test, -1) EMPTY(1) IDEXW(0x2,empt,not,-1) IDEXW(0x3,empt,neg,-1)
+    IDEXW(0x4,empt, mul,-1) IDEXW(0x5,empt,imul1,-1) IDEXW(0x6,empt,div,-1) IDEXW(0x7,empt,idiv,-1)
   }
 }
 
@@ -46,8 +46,8 @@ static inline def_EHelper(gp4) {
 /* 0xff */
 static inline def_EHelper(gp5) {
   switch (s->isa.ext_opcode) {
-    EX(0x0,inc) EX(0x1,dec) EX(0x2,call_rm) EMPTY(3)
-    EX(0x4,jmp_rm) EMPTY(5) EX(0x6,push) EMPTY(7)
+    IDEXW(0x0,empt,inc,-1) IDEXW(0x1,empt,dec,-1) IDEXW(0x2,empt,call_rm,-1) EMPTY(3)
+    IDEXW(0x4,empt,jmp_rm,-1) EMPTY(5) IDEXW(0x6,empt,push,-1) EMPTY(7)
   }
 }
 
