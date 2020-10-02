@@ -50,6 +50,7 @@ void isa_reg_display() {
   for (i = R_EAX; i <= R_EDI; i ++) {
     printf("%s\t%x\t%u\n", regsl[i], reg_l(i), reg_l(i));   
   }
+  printf("cpu.pc:%x\n",cpu.pc);
   // for (i = R_AX; i <= R_DI; i ++) {
   //   printf("%s\t%x\t%u\n", regsw[i], reg_w(i), reg_w(i));   
   // }
