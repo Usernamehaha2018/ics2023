@@ -63,13 +63,13 @@ static inline def_EHelper(sar) {
   if(id_dest->width==1&&*ddest&(uint32_t)128){
     *s1 = get_sar(*dsrc1,id_dest->width*8-1);
   }
-   printf("widthsar:%d,times:%u,des:%u\n",id_dest->width,*dsrc1,*ddest);
+   //printf("widthsar:%d,times:%u,des:%u\n",id_dest->width,*dsrc1,*ddest);
    rtl_sar(s, s0, id_dest->preg, id_src1->preg);
-   printf("widthsar:%d,val-s0:%u--%u\n",id_dest->width,*s0,*s1);
+   //printf("widthsar:%d,val-s0:%u--%u\n",id_dest->width,*s0,*s1);
   if(*s1)*s0 |= *s1;
-  printf("widthsar:%d,val-s0:%u\n",id_dest->width,*s0);
+  //printf("widthsar:%d,val-s0:%u\n",id_dest->width,*s0);
   operand_write(s, id_dest, s0);
-  printf("widthsar:%d,val:%u\n",id_dest->width,*ddest);
+  //printf("widthsar:%d,val:%u\n",id_dest->width,*ddest);
 
   // unnecessary to update CF and OF in NEMU
   // update ZF and SF
