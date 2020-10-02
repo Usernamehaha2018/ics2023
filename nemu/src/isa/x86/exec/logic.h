@@ -57,10 +57,11 @@ uint32_t get_sar(const uint32_t times, const uint32_t width){
 static inline def_EHelper(sar) {
   // unnecessary to update CF and OF in NEMU
   *s1 = 0;
-  if(id_dest->width==2&&*ddest&32678){
+  if(id_dest->width==2&&*ddest&(uint32_t)32678){
+    printf("ddest!%u\n",*ddest&(uint32_t)32678);
     *s1 = get_sar(*dsrc1,id_dest->width*8-1);
   }
-  if(id_dest->width==1&&*ddest&128){
+  if(id_dest->width==1&&*ddest&(uint32_t)128){
     *s1 = get_sar(*dsrc1,id_dest->width*8-1);
   }
    printf("widthsar:%d,times:%u,des:%u\n",id_dest->width,*dsrc1,*ddest);
