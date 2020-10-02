@@ -92,3 +92,16 @@ static inline def_EHelper(lea) {
   print_asm_template2(lea);
 }
 
+static inline def_EHelper(movsb){
+  if (s->isa.is_operand_size_16) {
+    rtl_lr(s,s0, R_SI, 1);
+    rtl_sext(s,s0, s0, 1);
+    rtl_sr(s,R_DI,s0, 2);
+  }
+  else {
+    rtl_lr(s, s0, R_ESI, 2);
+    rtl_sext(s,s0, s0, 2);
+    rtl_sr(s,R_EDI, s0, 4);
+  }
+  print_asm("movsb" );
+}
