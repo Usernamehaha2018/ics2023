@@ -23,7 +23,7 @@ static inline def_EHelper(gp1) {
 static inline def_EHelper(gp2) {
   if(s->opcode)
   switch (s->isa.ext_opcode) {
-    EMPTY(0) EMPTY(1) EMPTY(2) EMPTY(3)
+    EX(0,rol) EMPTY(1) EMPTY(2) EMPTY(3)
     EX(0x4,shl) EX(0x5,shr) EMPTY(6) EX(0x7, sar)
   }
 }
