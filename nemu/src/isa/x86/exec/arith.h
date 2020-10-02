@@ -13,6 +13,7 @@ static inline def_EHelper(bsr){
     operand_write(s,id_dest,s0);}
   else{
     *s0 = 1;
+    printf("bsr:%u\n",*s1);
     while(!*s1){
       *s0 += 1;
       *dsrc1 *=2;
