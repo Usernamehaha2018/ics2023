@@ -14,8 +14,8 @@ static inline void set_width(DecodeExecState *s, int width) {
 /* 0x80, 0x81, 0x83 */
 static inline def_EHelper(gp1) {
   switch (s->isa.ext_opcode) {
-    EX(0x0,add) IDEXW(0x1, empt, or,-1) EX(0x2,adc) EX(0x3,sbb)
-    EX(0x4, and) EX(0x5,sub) EX(0x6,xor) EX(0x7,cmp)
+    IDEXW(0x0,empt,add,-1) IDEXW(0x1, empt, or,-1) IDEXW(0x2,empt,adc,-1) IDEXW(0x3,empt,sbb,-1)
+    IDEXW(0x4,empt, and,-1) IDEXW(0x5,empt,sub,-1) IDEXW(0x6,empt,xor,-1) IDEXW(0x7,empt,cmp,-1)
   }
 }
 
