@@ -82,9 +82,9 @@ static inline def_EHelper(2byte_esc) {
     IDEXW(0x9e, setcc_E, setcc, 1)
     IDEX (0xaf, E2G, imul2)
     IDEX (0xbd, E2G, bsr)
-    IDEXW(0xbe, E2G, movsx, 1)
-    IDEXW(0xbf, E2G, movsx, 2)
-    IDEX (0xb6, mov_E2G, movzx)
+    IDEXW(0xbe, mov_E2G, movsx, 1)
+    IDEXW(0xbf, mov_E2G, movsx, 2)
+    IDEXW(0xb6, mov_E2G, movzx, 1)
     IDEXW(0xb7, mov_E2G, movzx, 2)
     default: exec_inv(s);
   }
@@ -95,7 +95,7 @@ static inline void fetch_decode_exec(DecodeExecState *s) {
 again:
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
-  //printf("pc:%x\n",cpu.pc);
+  // printf("pc:%x\n",cpu.pc);
 //   if (opcode == 0xd3) printf("op:%x,pc:%x\n",opcode,cpu.pc);
 // if(opcode==0xd3){
 //     isa_reg_display();
