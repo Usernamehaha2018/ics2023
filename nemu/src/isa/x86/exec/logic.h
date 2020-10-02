@@ -43,6 +43,7 @@ static inline def_EHelper(or) {
 
 static inline def_EHelper(sar) {
   // unnecessary to update CF and OF in NEMU
+  printf("widthsar:%d\n",id_dest->width);
   rtl_sar(s, s0, id_dest->preg, id_src1->preg);
   operand_write(s, id_dest, s0);
 
