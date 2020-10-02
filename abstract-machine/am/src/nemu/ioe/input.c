@@ -9,7 +9,7 @@ void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
     code <<= 24;
     code >>= 24;
   if(code){
-    kbd->keydown = code_cur < 4;
+    kbd->keydown = code_cur < 2;
     kbd->keycode = code;
   }
   else{
