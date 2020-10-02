@@ -45,6 +45,7 @@ uint32_t get_sar(const uint32_t times, const uint32_t width){
  // width is 15 or 7
  uint32_t cur = 1;
  uint32_t w = width,w_=width;
+ printf("width:%d\n",width);
   while(w--){
     cur<<=1;
     cur+=1;
