@@ -28,13 +28,13 @@ static inline def_EHelper(gp1) {
 
 /* 0xc0, 0xc1, 0xd0, 0xd1, 0xd2, 0xd3 */
 static inline def_EHelper(gp2) {
-  if(s->opcode==0xd0){
-     switch (s->isa.ext_opcode) {
-    EX(0,rol) EMPTY(1) EMPTY(2) EMPTY(3)
-    EX(0x4,shl) IDEXW(0x5,empt,shr,s->width) EMPTY(6) IDEXW(0x7,empt, sar,s->width)
-  }
-  return; 
-  }
+  // if(s->opcode==0xd0){
+  //    switch (s->isa.ext_opcode) {
+  //   EX(0,rol) EMPTY(1) EMPTY(2) EMPTY(3)
+  //   EX(0x4,shl) IDEXW(0x5,empt,shr,s->width) EMPTY(6) IDEXW(0x7,empt, sar,s->width)
+  // }
+  // return; 
+  // }
   switch (s->isa.ext_opcode) {
     EX(0,rol) EMPTY(1) EMPTY(2) EMPTY(3)
     EX(0x4,shl) EX(0x5,shr) EMPTY(6) EX(0x7, sar)
