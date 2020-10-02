@@ -96,7 +96,7 @@ again:
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
   // printf("pc:%x\n",cpu.pc);
-  //printf("op:%x,pc:%x\n",opcode,cpu.pc);
+  printf("op:%x,pc:%x\n",opcode,cpu.pc);
 // if(opcode==0x31){
 //     isa_reg_display();
 //   }
@@ -258,7 +258,6 @@ vaddr_t isa_exec_once() {
   s.is_jmp = 0;
   s.isa = (ISADecodeInfo) { 0 };
   s.seq_pc = cpu.pc;
-
   fetch_decode_exec(&s);
   update_pc(&s);
 
