@@ -179,7 +179,7 @@ again:
     IDEX (0x68, I, push)
     IDEX (0x69, I2r, imul1)
     IDEXW(0x6a, I, push, 1)
-    IDEX (0x6b, I2r, imul1)
+    IDEXW(0x6b, I2r, imul1, 1)
     IDEXW(0x72, J, jcc, 1)
     IDEXW(0x73, J, jcc, 1)
     IDEXW(0x74, J, jcc, 1)
