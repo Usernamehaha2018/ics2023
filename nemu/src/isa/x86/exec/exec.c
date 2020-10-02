@@ -163,6 +163,7 @@ again:
     IDEX (0x49, r, dec)
     IDEX (0x4a, r, dec)
     IDEX (0x4b, r, dec)
+    IDEX (0x4e, r, dec)
     IDEX (0x50, r, push)
     IDEX (0x51, r, push)
     IDEX (0x52, r, push)
