@@ -9,7 +9,7 @@ void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
     code <<= 24;
     code >>= 24;
   if(code){
-    kbd->keydown = (code_cur < 128) & KEYDOWN_MASK;
+    kbd->keydown = (code_cur & KEYDOWN_MASK) < 128;
     kbd->keycode = code;
   }
   else{
