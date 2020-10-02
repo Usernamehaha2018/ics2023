@@ -93,15 +93,14 @@ static inline def_EHelper(lea) {
 }
 
 static inline def_EHelper(movsb){
-  if (s->isa.is_operand_size_16) {
-    rtl_lr(s,s0, R_SI, 2);
-    rtl_sext(s,s0, s0, 2);
-    rtl_sr(s,R_DI,s0, 2);
-  }
-  else {
-    rtl_lr(s, s0, R_ESI, 4);
-    rtl_sext(s,s0, s0, 4);
-    rtl_sr(s,R_EDI, s0, 4);
-  }
+   int increment = 1;
+  
+  rtl_lr(s,s0, R_ESI, 4);
+  rtl_lm(s,s1, s0, 0,increment);
+  rtl_lr(s,s0, R_EDI, 4);
+  rtl_sm(s,s0, 0,s1, increment);
+  rtl_sr(s, R_EDI, s0, 4);
+  cpu.esi += increment;
+  cpu.edi += increment;
   print_asm("movsb" );
 }
