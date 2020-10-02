@@ -41,10 +41,30 @@ static inline def_EHelper(or) {
   print_asm_template2(or);
 }
 
+uint32_t get_sar(const uint32_t times, const uint32_t width){
+ // width is 15 or 7
+ uint32_t cur = 1;
+ uint32_t w = width,w_=width;
+  while(w--){
+    cur<<=1;
+    cur+=1;
+  }
+  cur>>=(w_+1-times);
+  cur<<=(w_+1-times);
+  return cur;
+}
+
 static inline def_EHelper(sar) {
   // unnecessary to update CF and OF in NEMU
-  printf("widthsar:%d,val:%u\n",id_dest->width,*ddest);
+  *s1 = 0;
+  if(id_dest->width==2&&*ddest&32678){
+    *s1 = get_sar(*dsrc1,id_dest->width*8-1);
+  }
+  if(id_dest->width==1&&*ddest&128){
+    *s1 = get_sar(*dsrc1,id_dest->width*8-1);
+  }
   rtl_sar(s, s0, id_dest->preg, id_src1->preg);
+  if(*s1)*s0 |= *s1;
   printf("widthsar:%d,vals0:%u\n",id_dest->width,*s0);
   operand_write(s, id_dest, s0);
   printf("widthsar:%d,val:%u\n",id_dest->width,*ddest);
