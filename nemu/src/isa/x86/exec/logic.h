@@ -116,8 +116,10 @@ static inline def_EHelper(not) {
 }
 
 static inline def_EHelper(rol) {
+  
   if(id_src1->width == 4) *s0 = (*dsrc1<<24)>>24;
   if(id_src1->width == 2) *s0 = (*dsrc1<<8)>>8;
+  printf("rolddest:%u\n",*s0);
   for(; *s0!=0; (*s0)-=1) {
     rtl_msb(s, s1, ddest, id_dest->width);
     rtl_shli(s, ddest, ddest, 1);
@@ -128,8 +130,10 @@ static inline def_EHelper(rol) {
 }
 
 static inline def_EHelper(ror) {
+  
   if(id_src1->width == 4) *s0 = (*dsrc1<<24)>>24;
   if(id_src1->width == 2) *s0 = (*dsrc1<<8)>>8;
+  printf("rorddest:%u\n",*s0);
   for(; *s0!=0; (*s0)-=1) {
     *s1 = *ddest & 1;
     rtl_shri(s, ddest, ddest, 1);
