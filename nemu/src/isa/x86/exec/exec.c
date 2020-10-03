@@ -98,7 +98,7 @@ static inline void fetch_decode_exec(DecodeExecState *s) {
 again:
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
-  printf("%x\n",cpu.pc);
+  //printf("%x\n",cpu.pc);
 //   if (opcode == 0xd3) printf("op:%x,pc:%x\n",opcode,cpu.pc);
 // if(opcode==0xd3){
 //     isa_reg_display();
@@ -133,6 +133,7 @@ again:
     IDEX (0x21, G2E, and)
     IDEXW(0x22, E2G, and, 1)
     IDEX (0x23, E2G, and)
+    IDEXW(0x24, I2a, and, 1)
     IDEX (0x25, I2a, and)
     IDEX (0x29, G2E, sub)
     IDEX (0x2b, E2G, sub)
