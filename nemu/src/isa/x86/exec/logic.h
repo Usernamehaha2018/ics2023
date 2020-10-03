@@ -125,3 +125,16 @@ static inline def_EHelper(rol) {
   operand_write(s, id_dest, ddest);
   print_asm_template1(rol);
 }
+
+static inline def_EHelper(ror) {
+  if(id_src1->width == 4) *s0 = (*dsrc1<<24)>>24;
+  for(; *s0!=0; (*s0)-=1) {
+    *s1 = *ddest & 1;
+    rtl_shri(s, ddest, ddest, 1);
+    rtl_shli(s, s1, s1, id_dest->width);
+    rtl_addi(s, ddest, ddest, *s1);
+  }
+  operand_write(s, id_dest, ddest);
+  print_asm_template1(ror);
+}
+
