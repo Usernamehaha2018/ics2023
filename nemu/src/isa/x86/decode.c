@@ -101,6 +101,8 @@ void read_ModR_M(DecodeExecState *s, Operand *rm, bool load_rm_val, Operand *reg
   ModR_M m;
   m.val = instr_fetch(&s->seq_pc, 1);
   s->isa.ext_opcode = m.opcode;
+  printf("%d\n",reg==NULL);
+  printf("%d\n",m.mod==3);
   if (reg != NULL) operand_reg(s, reg, load_reg_val, m.reg, reg->width);
   if (m.mod == 3) operand_reg(s, rm, load_rm_val, m.R_M, rm->width);
   else {
