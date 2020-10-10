@@ -2,8 +2,8 @@
 #include <nemu.h>
 #include <string.h>
 
-#define SYNC_ADDR (SCREEN_ADDR + 4)
-
+//#define SYNC_ADDR (SCREEN_ADDR + 4)
+#define SYNC_ADDR (VGACTL_ADDR + 4)
 void __am_gpu_init() {
   int i;
   int w = 400;  // TODO: get the correct width
@@ -34,7 +34,8 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
         pixels += w;
     }
   if (ctl->sync) {
-    outl(SYNC_ADDR, 0);
+   // outl(SYNC_ADDR, 0);
+   outl(SYNC_ADDR, 1);
   }
 }
 
