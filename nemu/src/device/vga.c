@@ -1,8 +1,6 @@
-#include <common.h>
+#include "common.h"
 
 #ifdef HAS_IOE
-void     ioe_read    (int reg, void *buf);
-void     ioe_write   (int reg, void *buf);
 #define SHOW_SCREEN
 //#define MODE_800x600
 
