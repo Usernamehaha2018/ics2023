@@ -1,7 +1,8 @@
 #include <common.h>
 
 #ifdef HAS_IOE
-
+void     ioe_read    (int reg, void *buf);
+void     ioe_write   (int reg, void *buf);
 #define SHOW_SCREEN
 //#define MODE_800x600
 
@@ -51,6 +52,13 @@ static inline void update_screen() {
 void vga_update_screen() {
   // TODO: call `update_screen()` when the sync register is non-zero,
   // then zero out the sync register
+  int *buf = NULL;
+  ioe_read(11,buf);
+  if(*buf){
+    update_screen();
+    ioe_write(11,0);
+  }
+
 }
 
 void init_vga() {
