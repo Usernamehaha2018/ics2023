@@ -52,12 +52,7 @@ static inline void update_screen() {
 void vga_update_screen() {
   // TODO: call `update_screen()` when the sync register is non-zero,
   // then zero out the sync register
-  int *buf = NULL;
-  ioe_read(11,buf);
-  if(*buf){
-    update_screen();
-    ioe_write(11,0);
-  }
+  update_screen();
 
 }
 
