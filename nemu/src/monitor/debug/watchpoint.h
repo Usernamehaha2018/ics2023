@@ -7,10 +7,10 @@ typedef struct watchpoint {
   int NO; //the number of watchpoint
   struct watchpoint *next;
   /* TODO: Add more members if necessary */
-  int cur_val;
+  word_t cur_val;
   char s[32];
 } WP;
-WP* new_wp(int,char*);
+WP* new_wp(word_t,char*);
 void free_wp(int, bool *);
 bool check_watchpoint();
 void info_watchpoints();

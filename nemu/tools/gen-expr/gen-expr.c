@@ -42,16 +42,16 @@ static void gen(char s){
 }
 
 static int gen_rand_op(){
-  uint32_t num = choose(4);
+  uint32_t num = choose(3);
   switch (num)
   {
-  //case 0:gen('&&');break;
-  //case 1:gen('==');break;
-  //case 2:gen('!=');break;
-  case 3:gen('+');break;
+  // case 4:gen('&');gen('&');break;
+  // case 5:gen('=');gen('=');break;
+  // case 6:gen('!');gen('=');break;
+  // case 3:gen('+');break;
   case 0:gen('-');break;
   case 1:gen('*');break;
-  case 2:gen('/');return 1;break;
+  case 2:gen('/');return 1;
   default:assert(0);break;
   }
   return 0;

@@ -4,14 +4,15 @@ static inline def_EHelper(mov) {
 }
 
 static inline def_EHelper(push) {
-  TODO();
-
+  rtl_sext(s, id_dest->preg, id_dest->preg, id_dest->width);
+  // printf("push-val:%x", id_dest->val);
+  rtl_push(s, id_dest->preg);
   print_asm_template1(push);
 }
 
 static inline def_EHelper(pop) {
-  TODO();
-
+  rtl_pop(s, s0);
+  operand_write(s, id_dest, s0);
   print_asm_template1(pop);
 }
 
@@ -28,28 +29,45 @@ static inline def_EHelper(popa) {
 }
 
 static inline def_EHelper(leave) {
-  TODO();
-
+  rtl_mv(s,&cpu.esp,&cpu.ebp);
+  rtl_pop(s,&cpu.ebp);
   print_asm("leave");
 }
 
 static inline def_EHelper(cltd) {
   if (s->isa.is_operand_size_16) {
-    TODO();
+    rtl_lr(s, s0, R_AX, 2);
+    *s0 = (int32_t) *s0;
+    if (*s0 < 0)
+      *s1 = 0xffff;
+    else
+      *s1 = 0;
+    rtl_sr(s, R_DX, s1, 2);
   }
   else {
-  TODO();
+    rtl_lr(s, s0, R_EAX, 4);
+    *s0 = (int32_t) *s0;
+    if (*s0 < 0)
+      *s1 = 0xffffffff;
+    else
+      *s1 = 0;
+    rtl_sr(s, R_EDX, s1, 4);
   }
 
   print_asm(s->isa.is_operand_size_16 ? "cwtl" : "cltd");
 }
 
 static inline def_EHelper(cwtl) {
-  if (s->isa.is_operand_size_16) {
-  TODO();
+
+    if (s->isa.is_operand_size_16) {
+    rtl_lr(s,s0, R_AL, 1);
+    rtl_sext(s,s0, s0, 1);
+    rtl_sr(s,R_AX,s0, 2);
   }
   else {
-  TODO();
+    rtl_lr(s, s0, R_AX, 2);
+    rtl_sext(s,s0, s0, 2);
+    rtl_sr(s,R_EAX, s0, 4);
   }
 
   print_asm(s->isa.is_operand_size_16 ? "cbtw" : "cwtl");
@@ -74,3 +92,15 @@ static inline def_EHelper(lea) {
   print_asm_template2(lea);
 }
 
+static inline def_EHelper(movsb){
+  int increment = 1;
+  
+  rtl_lr(s,s0, R_ESI, 4);
+  rtl_lm(s, s1, s0, 0, increment);
+  rtl_lr(s,s0, R_EDI, 4);
+  rtl_sm(s,s0, 0, s1, increment);
+  rtl_sr(s, R_EDI, s0, 4);
+  cpu.esi += increment;
+  cpu.edi += increment;
+  print_asm("movsb" );
+}

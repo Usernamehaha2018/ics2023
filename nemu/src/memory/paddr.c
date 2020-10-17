@@ -33,6 +33,7 @@ static inline word_t pmem_read(paddr_t addr, int len) {
     case 1: return *(uint8_t  *)p;
     case 2: return *(uint16_t *)p;
     case 4: return *(uint32_t *)p;
+    case 8: return *(uint64_t *)p;
     default: assert(0);
   }
 }

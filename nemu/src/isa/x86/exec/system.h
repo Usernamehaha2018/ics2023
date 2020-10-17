@@ -1,4 +1,5 @@
 #include <monitor/difftest.h>
+#include <isa.h>
 
 static inline def_EHelper(lidt) {
   TODO();
@@ -50,13 +51,39 @@ void pio_write_w(ioaddr_t, uint32_t);
 void pio_write_b(ioaddr_t, uint32_t);
 
 static inline def_EHelper(in) {
-  TODO();
+    switch (id_dest->width)
+  {
+  case 1:
+    *id_dest->preg = pio_read_b(*id_src1->preg);
+    break;
+  case 2: 
+    *id_dest->preg = pio_read_w(*id_src1->preg);
+    break;
+  case 4:
+    *id_dest->preg = pio_read_l(*id_src1->preg);
+    break;
+  default:
+    assert(0);
+  }
 
   print_asm_template2(in);
 }
 
 static inline def_EHelper(out) {
-  TODO();
 
+  switch (id_dest->width)
+  {
+  case 1:
+    pio_write_b(*id_dest->preg,*id_src1->preg);
+    break;
+  case 2: 
+    pio_write_w(*id_dest->preg,*id_src1->preg);
+    break;
+  case 4:
+    pio_write_l(*id_dest->preg,*id_src1->preg);
+    break;
+  default:
+    assert(0);
+  }
   print_asm_template2(out);
 }

@@ -2,7 +2,8 @@
 #include <sys/time.h>
 #include <signal.h>
 
-#define TIMER_HZ 100
+// #define TIMER_HZ 100
+#define TIMER_HZ 60
 #define MAX_HANDLER 8
 
 typedef void (*alarm_handler_t) ();
@@ -14,6 +15,8 @@ void add_alarm_handle(void *h) {
   assert(idx < MAX_HANDLER);
   handler[idx ++] = h;
 }
+
+
 
 uint32_t uptime() { return jiffy / TIMER_HZ; }
 

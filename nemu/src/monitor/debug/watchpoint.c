@@ -22,7 +22,7 @@ void init_wp_pool() {
 
 /* TODO: Implement the functionality of watchpoint */
 /* add a watchpoint */
-WP* new_wp(int val, char *reg){
+WP* new_wp(word_t val, char *reg){
   /* if there is no free wp 
    * for convenience 
    * assert(0)
@@ -47,13 +47,16 @@ WP* new_wp(int val, char *reg){
     if(free_->next)free_ = free_->next;
       else free_ = NULL; 
   }
-  else assert(0);
+  else {
+    printf("there is no available space to add a watchpoint!\n");
+    return NULL;
+  };
   info_watchpoints();
   return tail;
 }
 
 void free_wp(int num, bool *success){
-  if(head==tail){
+  if(head==tail&&head!=NULL){
     if(head->NO!=num){
       *success = false;
       return;
@@ -62,9 +65,19 @@ void free_wp(int num, bool *success){
     free_tail = free_tail->next;
     head = NULL;
     tail =  NULL;
-  }
+  } 
   else{
     WP* i = head;
+    if(head==NULL){
+      *success = false;
+      return;
+    }
+    if(i->NO==num){
+      head = i->next;
+      free_tail->next = i;
+      free_tail = i;
+      return;
+    }
     WP* j = head->next;
     for(;j->NO!=num&&j!=tail;j++);
     if(j->NO!=num){
@@ -83,7 +96,7 @@ bool check_watchpoint(){
   bool flag = false;
   for(WP* i = head;;i++){
     bool  success = true;
-    int val = expr(i->s, &success);
+    word_t val = expr(i->s, &success);
     if(val!=i->cur_val){
       flag = true;
       printf("Hardware watchpoint %d: %s\n",i->NO,i->s);

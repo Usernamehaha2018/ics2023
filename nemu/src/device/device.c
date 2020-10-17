@@ -14,6 +14,7 @@ void init_i8042();
 void init_audio();
 
 void send_key(uint8_t, bool);
+void vga_update_screen();
 
 static int device_update_flag = false;
 
@@ -26,7 +27,7 @@ void device_update() {
     return;
   }
   device_update_flag = false;
-
+  vga_update_screen();
   SDL_Event event;
   while (SDL_PollEvent(&event)) {
     switch (event.type) {
@@ -55,7 +56,7 @@ void init_device() {
   init_serial();
   init_timer();
   init_vga();
-  init_i8042();
+  init_i8042(); //keyboard
   init_audio();
 
   add_alarm_handle(set_device_update_flag);
