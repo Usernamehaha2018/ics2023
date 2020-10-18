@@ -113,7 +113,7 @@ static char * number(char * str, int num, int base, int size, int precision,int 
 
  
 int printf(const char *fmt, ...) {
-  char s[256];
+  char s[4096];
   va_list args;
   va_start(args, fmt);
   int val = vsprintf(s, fmt, args);
