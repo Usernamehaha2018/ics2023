@@ -243,15 +243,12 @@ again:
     IDEX (0xd3, gp2_cl2E, gp2)
     EX   (0xd6, nemu_trap)
     IDEX (0xe8, J, call)
-<<<<<<< HEAD
-=======
     IDEX (0xe9, J, jmp)
     IDEXW(0xeb, J, jmp, 1)
     IDEXW(0xec, in_dx2a, in, 1)
     IDEX (0xed, in_dx2a, in)
     IDEXW(0xee, out_a2dx, out, 1)
     IDEX (0xef, out_a2dx, out)
->>>>>>> pa2
     IDEXW(0xf6, E, gp3, 1)
     IDEX (0xf7, E, gp3)
     IDEXW(0xfe, E, gp4, 1)
