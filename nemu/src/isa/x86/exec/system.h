@@ -2,13 +2,12 @@
 #include <isa.h>
 
 static inline def_EHelper(lidt) {
-  
   if (s->isa.is_operand_size_16){   
-    cpu.idtr.limit = vaddr_read(*ddest, 2);
+    cpu.idtr.limit = vaddr_read(*s->isa.mbase, 2);
     cpu.idtr.base = vaddr_read(*ddest+2, 3);
   }
   else{
-    printf("%x\n",*ddest);
+    printf("%x\n",*s->isa.mbase);
     cpu.idtr.limit = vaddr_read(*ddest, 2);
     cpu.idtr.base = vaddr_read(*ddest+2, 4);
   }

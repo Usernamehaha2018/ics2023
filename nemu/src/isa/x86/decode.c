@@ -31,7 +31,6 @@ static inline void load_addr(DecodeExecState *s, ModR_M *m, Operand *rm) {
   sword_t disp = 0;
   int disp_size = 4;
   int base_reg = -1, index_reg = -1, scale = 0;
-  printf("%x,%x\n",cpu.pc,m->R_M);
   if (m->R_M == R_ESP) {
     SIB sib;
     sib.val = instr_fetch(&s->seq_pc, 1);
