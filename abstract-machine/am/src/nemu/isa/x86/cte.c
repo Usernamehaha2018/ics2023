@@ -17,11 +17,10 @@ void __am_vecnull();
 Context* __am_irq_handle(Context *c) {
   if (user_handler) {
     Event ev = {0};
-
+    printf("haha\n");
     switch (c->irq) {
       default: ev.event = EVENT_ERROR; break;
     }
-    printf("%x\n",c->irq);
     c = user_handler(ev, c);
     assert(c != NULL);
   }
