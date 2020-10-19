@@ -23,7 +23,11 @@ Context* __am_irq_handle(Context *c) {
 // 1050588
     printf("%d\n",c->irq);
     printf("%d\n",c->eax);
+    printf("%d\n",c->ecx);
+    printf("%d\n",c->edx);
     printf("%d\n",c->ebx);
+    printf("%d\n",c->esp);
+    printf("%d\n",c->ebp);
     printf("%d\n",c->eflags);
     switch (c->irq) {
       default: ev.event = EVENT_ERROR; break;
