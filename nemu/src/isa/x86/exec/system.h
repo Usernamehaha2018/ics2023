@@ -4,12 +4,11 @@
 static inline def_EHelper(lidt) {
   if (s->isa.is_operand_size_16){   
     cpu.idtr.limit = vaddr_read(*s->isa.mbase, 2);
-    cpu.idtr.base = vaddr_read(*ddest+2, 3);
+    cpu.idtr.base = vaddr_read(*s->isa.mbase+2, 3);
   }
   else{
-    printf("%x\n",*s->isa.mbase);
-    cpu.idtr.limit = vaddr_read(*ddest, 2);
-    cpu.idtr.base = vaddr_read(*ddest+2, 4);
+    cpu.idtr.limit = vaddr_read(*s->isa.mbase, 2);
+    cpu.idtr.base = vaddr_read(*s->isa.mbase+2, 4);
   }
   print_asm_template1(lidt);
 }
