@@ -1,5 +1,7 @@
 #include <monitor/difftest.h>
 #include <isa.h>
+// mychange
+#include<cpu/exec.h>
 
 static inline def_EHelper(lidt) {
   if (s->isa.is_operand_size_16){   
@@ -29,9 +31,8 @@ static inline def_EHelper(mov_cr2r) {
 #endif
 }
 
-static inline def_EHelper(int) {
-  TODO();
-
+static inline def_EHelper(sys_int) {
+  raise_intr(s,*ddest,s->seq_pc);
   print_asm("int %s", id_dest->str);
 
 #ifndef __DIFF_REF_NEMU__
