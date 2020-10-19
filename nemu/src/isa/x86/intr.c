@@ -14,8 +14,6 @@ void raise_intr(DecodeExecState *s, uint32_t NO, vaddr_t ret_addr) {
   rtl_push(s,&cpu.eflags.eflag);
   rtl_push(s,&cpu.cs);
   rtl_push(s,&ret_addr);
-  s->is_jmp = 1;
-  s->jmp_pc = 1;
   rtl_j(s,offset_hi);
 }
 
