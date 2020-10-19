@@ -17,6 +17,10 @@ void __am_vecnull();
 Context* __am_irq_handle(Context *c) {
   if (user_handler) {
     Event ev = {0};
+//     83
+// 1257431
+// 1261464
+// 1050588
     printf("%d\n",c->irq);
     printf("%d\n",c->eax);
     printf("%d\n",c->ebx);
