@@ -103,9 +103,9 @@ again:
 // if(opcode==0xd3){
 //     isa_reg_display();
 //   }
-//   if(opcode==0x90){
-    
-//   }
+  if(cpu.pc==0x100667){
+    printf("true\n");
+  }
   /*
    * I:imm
    * r:reg
