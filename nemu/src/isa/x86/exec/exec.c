@@ -179,6 +179,7 @@ again:
     IDEX (0x5d, r, pop)
     IDEX (0x5e, r, pop)
     IDEX (0x5f, r, pop)
+    EX   (0x60, push)
     IDEX (0x68, I, push)
     IDEX (0x69, I2r, imul1)
     IDEX (0x6b, SI_E2G, imul3)
