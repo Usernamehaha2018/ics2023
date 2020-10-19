@@ -9,7 +9,7 @@ static inline void operand_reg(DecodeExecState *s, Operand *op, bool load_val, i
 
   if (width == 4) {
     op->preg = &reg_l(r);
-    printf("%x,\n",*op->preg);
+    printf("%x,%x\n",*op->preg,cpu.pc);
   } else {
     assert(width == 1 || width == 2);
     op->preg = &op->val;
