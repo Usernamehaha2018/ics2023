@@ -17,7 +17,7 @@ void __am_vecnull();
 Context* __am_irq_handle(Context *c) {
   if (user_handler) {
     Event ev = {0};
-    printf("haha,%d",c->eax);
+    printf("haha,%d",c->ebx);
     switch (c->irq) {
       default: ev.event = EVENT_ERROR; break;
     }
