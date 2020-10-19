@@ -3,7 +3,7 @@
 
 static inline def_EHelper(lidt) {
   
-  if (s->isa.is_operand_size_16){   
+  if (s->isa.is_operand_size_16&&0){   
     cpu.idtr.limit = vaddr_read(*ddest, 2);
     cpu.idtr.base = vaddr_read(*ddest+2, 3);
   }
