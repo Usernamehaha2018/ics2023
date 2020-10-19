@@ -47,6 +47,11 @@ typedef union {
     };
     uint32_t eflag;
   }eflags;
+  struct {
+      uint32_t base;
+      uint16_t limit;
+    }idtr;
+  rtlreg_t cs;
   
   };
 

@@ -2,8 +2,15 @@
 #include <isa.h>
 
 static inline def_EHelper(lidt) {
-  TODO();
-
+  
+  if (s->isa.is_operand_size_16){   
+    cpu.idtr.limit = vaddr_read(*ddest, 2);
+    cpu.idtr.base = vaddr_read(*ddest+2, 3);
+  }
+  else{
+    cpu.idtr.limit = vaddr_read(*ddest, 2);
+    cpu.idtr.base = vaddr_read(*ddest+2, 4);
+  }
   print_asm_template1(lidt);
 }
 
