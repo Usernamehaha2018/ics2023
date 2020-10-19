@@ -8,6 +8,7 @@ static inline def_EHelper(lidt) {
     cpu.idtr.base = vaddr_read(*ddest+2, 3);
   }
   else{
+    printf("%x\n",*ddest);
     cpu.idtr.limit = vaddr_read(*ddest, 2);
     cpu.idtr.base = vaddr_read(*ddest+2, 4);
   }
