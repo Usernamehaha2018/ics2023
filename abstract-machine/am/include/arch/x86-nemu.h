@@ -6,6 +6,7 @@ struct Context {
   uintptr_t edi, esi, ebp, esp, ebx, edx, ecx, eax;  
   int irq;
   int ha;
+  int aa;
   uintptr_t eip, cs, eflags;
 };
 
