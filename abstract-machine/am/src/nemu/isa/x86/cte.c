@@ -17,6 +17,14 @@ void __am_vecnull();
 Context* __am_irq_handle(Context *c) {
   if (user_handler) {
     Event ev = {0};
+// eax     53      83
+// ecx     132fd7  1257431
+// edx     3f8     1016
+// ebx     133f70  1261424
+// esp     133f50  1261392
+// ebp     133f68  1261416
+// esi     4c066120        1275486496
+// edi     28ed23cc        686629836
     switch (c->irq) {
       case 0x81: ev.event = EVENT_YIELD; break;
       default: ev.event = EVENT_ERROR; break;
