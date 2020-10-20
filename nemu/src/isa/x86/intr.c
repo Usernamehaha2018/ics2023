@@ -11,11 +11,9 @@ void raise_intr(DecodeExecState *s, uint32_t NO, vaddr_t ret_addr) {
   uint32_t offset_hi = vaddr_read(addr+4,4);
   offset_hi &= 0xffff0000;
   offset_hi |= offset_lo;
-  printf("eflag,%x\n",cpu.esp);
   rtl_push(s,&cpu.eflags.eflag);
   rtl_push(s,&cpu.cs);
   rtl_push(s,&ret_addr);
-  printf("eip,%x\n",cpu.esp);
   rtl_j(s,offset_hi);
 }
 

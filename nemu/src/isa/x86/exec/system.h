@@ -32,7 +32,8 @@ static inline def_EHelper(mov_cr2r) {
 }
 
 static inline def_EHelper(sys_int) {
-  raise_intr(s,*ddest,cpu.pc);
+  printf("%x,pc\n",s->seq_pc);
+  raise_intr(s,*ddest,s->seq_pc);
   print_asm("int %s", id_dest->str);
 
 #ifndef __DIFF_REF_NEMU__
