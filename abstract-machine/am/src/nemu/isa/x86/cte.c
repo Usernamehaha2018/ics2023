@@ -26,7 +26,7 @@ Context* __am_irq_handle(Context *c) {
 // esi     4c066120        1275486496
 // edi     28ed23cc        686629836
     switch (c->irq) {
-      case 0x81: ev.event = EVENT_YIELD; break;
+      //case 0x81: ev.event = EVENT_YIELD; break;
       default: ev.event = EVENT_ERROR; break;
     }
     c = user_handler(ev, c);
