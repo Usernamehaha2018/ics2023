@@ -38,7 +38,6 @@ Context* __am_irq_handle(Context *c) {
     // printf("%d\n",c->eflags);
     // printf("%d\n",c->cs);
     // printf("%d\n",c->eip);
-    printf("ss\n");
     switch (c->irq) {
       case 0x81: ev.event = EVENT_YIELD; break;
       default: ev.event = EVENT_ERROR; break;
