@@ -39,7 +39,7 @@ Context* __am_irq_handle(Context *c) {
     // printf("%d\n",c->cs);
     // printf("%d\n",c->eip);
     switch (c->irq) {
-      case 0x81: ev.event = EVENT_YIELD; break;
+      // case 0x81: ev.event = EVENT_YIELD; break;
       default: ev.event = EVENT_ERROR; break;
     }
     c = user_handler(ev, c);
