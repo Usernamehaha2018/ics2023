@@ -3,7 +3,7 @@
 
 struct Context {
   void *cr3;  
-  uintptr_t ess, edi, esi, ebp, esp, ebx, edx, ecx, eax, empt;  
+  uintptr_t ess, edi, esi, ebp, esp, ebx, edx, ecx, eax, empt, empt2;  
   int irq;
   uintptr_t eip, cs, eflags;
 };
