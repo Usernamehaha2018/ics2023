@@ -27,6 +27,9 @@ static inline def_rtl(sr, int r, const rtlreg_t* src1, int width) {
 static inline def_rtl(push, const rtlreg_t* src1) {
   // esp <- esp - 4
   // M[esp] <- src1
+  if(*src1==0x81){
+    printf("0x81,%x\n",cpu.esp);
+  }
   rtl_subi(s,&cpu.esp,&cpu.esp,4);   
   rtl_sm(s, &cpu.esp, 0, src1, 4);
 }
