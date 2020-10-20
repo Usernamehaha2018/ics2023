@@ -38,6 +38,10 @@ Context* __am_irq_handle(Context *c) {
     printf("%d\n",c->eflags);
     printf("%d\n",c->cs);
     printf("%d\n",c->eip);
+        printf("%d\n",c->d);
+    printf("%d\n",c->c);
+    printf("%d\n",c->b);
+    printf("%d\n",c->a);
     switch (c->irq) {
       default: ev.event = EVENT_ERROR; break;
     }
