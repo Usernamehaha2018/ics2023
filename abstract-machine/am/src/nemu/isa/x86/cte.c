@@ -26,6 +26,7 @@ Context* __am_irq_handle(Context *c) {
 // esi     4c066120        1275486496
 // edi     28ed23cc        686629836
     printf("%d\n",c->irq);
+    printf("%d\n",c->ess);
     printf("%d\n",c->eax);
     printf("%d\n",c->ecx);
     printf("%d\n",c->edx);
