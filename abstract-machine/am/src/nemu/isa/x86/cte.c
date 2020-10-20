@@ -35,6 +35,8 @@ Context* __am_irq_handle(Context *c) {
     printf("%d\n",c->esi);
     printf("%d\n",c->ebp);
     printf("%d\n",c->eflags);
+    printf("%d\n",c->cs);
+    printf("%d\n",c->eip);
     switch (c->irq) {
       default: ev.event = EVENT_ERROR; break;
     }
