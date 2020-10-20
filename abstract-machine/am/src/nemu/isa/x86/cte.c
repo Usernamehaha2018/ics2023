@@ -25,19 +25,7 @@ Context* __am_irq_handle(Context *c) {
 // ebp     133f68  1261416
 // esi     4c066120        1275486496
 // edi     28ed23cc        686629836
-    printf("%d\n",c->irq);
-    printf("%d\n",c->ess);
-    printf("%d\n",c->eax);
-    printf("%d\n",c->ecx);
-    printf("%d\n",c->edx);
-    printf("%d\n",c->ebx);
-    printf("%d\n",c->esp);
-    printf("%d\n",c->ebp);
-    printf("%d\n",c->esi);
-    printf("%d\n",c->ebp);
-    printf("%d\n",c->eflags);
-    printf("%d\n",c->cs);
-    printf("%d\n",c->eip);
+    printf("dd\n");
     switch (c->irq) {
       default: ev.event = EVENT_ERROR; break;
     }
