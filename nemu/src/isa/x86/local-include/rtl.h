@@ -28,6 +28,9 @@ static inline def_rtl(push, const rtlreg_t* src1) {
   if(cpu.pc>=0x001007b4&&cpu.pc<=0x1007bf){
     printf("esp: %x, src1: %x, pc: %x\n",cpu.esp, *src1,cpu.pc);
   }
+    if(cpu.pc>=0x001007db&&cpu.pc<=0x1007df){
+    printf("esp: %x, src1: %x, pc: %x\n",cpu.esp, *src1,cpu.pc);
+  }
     if(cpu.pc>=0x00100678&&cpu.pc<=0x10067f){
     printf("esp: %x, src1: %x, pc: %x\n",cpu.esp, *src1, cpu.pc);
   }
