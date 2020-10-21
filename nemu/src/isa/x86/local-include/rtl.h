@@ -25,7 +25,8 @@ static inline def_rtl(sr, int r, const rtlreg_t* src1, int width) {
 }
 
 static inline def_rtl(push, const rtlreg_t* src1) {
-  if(cpu.pc>=0x001007b4&&cpu.pc<=0x1007bf){
+  rtl_subi(s,&cpu.esp,&cpu.esp,4);   
+    if(cpu.pc>=0x001007b4&&cpu.pc<=0x1007bf){
     printf("esp: %x, src1: %x, pc: %x\n",cpu.esp, *src1,cpu.pc);
   }
     if(cpu.pc>=0x001007db&&cpu.pc<=0x1007df){
@@ -34,7 +35,6 @@ static inline def_rtl(push, const rtlreg_t* src1) {
     if(cpu.pc>=0x00100678&&cpu.pc<=0x10067f){
     printf("esp: %x, src1: %x, pc: %x\n",cpu.esp, *src1, cpu.pc);
   }
-  rtl_subi(s,&cpu.esp,&cpu.esp,4);   
   rtl_sm(s, &cpu.esp, 0, src1, 4);
 }
 
