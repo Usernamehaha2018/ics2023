@@ -22,7 +22,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     ramdisk_read(&phdr[i], buf.e_phoff+i*sizeof(Elf_Phdr), sizeof(Elf_Phdr));
   }
   for(int i = 0; i<buf.e_phnum;i++){
-    printf("%u,\n");
+    printf("eeiche,\n");
     printf("%u,\n",phdr[i].p_offset);
   }
   void* buf1 =  (void *)0x3000000;
