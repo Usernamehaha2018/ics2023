@@ -9,9 +9,14 @@
 # define Elf_Phdr Elf32_Phdr
 #endif
 
+size_t ramdisk_read(void *buf, size_t offset, size_t len);
+size_t get_ramdisk_size();
+
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  TODO();
-  return 0;
+  void* buf =  (void *)0x3000000;
+  size_t  len = get_ramdisk_size();
+  ramdisk_read(buf, 0, len);
+  return 0x3000000;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
