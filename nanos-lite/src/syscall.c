@@ -10,6 +10,11 @@ void sys_yield(Context *c) {
   c->GPRx = 0;
 }
 
+void write(Context *c) {
+  yield();
+  c->GPRx = 0;
+}
+
 
 
 
