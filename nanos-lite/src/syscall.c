@@ -1,7 +1,7 @@
 #include <common.h>
 #include <syscall.h>
 size_t fs_write(int fd, void* buf, size_t len);
-
+int mm_brk(uintptr_t brk);
 void sys_exit(Context *c) {
   halt(0);
 }
@@ -16,7 +16,7 @@ void sys_write(Context *c) {
 }
 
 void sys_brk(Context *c) {
-  c->GPRx = 0;
+  c->GPRx = mm_brk(c->GPR2+c->GPR3);
 }
 
 
@@ -27,7 +27,6 @@ void sys_brk(Context *c) {
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
-  printf("%u\n",a[0]);
   switch (a[0]) {
     case 0: sys_exit(c); break;
     case 1: sys_yield(c);break; //SYS_yield
