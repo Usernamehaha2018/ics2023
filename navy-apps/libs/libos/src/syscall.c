@@ -61,11 +61,6 @@ int _open(const char *path, int flags, mode_t mode) {
 }
 
 int _write(int fd, void *buf, size_t count) {
-  while ((1))
-  {
-    /* code */
-  }
-  
   _exit(SYS_write);
   return 0;
 }
