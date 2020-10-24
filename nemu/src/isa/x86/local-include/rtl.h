@@ -30,11 +30,6 @@ static inline def_rtl(push, const rtlreg_t* src1) {
   rtl_sm(s, &cpu.esp, 0, t0, 4);
 }
 
-static inline def_rtl(check, const rtlreg_t* src1) {
-  *t1 = 0x133f70;
-  rtl_lm(s,t0,t1,0,4);
-  printf("pc:%x, 10067f:%x\n",cpu.pc, *t0);
-}
 
 static inline def_rtl(pop, rtlreg_t* dest) {
   // dest <- M[esp]
