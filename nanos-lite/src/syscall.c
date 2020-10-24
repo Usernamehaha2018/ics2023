@@ -23,10 +23,6 @@ void sys_write(Context *c) {
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
-  printf("c->GPR1:%u\n",c->GPR1);
-  printf("c->GPR2:%u\n",c->GPR2);
-  printf("c->GPR3:%u\n",c->GPR3);
-  printf("c->GPR4:%u\n",c->GPR4);
   switch (a[0]) {
     case 0: sys_exit(c); break;
     case 1: sys_yield(c);break; //SYS_yield
