@@ -14,6 +14,16 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t get_ramdisk_size();
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
+  Elf64_Ehdr buf;
+  ramdisk_read(&buf, 0, sizeof(Elf_Ehdr));
+  printf("%u,\n",buf.e_phoff);
+  Elf_Phdr phdr[buf.e_phnum];
+  for(int i = 0; i<buf.e_phnum;i++){
+    ramdisk_read(&phdr[i], buf.e_phoff+i*sizeof(Elf_Phdr), sizeof(Elf_Phdr));
+  }
+  for(int i = 0; i<buf.e_phnum;i++){
+    printf("%u,\n",phdr[i].p_offset);
+  }
   void* buf1 =  (void *)0x3000000;
   void* buf2 =  (void *)0x3001000;
   void* buf3 =  (void *)0x3005000;
