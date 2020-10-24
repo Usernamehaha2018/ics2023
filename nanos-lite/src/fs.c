@@ -23,6 +23,18 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
   return 0;
 }
 
+size_t fs_write(int fd, void *buf, size_t len){
+ if(fd==1 || fd==2){
+   char *buf_c = buf;
+   for(int i=0;i<len;i++){
+     putch(buf_c[i]);
+   }
+   return len;
+ }
+ TODO();
+ return 0;
+}
+
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
   [FD_STDIN]  = {"stdin", 0, 0, invalid_read, invalid_write},
