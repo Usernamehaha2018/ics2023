@@ -25,6 +25,7 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
 
 size_t fs_write(int fd, void *buf, size_t len){
  if(fd==1 || fd==2){
+   Log("Write!");
    char *buf_c = buf;
    for(int i=0;i<len;i++){
      putch(buf_c[i]);
