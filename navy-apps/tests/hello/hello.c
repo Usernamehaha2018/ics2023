@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include <stdio.h>
-
+extern int _write(int , void *, size_t );
 int main() {
   _write(1, "Hello World!\n", 13);
   int i = 2;
