@@ -22,6 +22,12 @@ void do_syscall(Context *c) {
   printf("c->GPR2:%u\n",c->GPR2);
   printf("c->GPR3:%u\n",c->GPR3);
   printf("c->GPR4:%u\n",c->GPR4);
+  printf("c->GPR1:%u\n",c->eax);
+  printf("c->GPR2:%u\n",c->ebx);
+  printf("c->GPR3:%u\n",c->ecx);
+  printf("c->GPR4:%u\n",c->edx);
+  printf("c->GPR3:%u\n",c->edi);
+  printf("c->GPR4:%u\n",c->esi);
   switch (a[0]) {
     case 0: sys_exit(c); break;
     case 1: sys_yield(c);break; //SYS_yield
