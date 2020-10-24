@@ -100,9 +100,9 @@ again:
   s->opcode = opcode;  //操作码
   //printf("%x\n",cpu.pc);
 //   if (opcode == 0xd3) printf("op:%x,pc:%x\n",opcode,cpu.pc);
- if(cpu.pc>0x030012e0&&cpu.pc<=0x030012f4){
-     isa_reg_display();
-   }
+//  if(cpu.pc>0x030012e0&&cpu.pc<=0x030012f4){
+//      isa_reg_display();
+//    }
   /*
    * I:imm
    * r:reg
