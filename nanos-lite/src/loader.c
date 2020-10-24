@@ -16,15 +16,14 @@ size_t get_ramdisk_size();
 static uintptr_t loader(PCB *pcb, const char *filename) {
   void* buf =  (void *)0x3000000;
   Elf_Ehdr ret_buf;
+  Elf_Phdr p_buf;
   ramdisk_read(&ret_buf, 0, sizeof(Elf_Ehdr));
-  printf("%u,\n",ret_buf.e_ehsize);
-  printf("%u,\n",ret_buf.e_phentsize);
-  printf("%u,\n",ret_buf.e_entry);
-  printf("%u,\n",ret_buf.e_ident);
-  printf("%u,\n",ret_buf.e_phoff);
-  printf("%u,\n",ret_buf.e_shoff);  printf("%u,\n",ret_buf.e_phnum);
-
-  printf("%u,\n",ret_buf.e_shentsize);  printf("%u,\n",ret_buf.e_shnum);
+  ramdisk_read(&p_buf, 0, sizeof(Elf_Phdr));
+  printf("%u,\n",p_buf.p_offset);
+  printf("%u,\n",p_buf.p_vaddr);
+  printf("%u,\n",p_buf.p_paddr);
+  printf("%u,\n",p_buf.p_filesz);
+  printf("%u,\n",p_buf.p_memsz);
 printf("\n\n");
   size_t  len = get_ramdisk_size();
   ramdisk_read(buf, 0, len);
