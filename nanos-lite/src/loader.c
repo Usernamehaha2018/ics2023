@@ -20,7 +20,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   for(int i = 0; i<ret_buf.e_phnum;i++){
     ramdisk_read(&phdr[i], ret_buf.e_phoff+i*sizeof(Elf_Phdr), sizeof(Elf_Phdr));
     ramdisk_read((void*)phdr[i].p_vaddr, phdr[i].p_offset, phdr[i].p_memsz);
-    printf("%u,%u,%u\n",phdr[i].p_vaddr,phdr[i].p_offset,phdr[i].p_memsz);
+    //printf("%u,%u,%u\n",phdr[i].p_vaddr,phdr[i].p_offset,phdr[i].p_memsz);
   }
   
   return ret_buf.e_entry;
