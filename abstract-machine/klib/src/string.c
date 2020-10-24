@@ -65,7 +65,7 @@ int strncmp(const char* s1, const char* s2, size_t n) {
   return 0;
 }
 
-void* memset(void* v,int c,size_t n) {
+void* memset(void* v, int c,size_t n) {
   if(v == NULL)return NULL;
   char* pDest = (char*)v;
   while (n-->0)*pDest++ = c;
