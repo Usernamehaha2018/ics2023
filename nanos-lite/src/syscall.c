@@ -21,6 +21,7 @@ void write(Context *c) {
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
+  printf("syscall ID = %u\n", a[0]);
   switch (a[0]) {
     case 0: sys_exit(c); break;
     case 1: sys_yield(c);break; //SYS_yield
