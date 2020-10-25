@@ -89,10 +89,13 @@ off_t _lseek(int fd, off_t offset, int whence) {
 }
 
 int _signal(void *buf, size_t len){
-  return _syscall_(SYS_signal, 3,(intptr_t)buf, (intptr_t)len);
+  return _syscall_(SYS_signal, 4,(intptr_t)buf, (intptr_t)len);
 }
 
 
+int _get_screen_size(void *buf, size_t len){
+  return _syscall_(SYS_get_hw, 5,(intptr_t)buf, (intptr_t)len);
+}
 
 
 int _gettimeofday(struct timeval *tv, struct timezone *tz) {

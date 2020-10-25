@@ -14,7 +14,8 @@ static const char *keyname[256] __attribute__((used)) = {
   AM_KEYS(NAME)
 };
 void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd);
-
+void __am_gpu_config(AM_GPU_CONFIG_T *cfg);
+static char dispinfo[128] = {};
 
 size_t serial_write(const void *buf, size_t offset, size_t len) {
   return 0;
@@ -41,7 +42,8 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  return 0;
+  memcpy(buf, dispinfo, len);
+  return len;
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
@@ -51,4 +53,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
 void init_device() {
   Log("Initializing devices...");
   ioe_init();
+  AM_GPU_CONFIG_T cfg;
+  __am_gpu_config(&cfg);
+  sprintf(dispinfo, "WIDTH: %d\nHEIGHT:%d\n", cfg.width, cfg.height);
 }
