@@ -65,7 +65,12 @@ size_t fs_write(int fd, const void *buf, size_t len){
     case FD_STDOUT:
     case FD_STDERR:
     file_table[fd].write(buf, 0, len); break;
-    default: TODO();
+    default: 
+      if (file_table[fd].open_offset + len > file_table[fd].size)
+        len = file_table[fd].size - file_table[fd].open_offset;
+      ramdisk_write(buf, file_table[fd].disk_offset+file_table[fd].open_offset, len);
+      file_table[fd].open_offset += len;
+      break;
   }
  return len;
 }
