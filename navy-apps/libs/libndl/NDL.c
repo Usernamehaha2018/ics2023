@@ -34,14 +34,14 @@ void get_width(char* buf, int* width, int* height){
   int ans_w=0, ans_h = 0;
   int flag = 0;
   while(*buf != '\n'){
-    if(*buf > '0' && *buf < '9'){
+    if(*buf >= '0' && *buf <= '9'){
       ans_w = ans_w *10 + (*buf - '0');
     }
     buf ++;
   }
   buf ++;
   while(*buf != '\n'){
-    if(*buf > '0' && *buf < '9'){
+    if(*buf >= '0' && *buf <= '9'){
       ans_h = ans_h *10 + (*buf - '0');
     }
     buf ++;
