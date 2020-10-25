@@ -1,6 +1,6 @@
 #include <common.h>
 #include <syscall.h>
-size_t fs_write(int fd, void* buf, size_t len);
+size_t fs_write(int fd, const void* buf, size_t len);
 int mm_brk(uintptr_t brk);
 void sys_exit(Context *c) {
   halt(0);
@@ -12,7 +12,7 @@ void sys_yield(Context *c) {
 }
 
 void sys_write(Context *c) {
-  c->GPRx = fs_write(c->GPR2, (void*)c->GPR3, c->GPR4);
+  c->GPRx = fs_write(c->GPR2, (const void*)c->GPR3, c->GPR4);
 }
 
 void sys_brk(Context *c) {
