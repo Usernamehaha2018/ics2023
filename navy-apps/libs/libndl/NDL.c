@@ -52,7 +52,6 @@ void get_width(char* buf, int* width, int* height){
 }
 
 void NDL_OpenCanvas(int *w, int *h) {
-  if (getenv("NWM_APP")) {
     int fbctl = 4;
     fbdev = 5;
     screen_w = *w; screen_h = *h;
@@ -68,7 +67,7 @@ void NDL_OpenCanvas(int *w, int *h) {
     }
     printf("%d-----%d\n",s_height,s_width);
     while(1){
-      
+
     }
     // let NWM resize the window and create the frame buffer
     //write(fbctl, buf, len);
@@ -80,7 +79,7 @@ void NDL_OpenCanvas(int *w, int *h) {
       if (strcmp(buf, "mmap ok") == 0) break;
     }
     close(fbctl);
-  }
+  
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
