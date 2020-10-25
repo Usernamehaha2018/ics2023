@@ -53,6 +53,10 @@ void sys_get_time(Context *c) {
   c->GPRx = 0;
 }
 
+void sys_event(Context *c){
+  c->GPRx = fs_read(c->GPR2, (void*)c->GPR3, c->GPR4);
+}
+
 
 
 
@@ -70,6 +74,7 @@ void do_syscall(Context *c) {
     case 7: sys_close(c);break;
     case 8: sys_lseek(c);break;
     case 9: sys_brk(c);break;
+    case 12: sys_event(c);break;
     case 19: sys_get_time(c);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }

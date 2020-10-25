@@ -12,7 +12,7 @@ typedef struct {
   size_t open_offset;
 } Finfo;
 
-enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB};
+enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_EVENT, FD_FB};
 //enum {SEEK_SET, SEEK_CUR, SEEK_END};
 
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
@@ -35,11 +35,14 @@ size_t sys_write_standard(const void *buf, size_t offset, size_t len) {
   return len;
 }
 
+size_t events_read(void *buf, size_t offset, size_t len);
+
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
   [FD_STDIN]  = {"stdin", 0, 0, invalid_read, invalid_write},
   [FD_STDOUT] = {"stdout", 0, 0, invalid_read, sys_write_standard},
   [FD_STDERR] = {"stderr", 0, 0, invalid_read, sys_write_standard},
+  [FD_EVENT]  = {"/dev/events", 0, 0, events_read, invalid_write},
 #include "files.h"
 };
 
@@ -64,6 +67,7 @@ size_t fs_write(int fd, const void *buf, size_t len){
   switch (fd){
     case FD_STDOUT:
     case FD_STDERR:
+    case FD_EVENT:
     file_table[fd].write(buf, 0, len); break;
     default: 
       if (file_table[fd].open_offset + len > file_table[fd].size)
@@ -80,7 +84,8 @@ size_t fs_read(int fd, void *buf, size_t len){
   {
     case FD_STDIN: 
     case FD_STDOUT: 
-    case FD_STDERR: return file_table[fd].read(buf, 0, len);
+    case FD_STDERR: 
+    case FD_EVENT:return file_table[fd].read(buf, 0, len);
     default:
       if (file_table[fd].open_offset + len > file_table[fd].size)
         len = file_table[fd].size - file_table[fd].open_offset;
