@@ -14,6 +14,12 @@ void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
   uptime->us = (hi - sec) * 1000000 + lo - usec;
 }
 
+void __am_timer_get_time(AM_TIMER_UPTIME_T *uptime) { 
+  uint32_t lo = inl(0x48);
+  uint32_t hi = inl(0x4c);
+  uptime->us = (hi ) * 1000000 + lo ;
+}
+
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
   rtc->second = 0;
   rtc->minute = 0;
