@@ -21,9 +21,15 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   //printf("%d,%d,%d,%d,%d,%d\n",w,h,dx,dy,sx,sy);
   for (int i = 0; i < w; i ++)
     for (int j = 0; j < h; j ++) {
-      for (int k = 0; k < 4; k ++){
-      uint8_t idx = src->pixels[((sx + i) + (sy + j) * src->w)*4+k];
-      dst->pixels[((dx + i) + (dy + j) * dst->w)*4+k] = idx;
+      if(src->format->BitsPerPixel==8){
+        uint8_t idx = src->pixels[(sx + i) + (sy + j) * src->w];
+        dst->pixels[(dx + i) + (dy + j) * dst->w] = idx;
+      }
+      else{
+        for (int k = 0; k < 4; k ++){
+        uint8_t idx = src->pixels[((sx + i) + (sy + j) * src->w)*4+k];
+        dst->pixels[((dx + i) + (dy + j) * dst->w)*4+k] = idx;
+        }
       }
     }
 }
@@ -39,7 +45,15 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
   if(dst->h - dy < h)h = dst->h - dy; 
   for (int i = 0; i < w; i ++)
     for (int j = 0; j < h; j ++) {
-      dst->pixels[(dx + i) + (dy + j) * dst->w] = color;
+      // dst->pixels[(dx + i) + (dy + j) * dst->w] = color;
+      if(dst->format->BitsPerPixel==8){
+        dst->pixels[(dx + i) + (dy + j) * dst->w] = color;
+      }
+      else{
+        for (int k = 0; k < 4; k ++){
+        dst->pixels[((dx + i) + (dy + j) * dst->w)*4+k] = color;
+        }
+      }
     }
 }
 
@@ -50,6 +64,20 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   }
   assert(s);
   uint32_t* pixels = (uint32_t*)s->pixels;
+  int count = 0;
+  if(s->format->BitsPerPixel==8){
+    uint8_t *m = (uint8_t*)malloc(4*s->h*s->w);
+    for(int i = 0; i<s->w; i++){
+      for(int j = 0;i<s->h;j++){
+            m[count++] =  s->format->palette->colors[s->pixels[ i + j * s->w]].a ;
+            m[count++] =  s->format->palette->colors[s->pixels[ i + j * s->w]].b ;
+            m[count++] =  s->format->palette->colors[s->pixels[ i + j * s->w]].g ;
+            m[count++] =  s->format->palette->colors[s->pixels[ i + j * s->w]].r ;
+      }
+    }
+    NDL_DrawRect((uint32_t*)m, x, y, w, h);
+    free((void*)m);
+  }
   NDL_DrawRect(pixels, x, y, w, h);
 }
 
