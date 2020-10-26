@@ -127,8 +127,7 @@ static inline def_EHelper(movsb){
 
 
 static inline def_EHelper(movsw){
-  int increment = 2;
-  
+  int increment = s->isa.is_operand_size_16 ? 2 : 4;
   rtl_lr(s,s0, R_ESI, 4);
   rtl_lm(s, s1, s0, 0, increment);
   rtl_lr(s,s0, R_EDI, 4);
