@@ -62,7 +62,22 @@ int strcmp(const char* s1, const char* s2) {
 }
 
 int strncmp(const char* s1, const char* s2, size_t n) {
-  return 0;
+    	if((s1==NULL) || (s2==NULL)){
+      assert(0);
+    };
+    int i = 0;
+    while(*s1 == *s2 && i<n)
+    {
+        if(*s1 == '\0')
+            {return 0; }      
+        ++s1;
+        ++s2;
+        ++i;
+    }
+    if(i==n)return 0;
+    if(*s1 - *s2 > 0)return 1;
+
+    else return -1;
 }
 
 void* memset(void* v, int c,size_t n) {
