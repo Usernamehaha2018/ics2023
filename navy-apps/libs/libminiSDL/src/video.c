@@ -78,7 +78,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     NDL_DrawRect((uint32_t*)m, x, y, w, h);
     free((void*)m);
   }
-  NDL_DrawRect(pixels, x, y, w, h);
+  else NDL_DrawRect(pixels, x, y, w, h);
 }
 
 // APIs below are already implemented.
