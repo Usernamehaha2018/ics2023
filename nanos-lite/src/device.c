@@ -32,7 +32,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     return 0;
   }
   else {
-    if(strlen(keyname[kbd.keycode])+3+1 >= len)
+    if(strlen(keyname[kbd.keycode])+3+1 <= len)
     sprintf(buf, "%s %s\n", kbd.keydown?"kd":"ku", keyname[kbd.keycode]);
     else{
       char a[32];
