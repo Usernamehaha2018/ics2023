@@ -26,6 +26,7 @@ endif
 
 ### Check: environment variable `$ISA` must be in the supported list
 ISAS = $(basename $(notdir $(shell ls $(NAVY_HOME)/scripts/*.mk)))
+ISA = x86
 ifeq ($(filter $(ISAS), $(ISA)), )
   $(error Expected $$ISA in {$(ISAS)}, Got "$(ISA)")
 endif
@@ -163,7 +164,7 @@ $(CLEAN_ALL):
 .PHONY: clean-all $(CLEAN_ALL)
 
 ### Build fsimg and ramdisk for Nanos-lite
-APPS =  nslider menu nterm
+APPS =  nslider menu nterm bird
 TESTS = dummy hello file-test time-test event-test bmp-test
 
 fsimg: $(addprefix apps/, $(APPS)) $(addprefix tests/, $(TESTS))

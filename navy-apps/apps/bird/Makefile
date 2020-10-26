@@ -1,7 +1,7 @@
 REPO_PATH = repo
-ifeq ($(wildcard repo/include/BirdGame.h),)
-  $(shell git clone --depth=1 https://github.com/NJU-ProjectN/sdlbird.git $(REPO_PATH))
-endif
+# ifeq ($(wildcard repo/include/BirdGame.h),)
+  # $(shell git clone --depth=1 https://github.com/NJU-ProjectN/sdlbird.git $(REPO_PATH))
+# endif
 
 NAME = bird
 SRCS = $(shell find $(REPO_PATH)/src/ -name "*.cpp")

@@ -117,7 +117,9 @@ int _draw_screen(void *buf, size_t offset, size_t len){
 // But to pass linking, they are defined as dummy functions.
 
 int _fstat(int fd, struct stat *buf) {
-  return -1;
+  int ans = _syscall_(SYS_fstat, fd, 0, 0);
+  buf->st_size = ans;
+  return ans;
 }
 
 int _stat(const char *fname, struct stat *buf) {

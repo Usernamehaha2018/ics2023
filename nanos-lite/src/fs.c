@@ -131,6 +131,9 @@ size_t fs_lseek(int fd, size_t offset, int whence){
   return ret_val;
 }
 
+int fs_stat(int fd){
+  return file_table[fd].size;
+}
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb

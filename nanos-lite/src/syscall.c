@@ -9,6 +9,7 @@ int fs_close(int fd);
 int mm_brk(uintptr_t brk);
 void __am_timer_get_time(AM_TIMER_UPTIME_T *uptime);
 size_t fb_write(const void *buf, size_t offset, size_t len);
+int fs_stat(int fd);
 
 void sys_exit(Context *c) {
   halt(0);
@@ -68,6 +69,11 @@ void sys_draw_screen(Context *c){
 }
 
 
+void sys_fstat(Context *c){
+  c->GPRx = fs_stat(c->GPR2);
+}
+
+
 
 
 
@@ -84,6 +90,7 @@ void do_syscall(Context *c) {
     case 7: sys_close(c);break;
     case 8: sys_lseek(c);break;
     case 9: sys_brk(c);break;
+    case 10: sys_fstat(c);break;
     case 12: sys_event(c);break;
     case 19: sys_get_time(c);break;
     case 20: sys_get_screen_size(c);break;
