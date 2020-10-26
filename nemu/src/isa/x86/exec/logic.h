@@ -96,6 +96,19 @@ static inline def_EHelper(shld) {
   print_asm_template2(shl);
 }
 
+
+static inline def_EHelper(shrd) {
+  // unnecessary to update CF and OF in NEMU
+  *s0 = *dsrc1 & 31;
+  rtl_shr(s, s1, dsrc2, s0);
+  operand_write(s, id_dest, s1);
+
+  // unnecessary to update CF and OF in NEMU
+  // update ZF and SF
+  rtl_update_ZFSF(s, s1, id_dest->width);
+  print_asm_template2(shr);
+}
+
 static inline def_EHelper(shr) {
   // unnecessary to update CF and OF in NEMU
   rtl_shr(s,s0,ddest,dsrc1);
