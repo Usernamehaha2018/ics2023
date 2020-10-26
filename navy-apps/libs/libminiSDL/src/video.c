@@ -20,8 +20,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   if(dst->h - dy < h) { h = dst->h - dy; }
   for (int i = 0; i < w; i ++)
     for (int j = 0; j < h; j ++) {
-      char* idx = &src->pixels[(sx + i) + (sy + j) * src->w];
-      memcpy(&dst->pixels[(dx + i) + (dy + j) * dst->w],(const void*)idx, 4);
+      uint8_t idx = src->pixels[(sx + i) + (sy + j) * src->w];
+      dst->pixels[(dx + i) + (dy + j) * dst->w] = idx;
     }
 }
 
