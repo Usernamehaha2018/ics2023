@@ -31,7 +31,7 @@ int SDL_WaitEvent(SDL_Event *event) {
     else if (s[1]=='u')event->type = 1;
     char *kbd = &s[3];
     for(int i= 0;i<83;i++){
-      printf("%s,keycode\n",keyname[i]);
+      printf("%d,%s,keycode\n",i,keyname[i]);
       if(strcmp(keyname[i],(const char*)kbd)==0){
        event->key.keysym.sym = i;
       }
