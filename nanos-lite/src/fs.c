@@ -17,7 +17,7 @@ enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB, FD_EVENT, FD_DISP};
 
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
-
+void __am_gpu_config(AM_GPU_CONFIG_T *cfg);
 
 size_t invalid_read(void *buf, size_t offset, size_t len) {
   panic("should not reach here");
@@ -131,4 +131,7 @@ size_t fs_lseek(int fd, size_t offset, int whence){
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb
+  AM_GPU_CONFIG_T cfg;
+  __am_gpu_config(&cfg);
+  file_table[FD_FB].size = cfg.width * cfg.height * 4;
 }
