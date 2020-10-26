@@ -60,6 +60,8 @@ void NDL_OpenCanvas(int *w, int *h) {
     get_width(cur,&screen_w,&screen_h);
     printf("%s\n",buf);
     printf("%d-----%d\n",screen_w,screen_h);
+    *w = screen_w;
+    *h = screen_h;
   if (getenv("NWM_APP")) {
     int fbctl = 4;
     fbdev = 5;
