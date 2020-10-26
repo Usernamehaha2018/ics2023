@@ -24,20 +24,20 @@ int SDL_WaitEvent(SDL_Event *event) {
   char s[128];
   int flag = 1;
   int ans = NDL_PollEvent(s,128);
-  if(s[0]=='k'){
+  if(ans){
     if(s[1]=='d'){
       event->type = 0;
     }
     else if (s[1]=='u')event->type = 1;
-    char *kbd = &s[3];
-    for(int i= 0;i<83;i++){
-      printf("%d,%s,keycode\n",i,keyname[i]);
+    char *kbd = &s[3];    
+    for(uint8_t i= 0;i<83;i++){
+      printf("lem:%d,%d",strlen(kbd),strlen(keyname[i]));
       if(strcmp(keyname[i],(const char*)kbd)==0){
        event->key.keysym.sym = i;
+           printf("%s\n",s);
+          printf("key:%d,%d\n",event->type,event->key.keysym.sym);
       }
     }  
-    printf("%s\n",s);
-  printf("key:%d,%d\n",event->type,event->key.keysym.sym);
   }
   else{
     event->type = 2; //user event
