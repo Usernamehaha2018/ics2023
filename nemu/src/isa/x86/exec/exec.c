@@ -188,7 +188,7 @@ again:
     EX   (0x60, pusha)
     EX   (0x61, popa)
     IDEX (0x68, I, push)
-    IDEX (0x69, I2r, imul1)
+    IDEX (0x69, I_E2G, imul3)
     IDEX (0x6b, SI_E2G, imul3)
     IDEXW(0x6a, I, push, 1)
     IDEXW(0x72, J, jcc, 1)
