@@ -9,7 +9,7 @@ void __am_gpu_init() {
   int w = 400;  // TODO: get the correct width
   int h = 300;  // TODO: get the correct height
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
-  for (i = 0; i < w * h; i ++) fb[i] = 0;
+  for (i = 0; i < w * h; i ++) fb[i] = i;
   outl(SYNC_ADDR, 0);
 }
 
@@ -28,7 +28,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     int min_w;
     if(w<400-x) min_w = w;
     else min_w = 400-x;
-    int cp_bytes = sizeof(uint32_t) * min_w;
+    int cp_bytes = 4 * min_w;
     for (int j = 0; j < h && y + j < 300; j ++) {
         memcpy(&fb[(y + j) * 400 + x], pixels, cp_bytes);
         pixels += w;

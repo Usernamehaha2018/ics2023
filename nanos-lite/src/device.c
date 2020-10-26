@@ -51,8 +51,8 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
-  ctl.x = (offset) / cfg.width;
-  ctl.y = (offset) % cfg.width;
+  ctl.x = (offset) % cfg.width;
+  ctl.y = (offset) / cfg.width;
   ctl.w = len/4;
   ctl.h = 1;
   ctl.pixels = (void*)buf;
