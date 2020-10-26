@@ -56,6 +56,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   ctl.w = len/4;
   ctl.h = 1;
   ctl.pixels = (void*)buf;
+  printf("%d,%d,%d,%d\n",ctl.x,ctl.y,ctl.w,ctl.h);
   ctl.sync = 1;
   __am_gpu_fbdraw(&ctl);
   return len;
