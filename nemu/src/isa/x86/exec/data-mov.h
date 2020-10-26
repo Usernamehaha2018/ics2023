@@ -124,3 +124,17 @@ static inline def_EHelper(movsb){
   cpu.edi += increment;
   print_asm("movsb" );
 }
+
+
+static inline def_EHelper(movsw){
+  int increment = 2;
+  
+  rtl_lr(s,s0, R_ESI, 4);
+  rtl_lm(s, s1, s0, 0, increment);
+  rtl_lr(s,s0, R_EDI, 4);
+  rtl_sm(s,s0, 0, s1, increment);
+  rtl_sr(s, R_EDI, s0, 4);
+  cpu.esi += increment;
+  cpu.edi += increment;
+  print_asm("movsb" );
+}
