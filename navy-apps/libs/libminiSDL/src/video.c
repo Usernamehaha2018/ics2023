@@ -16,14 +16,10 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   int h = (srcrect == NULL ? src->h : srcrect->h);
   if(dst->w - dx < w) { w = dst->w - dx; }
   if(dst->h - dy < h) { h = dst->h - dy; }
-  if(dstrect != NULL) {
-    dstrect->w = w;
-    dstrect->h = h;
-  }
   for (int i = 0; i < w; i ++)
     for (int j = 0; j < h; j ++) {
-      uint8_t idx = src->pixels[(sx + i) + (sy + j) * src->w];
-      dst->pixels[(dx + i) + (dy + j) * dst->w] = idx;
+      uint32_t idx = src->pixels[(sx + i) + (sy + j) * w];
+      memcpy(&dst->pixels[(dx + i) + (dy + j) * w],(const void*)&idx, 4);
     }
 }
 
