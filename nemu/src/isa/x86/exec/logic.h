@@ -99,7 +99,8 @@ static inline def_EHelper(shld) {
 
 static inline def_EHelper(shrd) {
   // unnecessary to update CF and OF in NEMU
-  *s0 = *dsrc1 & 31;
+  printf("%d,%d,%d\n",*ddest,*dsrc1,*dsrc2);
+  *s0 = *dsrc1 & 0xff;
   rtl_shr(s, s1, dsrc2, s0);
   operand_write(s, id_dest, s1);
 
