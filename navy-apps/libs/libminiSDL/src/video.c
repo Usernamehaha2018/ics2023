@@ -14,7 +14,12 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
+  if(!w||!h){
+    w = s->w;
+    h = s->h;
+  }
   printf("xywh: %d,%d,%d,%d\n",x,y,w,h);
+  printf("ans：%d,%d\n",s->w,s->h);
   assert(s);
   uint32_t* pixels = (uint32_t*)s->pixels;
   NDL_DrawRect(pixels, x, y, w, h);
