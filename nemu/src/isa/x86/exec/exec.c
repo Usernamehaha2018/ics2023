@@ -101,10 +101,7 @@ again:
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
 
-  if(cpu.pc>=0x0300eefa&&cpu.pc<=0x0300eefe&&opcode!=0xf){
-    printf("opcode:%x\n",s->opcode);
-    assert(0);
-  }
+
   //printf("%x\n",cpu.pc);
 //   if (opcode == 0xd3) printf("op:%x,pc:%x\n",opcode,cpu.pc);
 //  if(cpu.pc>0x030012e0&&cpu.pc<=0x030012f4){
