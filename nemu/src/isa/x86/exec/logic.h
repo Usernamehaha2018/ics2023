@@ -101,8 +101,15 @@ static inline def_EHelper(shrd) {
   // unnecessary to update CF and OF in NEMU
   // printf("%d,%d,%d\n",*ddest,*dsrc1,*dsrc2);
   *s0 = *dsrc1 & 0xff;
-  unsigned int m = *ddest;
-  *s1 = m >> *s0;
+  *s1 = *ddest;
+  unsigned int m = *s1,flag = 0;
+  if(m&0x80000000)flag = 1;
+  for(int i=0;i<*s0;i++)
+  {
+    m>>=1;
+    if(flag)m|=0x80000000;
+  }
+  *s1 = m;
   operand_write(s, id_dest, s1);
 
   // unnecessary to update CF and OF in NEMU
