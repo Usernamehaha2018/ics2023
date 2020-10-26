@@ -26,6 +26,7 @@ int SDL_WaitEvent(SDL_Event *event) {
   int ans = NDL_PollEvent(s,128);
   if(ans){
     if(s[1]=='d'){
+      printf("%s,s.\n",s);
       event->type = 0;
     }
     else if (s[1]=='u')event->type = 1;
