@@ -16,13 +16,36 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
-  printf("unhandled pollevent\n");
-  return 0;
+  char s[128];
+  int flag = 1;
+  int ans = NDL_PollEvent(s,128);
+  if(ans){
+    if(s[1]=='d'){
+      printf("%s,s.\n",s);
+      ev->type = 0;
+    }
+    else if (s[1]=='u')ev->type = 1;
+    char *kbd = &s[3];    
+    for(uint8_t i= 0;i<83;i++){
+      if(strncmp(keyname[i],(const char*)kbd,strlen(keyname[i]))==0&&strlen((const char*)kbd)-1==strlen(keyname[i])){
+       ev->key.keysym.sym = i;
+      }
+    }  
+  }
+  else{
+    return ans;
+  }
+  
+
+
+  return ans;
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
   char s[128];
   int flag = 1;
+  int ans = 0;
+  while(!ans){
   int ans = NDL_PollEvent(s,128);
   if(ans){
     if(s[1]=='d'){
@@ -42,6 +65,7 @@ int SDL_WaitEvent(SDL_Event *event) {
   else{
     event->type = 2; //user event
     event->key.keysym.sym = 0;
+  }
   }
 
 
