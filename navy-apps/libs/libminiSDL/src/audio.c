@@ -19,6 +19,7 @@ SDL_AudioSpec *SDL_LoadWAV(const char *file, SDL_AudioSpec *spec, uint8_t **audi
 }
 
 void SDL_FreeWAV(uint8_t *audio_buf) {
+  printf("unhandled freewav\n");
 }
 
 void SDL_LockAudio() {

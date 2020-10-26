@@ -137,25 +137,50 @@ static inline fixedpt fixedpt_divi(fixedpt A, int B) {
 
 /* Multiplies two fixedpt numbers, returns the result. */
 static inline fixedpt fixedpt_mul(fixedpt A, fixedpt B) {
-	return 0;
+	return (((int64_t)A * (int64_t)B) >> FIXEDPT_FBITS);
 }
 
 
 /* Divides two fixedpt numbers, returns the result. */
 static inline fixedpt fixedpt_div(fixedpt A, fixedpt B) {
-	return 0;
+	return (((int64_t)A << FIXEDPT_FBITS) / (int64_t)B);
 }
 
 static inline fixedpt fixedpt_abs(fixedpt A) {
-	return 0;
+	if(A<0)return -A;
+	else return A;
 }
 
 static inline fixedpt fixedpt_floor(fixedpt A) {
-	return 0;
+	if((A&0xff)==0)return A;
+	if(A>0){
+		A &= 0xffffff00;
+		return A;
+	}
+	else if(A==0){
+		return 0;
+	}
+	else{		
+		A &= 0xffffff00;
+		A = -A;
+		return -fixedpt_add(A,FIXEDPT_ONE);
+	}
 }
 
 static inline fixedpt fixedpt_ceil(fixedpt A) {
-	return 0;
+	if((A&0xff)==0)return A;
+	if(A>0){
+		A &= 0xffffff00;
+		return fixedpt_add(A, FIXEDPT_ONE);
+	}
+	else if(A==0){
+		return 0;
+	}
+	else{
+		A &= 0xffffff00;
+		A = -A;
+		return -fixedpt_sub(A,FIXEDPT_ONE);
+	}
 }
 
 /*

@@ -80,6 +80,10 @@ void NDL_OpenCanvas(int *w, int *h) {
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   printf("%d-----%d\n",w,h);
+  if(w==0||h==0){
+    w = screen_w;
+    h = screen_h;
+  }
   for(int i = 0;i<h; i ++){
     _draw_screen((void *)pixels, screen_w*(x+i)+y, 4*w);
     pixels += w;
