@@ -18,7 +18,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   int h = (srcrect == NULL ? src->h : srcrect->h);
   if(dst->w - dx < w) { w = dst->w - dx; }
   if(dst->h - dy < h) { h = dst->h - dy; }
-  printf("%d,%d,%d,%d,%d,%d\n",w,h,dx,dy,sx,sy);
+  //printf("%d,%d,%d,%d,%d,%d\n",w,h,dx,dy,sx,sy);
   for (int i = 0; i < w; i ++)
     for (int j = 0; j < h; j ++) {
       uint8_t idx = src->pixels[(sx + i) + (sy + j) * src->w];
