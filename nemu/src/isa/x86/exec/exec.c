@@ -100,7 +100,8 @@ static inline void fetch_decode_exec(DecodeExecState *s) {
 again:
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
-  if(cpu.pc>=0x0300eefa&&cpu.pc<=0x0300eefe){
+
+  if(cpu.pc>=0x0300eefa&&cpu.pc<=0x0300eefe&&opcode!=0xf){
     printf("opcode:%x\n",s->opcode);
     assert(0);
   }
