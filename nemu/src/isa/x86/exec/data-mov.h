@@ -57,8 +57,7 @@ static inline def_EHelper(leave) {
 static inline def_EHelper(cltd) {
   if (s->isa.is_operand_size_16) {
     rtl_lr(s, s0, R_AX, 2);
-    *s0 = (int32_t) *s0;
-    if (*s0 < 0)
+    if ((int32_t)*s0 < 0)
       *s1 = 0xffff;
     else
       *s1 = 0;
@@ -66,8 +65,7 @@ static inline def_EHelper(cltd) {
   }
   else {
     rtl_lr(s, s0, R_EAX, 4);
-    *s0 = (int32_t) *s0;
-    if (*s0 < 0)
+    if ((int32_t)*s0<0)
       *s1 = 0xffffffff;
     else
       *s1 = 0;
