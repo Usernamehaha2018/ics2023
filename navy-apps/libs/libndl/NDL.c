@@ -8,9 +8,11 @@
 int _gettimeofday(struct timeval *tv, struct timezone *tz);
 int _signal(void *buf, size_t len);
 int _get_screen_size(void *buf, size_t len);
+int _draw_screen(void *buf, size_t offset, size_t len);
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
+static int canvas_w = 0, canvas_h = 0;
 
 
 
@@ -52,25 +54,17 @@ void get_width(char* buf, int* width, int* height){
 }
 
 void NDL_OpenCanvas(int *w, int *h) {
+    char buf[64];
+    _get_screen_size(buf, sizeof(buf));
+    char *cur = &buf[0];
+    get_width(cur,&screen_w,&screen_h);
+    printf("%s\n",buf);
+    printf("%d-----%d\n",screen_w,screen_h);
   if (getenv("NWM_APP")) {
     int fbctl = 4;
     fbdev = 5;
-    screen_w = *w; screen_h = *h;
-    char buf[64];
-    _get_screen_size(buf, sizeof(buf));
+    canvas_w = *w; canvas_h = *h;
     //int len = sprintf(buf, "%d %d", screen_w, screen_h);
-    char *cur = &buf[0];
-    int s_width=0,s_height = 0;
-    get_width(cur,&s_width,&s_height);
-    if(!*w||!*h){
-      screen_h = s_height;
-      screen_w = s_width;
-    }
-    printf("%s\n",buf);
-    printf("%d-----%d\n",s_height,s_width);
-    while(1){
-
-    }
     // let NWM resize the window and create the frame buffer
     //write(fbctl, buf, len);
     while (1) {
@@ -85,6 +79,10 @@ void NDL_OpenCanvas(int *w, int *h) {
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
+  for(int i = 0;i<h; i ++){
+    _draw_screen((void *)pixels, screen_w*(x+i)+screen_h, 4*w);
+    pixels += w;
+  }
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {

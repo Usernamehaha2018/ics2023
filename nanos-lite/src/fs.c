@@ -19,6 +19,7 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg);
 
+
 size_t invalid_read(void *buf, size_t offset, size_t len) {
   panic("should not reach here");
   return 0;
@@ -37,6 +38,7 @@ size_t sys_write_standard(const void *buf, size_t offset, size_t len) {
 
 size_t events_read(void *buf, size_t offset, size_t len);
 size_t dispinfo_read(void *buf, size_t offset, size_t len);
+size_t fb_write(const void *buf, size_t offset, size_t len);
 
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {

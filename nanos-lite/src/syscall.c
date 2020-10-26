@@ -8,6 +8,7 @@ size_t fs_lseek(int fd, size_t offset, int whence);
 int fs_close(int fd);
 int mm_brk(uintptr_t brk);
 void __am_timer_get_time(AM_TIMER_UPTIME_T *uptime);
+size_t fb_write(const void *buf, size_t offset, size_t len);
 
 void sys_exit(Context *c) {
   halt(0);
@@ -62,6 +63,10 @@ void sys_get_screen_size(Context *c){
   c->GPRx = fs_read(c->GPR2, (void*)c->GPR3, c->GPR4);
 }
 
+void sys_draw_screen(Context *c){
+  c->GPRx = fb_write((const void*)c->GPR2, c->GPR3, c->GPR4);
+}
+
 
 
 
@@ -82,6 +87,7 @@ void do_syscall(Context *c) {
     case 12: sys_event(c);break;
     case 19: sys_get_time(c);break;
     case 20: sys_get_screen_size(c);break;
+    case 21: sys_draw_screen(c);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 }

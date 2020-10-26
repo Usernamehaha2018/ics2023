@@ -107,6 +107,10 @@ int _execve(const char *fname, char * const argv[], char *const envp[]) {
   return 0;
 }
 
+int _draw_screen(void *buf, size_t offset, size_t len){
+  return _syscall_(SYS_draw_screen, (intptr_t)buf, (intptr_t)offset, (intptr_t)len);
+}
+
 
 
 // Syscalls below are not used in Nanos-lite.
