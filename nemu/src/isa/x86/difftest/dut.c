@@ -4,8 +4,6 @@
 #include "difftest.h"
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
-  printf("%d\n",ref_r->eflags.eflag); 
-  printf("%d\n",cpu.eflags.eflag); 
   if(cpu.eax == ref_r->eax&&cpu.ebx == ref_r->ebx
   &&cpu.ecx == ref_r->ecx&&cpu.edx == ref_r->edx
   &&cpu.esp == ref_r->esp&&cpu.ebp == ref_r->ebp
