@@ -121,7 +121,7 @@ again:
     
   }
   if(cpu.pc==0x03032674){
-    printf("!!!!%d,%d,%d\n",nex_ans,nex_ans2,nex_ans3);
+    printf("!!!!%d,%d,%d,%d\n",nex_ans,nex_ans2,nex_ans3,cpu.pc);
   }
   // if(
   //   ans != nex_ans){printf("cpu.pc:%x,prevpc:%x\n",cpu.pc,prev_pc);
