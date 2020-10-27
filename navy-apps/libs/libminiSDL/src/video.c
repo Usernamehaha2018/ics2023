@@ -203,9 +203,9 @@ void SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
     rect.h = h;
     SDL_BlitSurface(src, &rect, dst, dstrect);
   }
-  // else {
-  //   assert(0);
-  // }
+  else {
+    SDL_BlitSurface(src, srcrect, dst, dstrect);
+  }
 }
 
 void SDL_SetPalette(SDL_Surface *s, int flags, SDL_Color *colors, int firstcolor, int ncolors) {
