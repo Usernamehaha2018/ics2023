@@ -88,7 +88,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     for(int j = 0; j<s->h; j++){
       for(int i = 0;i<s->w;i++){     
             uint8_t c = s->pixels[ i + j * s->w];   
-            if(c)printf("%d\n",c);
+            // if(c)printf("%d\n",c);
             m[count++] = c ;
             m[count++] =  c ;
             m[count++] =  c ;
