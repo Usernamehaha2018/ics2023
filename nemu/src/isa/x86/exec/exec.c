@@ -105,9 +105,11 @@ again:
 
   //
 //   if (opcode == 0xd3) printf("op:%x,pc:%x\n",opcode,cpu.pc);
- if(cpu.pc>0x3038a37&&cpu.pc<=0x3038a4d){
-    //  printf("%x,%x\n",cpu.pc,opcode);
-   }
+//  if(cpu.pc>0x3038a37&&cpu.pc<=0x3038a4d){
+//     //  printf("%x,%x\n",cpu.pc,opcode);
+//    }
+  int ans = vaddr_read(0x1d38d74,4);
+  if(ans == 2)printf("cpu.pc:%x\n",cpu.pc);
   /*
    * I:imm
    * r:reg
