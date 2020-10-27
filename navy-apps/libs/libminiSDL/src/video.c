@@ -31,10 +31,6 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   if (src->h - sy < h) { h = src->h - sy; }
   if (dst->w - dx < w) { w = dst->w - dx; }
   if (dst->h - dy < h) { h = dst->h - dy; }
-    if (dstrect != NULL) {
-    dstrect->w = w;
-    dstrect->h = h;
-  }
   for (int i = 0; i < w; i ++)
     for (int j = 0; j < h; j ++) {
       if(src->format->BitsPerPixel==8){
@@ -89,10 +85,10 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
       for(int i = 0;i<s->w;i++){     
             uint8_t c = s->pixels[ i + j * s->w];   
             // if(c)printf("%d\n",c);
-            m[count++] = c ;
-            m[count++] =  c ;
-            m[count++] =  c ;
-            m[count++] =  c ;
+            m[count++] = s->format->palette->colors[c].r;
+            m[count++] = s->format->palette->colors[c].g;
+            m[count++] = s->format->palette->colors[c].b;
+            m[count++] =  s->format->palette->colors[c].a;
       }
     }
     printf("here!\n");
@@ -208,7 +204,7 @@ void SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
     SDL_BlitSurface(src, &rect, dst, dstrect);
   }
   else {
-    // assert(0);
+    assert(0);
   }
 }
 
