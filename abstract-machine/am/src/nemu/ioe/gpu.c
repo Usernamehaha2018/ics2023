@@ -23,14 +23,15 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
+    int xx = x+200-(x+w)/2;
     uint32_t *pixels = ctl->pixels;
     uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
     int min_w;
-    if(w<400-x) min_w = w;
-    else min_w = 400-x;
+    if(w<400-xx) min_w = w;
+    else min_w = 400-xx;
     int cp_bytes = 4 * min_w;
     for (int j = 0; j < h && y + j < 300; j ++) {
-        memcpy(&fb[(y + j) * 400 + x], pixels, cp_bytes);
+        memcpy(&fb[(y + j) * 400 + xx], pixels, cp_bytes);
         pixels += w;
     }
   if (ctl->sync) {

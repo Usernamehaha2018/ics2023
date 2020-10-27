@@ -44,14 +44,11 @@ void __am_gpu_status(AM_GPU_STATUS_T *stat) {
 }
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
-
-  int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;  
-  int xx = x + W/2 - (x+w)/2;
-  int yy = y + H/2 - (y+h)/2;
+  int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
   uint32_t *pixels = ctl->pixels;
-  int cp_bytes = sizeof(uint32_t) * min(w, W - xx);
-  for (int j = 0; j < h && yy + j < H; j ++) {
-    memcpy(&fb[(yy + j) * W + xx], pixels, cp_bytes);
+  int cp_bytes = sizeof(uint32_t) * min(w, W - x);
+  for (int j = 0; j < h && y + j < H; j ++) {
+    memcpy(&fb[(y + j) * W + x], pixels, cp_bytes);
     pixels += w;
   }
 }
