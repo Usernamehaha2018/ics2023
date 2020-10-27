@@ -96,7 +96,7 @@ static inline def_EHelper(2byte_esc) {
     default: exec_inv(s);
   }
 }
-
+static int ans=0;
 static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
@@ -108,8 +108,11 @@ again:
 //  if(cpu.pc>0x3038a37&&cpu.pc<=0x3038a4d){
 //     //  printf("%x,%x\n",cpu.pc,opcode);
 //    }
-  int ans = vaddr_read(0x1d38d74,4);
-  if(ans == 2)printf("cpu.pc:%x\n",cpu.pc);
+   int nex_ans = vaddr_read(0x1d38d74,4);
+
+  if(ans != nex_ans){printf("cpu.pc:%x\n",cpu.pc);
+   ans= nex_ans;
+  }
   /*
    * I:imm
    * r:reg
