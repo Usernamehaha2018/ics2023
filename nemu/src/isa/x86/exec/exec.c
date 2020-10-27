@@ -114,7 +114,7 @@ again:
    printf("prev ans:%x,next ans:%x\n",ans,nex_ans);
    ans= nex_ans;
   }
-  if(cpu.pc==0x1010e8)assert(0);
+  // if(cpu.pc==0x1010e8)assert(0);
   /*
    * I:imm
    * r:reg
