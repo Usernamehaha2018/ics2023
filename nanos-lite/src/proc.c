@@ -21,12 +21,24 @@ void hello_fun(void *arg) {
   }
 }
 
+// {"/bin/menu", 75380, 28407139},
+// {"/bin/event-test", 34328, 28482519},
+// {"/bin/nslider", 56180, 28516847},
+// {"/bin/dummy", 28840, 28573027},
+// {"/bin/pal", 393260, 28601867},
+// {"/bin/file-test", 47072, 28995127},
+// {"/bin/bmp-test", 39348, 29042199},
+// {"/bin/time-test", 34328, 29081547},
+// {"/bin/nterm", 81700, 29115875},
+// {"/bin/hello", 33596, 29197575},
+// {"/bin/bird", 140100, 29231171},
+
 void init_proc() {
   switch_boot_pcb();
 
   Log("Initializing processes...");
 
-  naive_uload(NULL, "/bin/dummy");
+  naive_uload(NULL, "/bin/menu");
 
 }
 
