@@ -26,7 +26,7 @@ endif
 
 ### Check: environment variable `$ISA` must be in the supported list
 ISAS = $(basename $(notdir $(shell ls $(NAVY_HOME)/scripts/*.mk)))
-ISA = x86
+# ISA = x86
 ifeq ($(filter $(ISAS), $(ISA)), )
   $(error Expected $$ISA in {$(ISAS)}, Got "$(ISA)")
 endif
