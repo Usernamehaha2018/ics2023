@@ -101,7 +101,7 @@ static int prev_pc = 0;
 static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
-printf("eflags:%d\n",cpu.eflags.eflag);
+// printf("eflags:%d\n",cpu.eflags.eflag);
 if((cpu.eflags.eflag & 2) ==0){
   printf("errpc:%x,\n",cpu.pc);
   assert(0);
