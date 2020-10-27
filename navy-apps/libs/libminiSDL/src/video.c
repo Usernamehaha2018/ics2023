@@ -87,12 +87,12 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     printf("%d,%d\n",s->w,s->h);
     for(int j = 0; j<s->h; j++){
       for(int i = 0;i<s->w;i++){     
-            uint32_t c = s->pixels[ i + j * s->w]&256;   
+            uint8_t c = s->pixels[ i + j * s->w];   
             if(c)printf("%d\n",c);
-            m[count++] = 100 ;
-            m[count++] =  100 ;
-            m[count++] =  100 ;
-            m[count++] = 100 ;
+            m[count++] = c ;
+            m[count++] =  c ;
+            m[count++] =  c ;
+            m[count++] =  c ;
       }
     }
     printf("here!\n");
