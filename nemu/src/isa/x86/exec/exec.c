@@ -111,6 +111,7 @@ again:
    int nex_ans = vaddr_read(0x1d38d74,4);
 
   if(ans != nex_ans){printf("cpu.pc:%x\n",cpu.pc);
+   printf("prev ans:%x,next ans:%x\n",ans,nex_ans);
    ans= nex_ans;
   }
   /*
