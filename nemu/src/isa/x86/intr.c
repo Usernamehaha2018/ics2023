@@ -6,6 +6,7 @@ void raise_intr(DecodeExecState *s, uint32_t NO, vaddr_t ret_addr) {
    * That is, use ``NO'' to index the IDT.
    */
   rtl_push(s,&cpu.eflags.eflag);
+  printf("eflagsaddr:%x\n",cpu.esp);
   rtl_push(s,&cpu.cs);
   rtl_push(s,&ret_addr);
 
