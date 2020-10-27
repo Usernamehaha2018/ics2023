@@ -92,7 +92,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
             m[count++] =  s->format->palette->colors[c].b ;
             m[count++] =  s->format->palette->colors[c].g ;
             m[count++] =  s->format->palette->colors[c].r ;
-            printf("%d\n",count);
+            printf("%d\n",s->format->palette->colors[c].r);
       }
     }
     printf("here!\n");
