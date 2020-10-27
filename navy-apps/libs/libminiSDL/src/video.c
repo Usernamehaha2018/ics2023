@@ -9,7 +9,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
   if(dst->w>200){
-    printf("width:%d,,%d\n",dst->w,dst->h);
+    // printf("width:%d,,%d\n",dst->w,dst->h);
   }
   int sx = (srcrect == NULL ? 0 : srcrect->x);
   int sy = (srcrect == NULL ? 0 : srcrect->y);
@@ -91,7 +91,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
             m[count++] =  s->format->palette->colors[c].a;
       }
     }
-    printf("here!\n");
+    // printf("here!\n");
     NDL_DrawRect((uint32_t*)m, x, y, w, h);
     free((void*)m);
   }
