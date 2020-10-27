@@ -110,7 +110,7 @@ again:
 //     //  printf("%x,%x\n",cpu.pc,opcode);
 //    }
   int nex_ans = vaddr_read(0x1d38d74,4);
-  if(nex_ans==0x102){
+  if(nex_ans==0x2){
     printf("!!!!\n");
   }
   // if(
