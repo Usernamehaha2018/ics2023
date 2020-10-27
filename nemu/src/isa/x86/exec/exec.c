@@ -101,9 +101,6 @@ static int prev_pc = 0;
 static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
-if(cpu.pc==0x3039a32){
-  isa_reg_display();
-}
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
 
@@ -115,6 +112,7 @@ if(cpu.pc==0x3039a32){
    int nex_ans = vaddr_read(0x1d38d74,4);
   if(
     ans != nex_ans){printf("cpu.pc:%x,prevpc:%x\n",cpu.pc,prev_pc);
+    if(prev_pc==0x3039a32)isa_reg_display();
    printf("prev ans:%x,next ans:%x\n",ans,nex_ans);
    ans= nex_ans;
   }
