@@ -90,6 +90,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
             m[count++] =  s->format->palette->colors[s->pixels[ i + j * s->w]].b ;
             m[count++] =  s->format->palette->colors[s->pixels[ i + j * s->w]].g ;
             m[count++] =  s->format->palette->colors[s->pixels[ i + j * s->w]].r ;
+            printf("%d\n",count);
       }
     }
     NDL_DrawRect((uint32_t*)m, x, y, w, h);
