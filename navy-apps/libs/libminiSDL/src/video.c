@@ -84,11 +84,12 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   if(s->format->BitsPerPixel==8){
     uint8_t *m = (uint8_t*)malloc(4*s->h*s->w);
     for(int i = 0; i<s->w; i++){
-      for(int j = 0;i<s->h;j++){
-            m[count++] =  s->format->palette->colors[s->pixels[ i + j * s->w]].a ;
-            while(1){
+      for(int j = 0;i<s->h;j++){            
+        while(1){
               
             }
+            m[count++] =  s->format->palette->colors[s->pixels[ i + j * s->w]].a ;
+
             m[count++] =  s->format->palette->colors[s->pixels[ i + j * s->w]].b ;
             m[count++] =  s->format->palette->colors[s->pixels[ i + j * s->w]].g ;
             m[count++] =  s->format->palette->colors[s->pixels[ i + j * s->w]].r ;
