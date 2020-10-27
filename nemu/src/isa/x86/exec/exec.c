@@ -101,6 +101,9 @@ static int prev_pc = 0;
 static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
+if(cpu.pc==0x3039a32){
+  isa_reg_display();
+}
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
 
