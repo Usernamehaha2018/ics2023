@@ -115,11 +115,13 @@ again:
 //     //  printf("%x,%x\n",cpu.pc,opcode);
 //    }
   int nex_ans = vaddr_read(0x1d38d74,4);
+  int nex_ans2 = vaddr_read(0x1d38d70,4);
+  int nex_ans3 = vaddr_read(0x1d38d78,4);
   if(nex_ans==0x2){
     
   }
   if(cpu.pc==0x03032674){
-    printf("!!!!%d\n",nex_ans);
+    printf("!!!!%d,%d,%d\n",nex_ans,nex_ans2,nex_ans3);
   }
   // if(
   //   ans != nex_ans){printf("cpu.pc:%x,prevpc:%x\n",cpu.pc,prev_pc);
