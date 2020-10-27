@@ -17,10 +17,8 @@ SDL_Surface* IMG_Load(const char *filename) {
   int fd = open(filename,1);
   struct stat pstat;
   fstat(fd,&pstat);
-  printf("size: %d\n",pstat.st_size);
   void * buf = malloc(pstat.st_size);
   read(fd,(void*)buf,pstat.st_size);
-  printf("readover,size: %d\n",pstat.st_size);
   SDL_Surface* su = STBIMG_LoadFromMemory((const unsigned char*)buf, pstat.st_size);
   close(fd);
   free(buf);

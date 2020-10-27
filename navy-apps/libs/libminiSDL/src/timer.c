@@ -18,7 +18,7 @@ uint32_t SDL_GetTicks() {
 void SDL_Delay(uint32_t ms) {
   // printf("unhandled delay\n");
   unsigned int i = NDL_GetTicks();
-  while(NDL_GetTicks()-i<10*ms)
+  while(NDL_GetTicks()-i<ms)
   {
   }
 }
