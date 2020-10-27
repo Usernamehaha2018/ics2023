@@ -74,20 +74,9 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-  if(!w||!h){
-    w = s->w;
-    h = s->h;
-  }
-  assert(s);            
-  uint32_t* pixels = (uint32_t*)s->pixels;
-  int count = 0;
-  if(s->format->BitsPerPixel==8){
-
 while(1){
   
 }
-  }
-  else NDL_DrawRect(pixels, x, y, w, h);
 }
 
 // APIs below are already implemented.
