@@ -24,6 +24,8 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
     int xx = x+200-(x+w)/2;
+    int yy = y+150-(y+h)/2;
+    if(yy<0)return;
     uint32_t *pixels = ctl->pixels;
     uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
     int min_w;
