@@ -17,7 +17,7 @@ static void restart() {
   /* Set the initial instruction pointer. */
   cpu.pc = PMEM_BASE + IMAGE_START;
   cpu.cs = 0x8;
-  cpu.eflags.eflag = 0x200;
+  cpu.eflags.eflag = 32767;
   printf("restart\n");
 }
 
