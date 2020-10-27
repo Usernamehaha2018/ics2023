@@ -12,12 +12,26 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   int sy = (srcrect == NULL ? 0 : srcrect->y);
   int dx = (dstrect == NULL ? 0 : dstrect->x);
   assert(dx>=0);
+  assert(sx>=0);
   int dy = (dstrect == NULL ? 0 : dstrect->y);
   assert(dy>=0);
+  assert(sy>=0);
   int w = (srcrect == NULL ? src->w : srcrect->w);
   int h = (srcrect == NULL ? src->h : srcrect->h);
   if(dst->w - dx < w) { w = dst->w - dx; }
   if(dst->h - dy < h) { h = dst->h - dy; }
+  if (sx >= src->w) return;
+  if (sy >= src->h) return;
+  if (dx >= dst->w) return;
+  if (dy >= dst->h) return;
+  if (src->w - sx < w) { w = src->w - sx; }
+  if (src->h - sy < h) { h = src->h - sy; }
+  if (dst->w - dx < w) { w = dst->w - dx; }
+  if (dst->h - dy < h) { h = dst->h - dy; }
+    if (dstrect != NULL) {
+    dstrect->w = w;
+    dstrect->h = h;
+  }
   for (int i = 0; i < w; i ++)
     for (int j = 0; j < h; j ++) {
       if(src->format->BitsPerPixel==8){
