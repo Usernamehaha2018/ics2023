@@ -109,7 +109,10 @@ again:
 //  if(cpu.pc>0x3038a37&&cpu.pc<=0x3038a4d){
 //     //  printf("%x,%x\n",cpu.pc,opcode);
 //    }
-  //  int nex_ans = vaddr_read(0x1d38d74,4);
+  int nex_ans = vaddr_read(0x1d38d74,4);
+  if(nex_ans==0x102){
+    printf("!!!!\n");
+  }
   // if(
   //   ans != nex_ans){printf("cpu.pc:%x,prevpc:%x\n",cpu.pc,prev_pc);
   //   if(prev_pc==0x3039a32)isa_reg_display();
