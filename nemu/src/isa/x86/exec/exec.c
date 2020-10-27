@@ -106,7 +106,7 @@ again:
   //
 //   if (opcode == 0xd3) printf("op:%x,pc:%x\n",opcode,cpu.pc);
  if(cpu.pc>0x3038a37&&cpu.pc<=0x3038a4d){
-     printf("%x,%x\n",cpu.pc,opcode);
+    //  printf("%x,%x\n",cpu.pc,opcode);
    }
   /*
    * I:imm
