@@ -97,6 +97,7 @@ static inline def_EHelper(2byte_esc) {
   }
 }
 static int ans=0;
+static int prev_pc = 0;
 static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
@@ -109,11 +110,12 @@ again:
 //     //  printf("%x,%x\n",cpu.pc,opcode);
 //    }
    int nex_ans = vaddr_read(0x1d38d74,4);
-
-  if(ans != nex_ans){printf("cpu.pc:%x\n",cpu.pc);
+  if(
+    ans != nex_ans){printf("cpu.pc:%x,prevpc:%x\n",cpu.pc,prev_pc);
    printf("prev ans:%x,next ans:%x\n",ans,nex_ans);
    ans= nex_ans;
   }
+  prev_pc = cpu.pc;
   // if(cpu.pc==0x1010e8)assert(0);
   /*
    * I:imm
