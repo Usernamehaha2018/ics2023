@@ -17,7 +17,8 @@ static inline def_EHelper(jcc) {
 }
 
 static inline def_EHelper(jmp_rm) {
-  rtl_jr(s, ddest);
+  *s0 = *ddest;
+  rtl_jr(s, s0);
 
   print_asm("jmp *%s", id_dest->str);
 }

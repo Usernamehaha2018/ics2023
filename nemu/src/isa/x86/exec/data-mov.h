@@ -4,9 +4,9 @@ static inline def_EHelper(mov) {
 }
 
 static inline def_EHelper(push) {
-  rtl_sext(s, id_dest->preg, id_dest->preg, id_dest->width);
+  rtl_sext(s, s0, id_dest->preg, id_dest->width);
   // printf("push-val:%x", id_dest->val);
-  rtl_push(s, id_dest->preg);
+  rtl_push(s, s0);
   print_asm_template1(push);
 }
 
@@ -105,8 +105,8 @@ static inline def_EHelper(movzx) {
 }
 
 static inline def_EHelper(lea) {
-  rtl_addi(s, ddest, s->isa.mbase, s->isa.moff);
-  operand_write(s, id_dest, ddest);
+  rtl_addi(s, s0, s->isa.mbase, s->isa.moff);
+  operand_write(s, id_dest, s0);
   print_asm_template2(lea);
 }
 

@@ -53,6 +53,7 @@ static inline def_EHelper(iret) {
 #endif
 }
 
+
 uint32_t pio_read_l(ioaddr_t);
 uint32_t pio_read_w(ioaddr_t);
 uint32_t pio_read_b(ioaddr_t);

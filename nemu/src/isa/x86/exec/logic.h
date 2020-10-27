@@ -130,8 +130,8 @@ static inline def_EHelper(shr) {
 
 static inline def_EHelper(setcc) {
   uint32_t cc = s->opcode & 0xf;
-  rtl_setcc(s, ddest, cc);
-  operand_write(s, id_dest, ddest);
+  rtl_setcc(s, s0, cc);
+  operand_write(s, id_dest, s0);
 
   print_asm("set%s %s", get_cc_name(cc), id_dest->str);
 }
