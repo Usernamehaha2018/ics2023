@@ -102,6 +102,10 @@ static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
 printf("eflags:%d\n",cpu.eflags.eflag);
+if((cpu.eflags.eflag & 2) ==0){
+  printf("errpc:%x,\n",cpu.pc);
+  assert(0);
+}
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
 
