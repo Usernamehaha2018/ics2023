@@ -34,8 +34,8 @@ static inline def_rtl(push, const rtlreg_t* src1) {
 static inline def_rtl(pop, rtlreg_t* dest) {
   // dest <- M[esp]
   // esp <- esp + 4
-  if(cpu.pc == 0x3032674||cpu.pc == 3032675)
-  printf("esp:%x\n",cpu.esp);
+  // if(cpu.pc == 0x3032674||cpu.pc == 3032675)
+  // printf("esp:%x\n",cpu.esp);
   rtl_lm(s, dest, &cpu.esp, 0, 4);
   rtl_addi(s, &cpu.esp,&cpu.esp,4);   
 }
