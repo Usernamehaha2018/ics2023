@@ -79,9 +79,6 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     h = s->h;
   }
   assert(s);            
-  while(1){
-              
-            }
   uint32_t* pixels = (uint32_t*)s->pixels;
   int count = 0;
   if(s->format->BitsPerPixel==8){
