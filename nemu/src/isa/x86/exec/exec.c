@@ -116,9 +116,9 @@ again:
   //  printf("prev ans:%x,next ans:%x\n",ans,nex_ans);
   //  ans= nex_ans;
   // }
-  if(cpu.pc>=0x3038994&&cpu.pc<=0x3038aaf){
-    printf("cpu.pc:%x\n",cpu.pc);
-  }
+  // if(cpu.pc>=0x3038994&&cpu.pc<=0x3038aaf){
+  //   printf("cpu.pc:%x\n",cpu.pc);
+  // }
     if(cpu.edx==0x80000f8){
     printf("cpu.pc:%x,prevpc:%x\n",cpu.pc,prev_pc);
   }
