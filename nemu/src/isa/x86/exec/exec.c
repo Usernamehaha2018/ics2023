@@ -96,16 +96,10 @@ static inline def_EHelper(2byte_esc) {
     default: exec_inv(s);
   }
 }
-// static int ans=0;
-static int prev_pc = 0;
+
 static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
-// printf("eflags:%d\n",cpu.eflags.eflag);
-// if((cpu.eflags.eflag & 2) ==0){
-//   printf("errpc:%x,\n",cpu.pc);
-//   assert(0);
-// }
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
 
@@ -114,15 +108,6 @@ again:
 //  if(cpu.pc>0x3038a37&&cpu.pc<=0x3038a4d){
 //     //  printf("%x,%x\n",cpu.pc,opcode);
 //    }
-  int nex_ans = vaddr_read(0x1d38d74,4);
-  int nex_ans2 = vaddr_read(0x1d38d70,4);
-  int nex_ans3 = vaddr_read(0x1d38d78,4);
-  if(nex_ans==0x2){
-    
-  }
-  if(cpu.pc==0x03032674){
-    printf("!!!!%d,%d,%d,%d\n",nex_ans,nex_ans2,nex_ans3,cpu.pc);
-  }
   // if(
   //   ans != nex_ans){printf("cpu.pc:%x,prevpc:%x\n",cpu.pc,prev_pc);
   //   if(prev_pc==0x3039a32)isa_reg_display();
@@ -132,10 +117,6 @@ again:
   // if(cpu.pc>=0x3038994&&cpu.pc<=0x3038aaf){
   //   printf("cpu.pc:%x\n",cpu.pc);
   // }
-    if(cpu.edx==0x80000f8){
-    printf("cpu.pc:%x,prevpc:%x\n",cpu.pc,prev_pc);
-  }
-  prev_pc = cpu.pc;
   // if(cpu.pc==0x1010e8)assert(0);
   /*
    * I:imm
