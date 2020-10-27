@@ -78,13 +78,14 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     w = s->w;
     h = s->h;
   }
-  assert(s);
+  assert(s);            
+  while(1){
+              
+            }
   uint32_t* pixels = (uint32_t*)s->pixels;
   int count = 0;
   if(s->format->BitsPerPixel==8){
-            while(1){
-              
-            }
+
     uint8_t *m = (uint8_t*)malloc(4*s->h*s->w);
     for(int i = 0; i<s->w; i++){
       for(int j = 0;i<s->h;j++){            
