@@ -5,7 +5,7 @@
 #include <assert.h>
 
 #define keyname(k) #k,
-extern char keystate[256];
+char keystate[256];
 static const char *keyname[] = {
   "NONE",
   _KEYS(keyname)
