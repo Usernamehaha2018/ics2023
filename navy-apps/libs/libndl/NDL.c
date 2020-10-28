@@ -62,6 +62,8 @@ void NDL_OpenCanvas(int *w, int *h) {
     *w = screen_w;
     *h = screen_h;
     }
+    *w = *w>screen_w? screen_w:*w;
+    *h = *h>screen_h? screen_h:*h;
     canvas_w = *w;
     canvas_h = *h;
   if (getenv("NWM_APP")) {
