@@ -91,6 +91,6 @@ uint8_t* SDL_GetKeyState(int *numkeys) {
     if(i==down)keystate[i]=1;
     else keystate[i]= 0;
   }
-  printf("down:%d;ans:%d\n",down);
+  printf("down:%d;\n",down);
   return keystate;
 }
