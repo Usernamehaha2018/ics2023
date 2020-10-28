@@ -35,7 +35,7 @@ int SDL_PollEvent(SDL_Event *ev) {
        flag = 1;
       }
     }  
-    if(!flag)assert(0);
+    if(!flag){printf("no\n");assert(0);}
   }
   else{
     return ans;
