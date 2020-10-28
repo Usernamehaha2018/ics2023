@@ -8,6 +8,7 @@ static uint8_t *m = NULL;
 static int width = 0;
 static int height = 0;
 static uint32_t time_spend = 0;
+static uint32_t total_time=0,start_time = 0;
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
@@ -73,6 +74,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
+  if(width==0)start_time = NDL_GetTicks();
   if(!w||!h){
     w = s->w;
     h = s->h;
@@ -105,7 +107,8 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     NDL_DrawRect((uint32_t*)m, x, y, w, h);
   }
   else NDL_DrawRect(pixels, x, y, w, h);
-  printf("time_spend:%d\n",time_spend/1000);
+  total_time = (NDL_GetTicks()- start_time );
+  printf("time_spend:%d,tottal time:%d\n",time_spend,total_time);
 
 }
 
