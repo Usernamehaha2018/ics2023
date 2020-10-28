@@ -52,7 +52,7 @@ int SDL_WaitEvent(SDL_Event *event) {
   int flag = 1;
   int ans = 0;
   while(!ans){
-  int ans = NDL_PollEvent(s,128);
+  ans = NDL_PollEvent(s,128);
   if(ans){
     if(s[1]=='d'){
       // printf("%s,s.\n",s);
