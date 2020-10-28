@@ -17,7 +17,7 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
-  printf("poll here\n");
+  // printf("poll here\n");
   char s[128];
   int flag = 1;
   int ans = NDL_PollEvent(s,128);
@@ -38,7 +38,6 @@ int SDL_PollEvent(SDL_Event *ev) {
     if(!flag)assert(0);
   }
   else{
-    printf("noevent\n");
     return ans;
   }
   
