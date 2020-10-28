@@ -85,11 +85,6 @@ int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
 }
 
 uint8_t* SDL_GetKeyState(int *numkeys) {
-  int flag = 1;
-  for(int i = 0;i<256;i++){
-    if(i==down)keystate[i]=1;
-    else keystate[i]= 0;
-  }
-  // printf("down:%d;\n",down);
+  NDL_get_key(keystate);
   return keystate;
 }

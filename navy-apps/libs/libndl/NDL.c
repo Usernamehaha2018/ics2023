@@ -9,6 +9,7 @@ int _gettimeofday(struct timeval *tv, struct timezone *tz);
 int _signal(void *buf, size_t len);
 int _get_screen_size(void *buf, size_t len);
 int _draw_screen(void *buf, size_t offset, size_t len);
+int _get_key(void *buf);
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
@@ -30,6 +31,9 @@ uint32_t NDL_GetTicks() {
 
 int NDL_PollEvent(char *buf, int len) {
   return _signal(buf,len);
+}
+int NDL_get_key(char *buf) {
+  return _get_key(buf);
 }
 
 void get_width(char* buf, int* width, int* height){

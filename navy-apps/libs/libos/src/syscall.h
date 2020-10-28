@@ -24,6 +24,7 @@ enum {
   SYS_gettimeofday, //
   SYS_get_hw,
   SYS_draw_screen,
+  SYS_get_kbd,
 };
 
 #endif

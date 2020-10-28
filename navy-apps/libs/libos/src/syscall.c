@@ -97,6 +97,9 @@ int _get_screen_size(void *buf, size_t len){
   return _syscall_(SYS_get_hw, 5,(intptr_t)buf, (intptr_t)len);
 }
 
+int _get_key(void *buf){
+  return _syscall_(SYS_get_kbd, (intptr_t)buf,0,0);
+}
 
 int _gettimeofday(struct timeval *tv, struct timezone *tz) {
   return _syscall_(SYS_gettimeofday,(intptr_t)&tv->tv_sec,(intptr_t)&tv->tv_usec,0);

@@ -10,6 +10,8 @@ int mm_brk(uintptr_t brk);
 void __am_timer_get_time(AM_TIMER_UPTIME_T *uptime);
 size_t fb_write(const void *buf, size_t offset, size_t len);
 int fs_stat(int fd);
+size_t events_get(void *buf);
+
 
 void sys_exit(Context *c) {
   halt(0);
@@ -73,6 +75,9 @@ void sys_fstat(Context *c){
   c->GPRx = fs_stat(c->GPR2);
 }
 
+void sys_get_keystate(Context *c){
+  c->GPRx = events_get((void*)c->GPR2);
+}
 
 
 
@@ -95,6 +100,7 @@ void do_syscall(Context *c) {
     case 19: sys_get_time(c);break;
     case 20: sys_get_screen_size(c);break;
     case 21: sys_draw_screen(c);break;
+    case 22: sys_get_keystate(c);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 }

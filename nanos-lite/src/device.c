@@ -45,6 +45,17 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   return ret_len;
 }
 
+
+size_t events_get(void *buf) {
+  AM_INPUT_KEYBRD_T kbd;
+  __am_input_keybrd(&kbd);
+  uint8_t* m = buf;
+  for(int i=0;i<256;i++){
+    m[i] = ((i==kbd.keycode&&kbd.keydown)? 1: 0);
+  }
+  return 0;
+}
+
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   memcpy(buf, dispinfo, len);
   return len;
