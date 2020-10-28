@@ -23,7 +23,7 @@ int SDL_PollEvent(SDL_Event *ev) {
   int ans = NDL_PollEvent(s,128);
   if(ans){
     if(s[1]=='d'){
-      // printf("%s,s.\n",s);
+      printf("%s,s.\n",s);
       ev->type = 0;
     }
     else if (s[1]=='u')ev->type = 1;
@@ -38,6 +38,7 @@ int SDL_PollEvent(SDL_Event *ev) {
     if(!flag)assert(0);
   }
   else{
+    printf("noevent\n");
     return ans;
   }
   
