@@ -108,7 +108,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   }
   else NDL_DrawRect(pixels, x, y, w, h);
   total_time = (NDL_GetTicks()- start_time );
-  printf("time_spend:%d,tottal time:%d\n",time_spend,total_time);
+  // printf("time_spend:%d,tottal time:%d\n",time_spend,total_time);
 
 }
 
