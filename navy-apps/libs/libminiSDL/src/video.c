@@ -4,7 +4,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
+static uint8_t *m = NULL;
+static int flag = 0;
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
@@ -78,9 +79,10 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   uint32_t* pixels = (uint32_t*)s->pixels;
   int count = 0;
   if(s->format->BitsPerPixel==8){
-
-    uint8_t *m = (uint8_t*)malloc(4*s->h*s->w);
-    printf("%d,%d\n",s->w,s->h);
+    if(!flag){
+      flag = 1;
+      m = (uint8_t*)malloc(4*s->h*s->w);
+    }
     for(int j = 0; j<s->h; j++){
       for(int i = 0;i<s->w;i++){     
             uint8_t c = s->pixels[ i + j * s->w];   
