@@ -5,7 +5,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 static uint8_t *m = NULL;
-static int flag = 0;
+static int width = 0;
+static int height = 0;
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
@@ -79,9 +80,11 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   uint32_t* pixels = (uint32_t*)s->pixels;
   int count = 0;
   if(s->format->BitsPerPixel==8){
-    if(!flag){
-      flag = 1;
+    if(s->w!=width||s->h!=height){
+      free(m);
       m = (uint8_t*)malloc(4*s->h*s->w);
+      height = s->h;
+      width = s->w;
     }
     for(int j = 0; j<s->h; j++){
       for(int i = 0;i<s->w;i++){     
@@ -95,7 +98,6 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     }
     // printf("here!\n");
     NDL_DrawRect((uint32_t*)m, x, y, w, h);
-    free((void*)m);
   }
   else NDL_DrawRect(pixels, x, y, w, h);
 
