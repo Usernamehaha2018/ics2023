@@ -51,6 +51,7 @@ size_t events_get(void *buf) {
   __am_input_keybrd(&kbd);
   uint8_t* m = buf;
   printf("code:%d\n",kbd.keycode);
+  printf("down:%d\n",kbd.keydown);
   for(int i=0;i<256;i++){
     m[i] = ((i==kbd.keycode)? 1: 0);
   }
