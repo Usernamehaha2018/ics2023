@@ -1,7 +1,8 @@
 #include <am.h>
 #include <nemu.h>
 #include <string.h>
-
+int get_vga_screen_width();
+int get_vga_screen_height();
 //#define SYNC_ADDR (SCREEN_ADDR + 4)
 #define SYNC_ADDR (VGACTL_ADDR + 4)
 void __am_gpu_init() {
