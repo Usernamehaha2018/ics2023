@@ -42,7 +42,6 @@ static inline def_EHelper(sys_int) {
 
 static inline def_EHelper(iret) {
   rtl_pop(s, &s->jmp_pc);
-  rtl_pop(s, &s->jmp_pc);
   rtl_pop(s, &cpu.cs);
   rtl_pop(s, &cpu.eflags.eflag);
   rtl_j(s, s->jmp_pc);
