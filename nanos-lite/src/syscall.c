@@ -8,6 +8,7 @@ size_t fs_lseek(int fd, size_t offset, int whence);
 int fs_close(int fd);
 int mm_brk(uintptr_t brk);
 void __am_timer_get_time(AM_TIMER_UPTIME_T *uptime);
+void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd);
 size_t fb_write(const void *buf, size_t offset, size_t len);
 int fs_stat(int fd);
 size_t events_get(void *buf);
@@ -76,7 +77,15 @@ void sys_fstat(Context *c){
 }
 
 void sys_get_keystate(Context *c){
-  c->GPRx = events_get((void*)c->GPR2);
+  AM_INPUT_KEYBRD_T kbd;
+  __am_input_keybrd(&kbd);
+  uint8_t* m = (uint8_t*)c->GPR2;
+  printf("code:%d\n",kbd.keycode);
+  printf("down:%d\n",kbd.keydown);
+  for(int i=0;i<256;i++){
+    m[i] = ((i==kbd.keycode)? 1: 0);
+  }
+  c->GPRx = 0;
 }
 
 
