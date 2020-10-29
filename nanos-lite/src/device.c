@@ -50,9 +50,15 @@ size_t events_get(void *buf) {
   AM_INPUT_KEYBRD_T kbd;
   __am_input_keybrd(&kbd);
   uint8_t* m = buf;
+  int flag = 0;
   for(int i=0;i<256;i++){
     m[i] = ((i==kbd.keycode&&kbd.keydown)? 1: 0);
+    if(m[i]){
+      flag = i;
+    }
   }
+  if(!flag)printf("no key\n");
+  else printf("key:%d\n",flag);
   return 0;
 }
 
