@@ -96,15 +96,19 @@ static inline def_EHelper(2byte_esc) {
     default: exec_inv(s);
   }
 }
-
+uint32_t a,prev_a=0,prev_pc;
 static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
+  a  = vaddr_read(0x1d37d94,4);
+  if(prev_a!=a){
+    printf("cpu.pc:%x\n",prev_pc);
+    prev_a = a;
+  }
+  prev_pc = cpu.pc;
 
-  //
-//   if (opcode == 0xd3) printf("op:%x,pc:%x\n",opcode,cpu.pc);
 //  if(cpu.pc>0x3038a37&&cpu.pc<=0x3038a4d){
 //     //  printf("%x,%x\n",cpu.pc,opcode);
 //    }
@@ -117,15 +121,7 @@ again:
   // if(cpu.pc>=0x3038994&&cpu.pc<=0x3038aaf){
   //   printf("cpu.pc:%x\n",cpu.pc);
   // }
-  // if(cpu.pc==0x1010e8)assert(0);
-  /*
-   * I:imm
-   * r:reg
-   * G:register
-   * E:r/m
-   * a:al ax
-   * 0:moff
-   */
+
   switch (opcode) {
     IDEXW (0x00, G2E, add, 1)
     IDEXW (0x02, E2G, add, 1)
