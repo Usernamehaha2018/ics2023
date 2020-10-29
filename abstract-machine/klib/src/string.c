@@ -4,7 +4,7 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 size_t strlen(const char *s) {\
-  assert(s != NULL);
+  // assert(s != NULL);
 	int len = 0;
 	while((*s++) != '\0')
 		++len;
