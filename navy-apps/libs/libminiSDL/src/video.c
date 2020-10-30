@@ -99,7 +99,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
             c = s->pixels[ i + j * s->w];   
             // if(c)printf("%d\n",c);
             m[count++] = s->format->palette->colors[c].a;
-            m[count++] = s->format->palette->colors[c].g;
+            m[count++] = s->format->palette->colors[c].a;
             m[count++] = s->format->palette->colors[c].b;
             m[count++] = s->format->palette->colors[c].a;
       }
