@@ -49,7 +49,7 @@ int SDL_PumpEvent() {
   int flag = 1;
   int ans = NDL_PollEvent(s,128);
   if(ans){
-    printf("%s,s.\n",s);
+    // printf("%s,s.\n",s);
     if(s[1]=='d'){
       key_queue[key_r].state = 0;
     }
