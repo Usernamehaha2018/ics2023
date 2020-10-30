@@ -10,7 +10,6 @@ static int height = 0;
 static uint32_t time_spend = 0;
 static uint32_t total_time=0,start_time = 0;
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
-  printf("SDL_BlitSurface\n");
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
   if(dst->w>200){
@@ -52,7 +51,6 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
-  printf("SDL_FillRect\n");
   assert(dst);
   color &= 0xff;
   int w = (dstrect == NULL ? dst->w : dstrect->w);
@@ -69,14 +67,13 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
       }
       else{
         for (int k = 0; k < 4; k ++){
-        dst->pixels[((dx + i) + (dy + j) * dst->w)*4+k] = color;
+        // dst->pixels[((dx + i) + (dy + j) * dst->w)*4+k] = color;
         }
       }
     }
 }
 static int count =0;
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-  printf("SDL_UpdateRect\n");
   count += 1;
   if(width==0)start_time = NDL_GetTicks();
   if(!w||!h){
@@ -247,7 +244,6 @@ void SDL_SetPalette(SDL_Surface *s, int flags, SDL_Color *colors, int firstcolor
 }
 
 static void ConvertPixelsARGB_ABGR(void *dst, void *src, int len) {
-  printf("ConvertPixelsARGB_ABGR\n");
   int i;
   uint8_t (*pdst)[4] = dst;
   uint8_t (*psrc)[4] = src;
@@ -275,7 +271,6 @@ static void ConvertPixelsARGB_ABGR(void *dst, void *src, int len) {
 }
 
 SDL_Surface *SDL_ConvertSurface(SDL_Surface *src, SDL_PixelFormat *fmt, uint32_t flags) {
-  printf("SDL_ConvertSurface\n");
   assert(src->format->BitsPerPixel == 32);
   assert(src->w * src->format->BytesPerPixel == src->pitch);
   assert(src->format->BitsPerPixel == fmt->BitsPerPixel);
@@ -291,7 +286,6 @@ SDL_Surface *SDL_ConvertSurface(SDL_Surface *src, SDL_PixelFormat *fmt, uint32_t
 }
 
 uint32_t SDL_MapRGBA(SDL_PixelFormat *fmt, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-  printf("SDL_MapRGBA\n");
   assert(fmt->BytesPerPixel == 4);
   uint32_t p = (r << fmt->Rshift) | (g << fmt->Gshift) | (b << fmt->Bshift);
   if (fmt->Amask) p |= (a << fmt->Ashift);
