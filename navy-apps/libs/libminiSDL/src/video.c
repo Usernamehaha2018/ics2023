@@ -190,38 +190,37 @@ void SDL_FreeSurface(SDL_Surface *s) {
 }
 
 SDL_Surface* SDL_SetVideoMode(int width, int height, int bpp, uint32_t flags) {
-  if (flags & SDL_HWSURFACE) NDL_OpenCanvas(&width, &height);
-  return SDL_CreateRGBSurface(flags, width, height, bpp,
-      DEFAULT_RMASK, DEFAULT_GMASK, DEFAULT_BMASK, DEFAULT_AMASK);
-}
+//   if (flags & SDL_HWSURFACE) NDL_OpenCanvas(&width, &height);
+//   return SDL_CreateRGBSurface(flags, width, height, bpp,
+//       DEFAULT_RMASK, DEFAULT_GMASK, DEFAULT_BMASK, DEFAULT_AMASK);
+// }
 
-void SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
-  assert(src && dst);
-  assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
-  assert(dst->format->BitsPerPixel == 8);
+// void SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
+//   assert(src && dst);
+//   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
+//   assert(dst->format->BitsPerPixel == 8);
 
-  int x = (srcrect == NULL ? 0 : srcrect->x);
-  int y = (srcrect == NULL ? 0 : srcrect->y);
-  int w = (srcrect == NULL ? src->w : srcrect->w);
-  int h = (srcrect == NULL ? src->h : srcrect->h);
+//   int x = (srcrect == NULL ? 0 : srcrect->x);
+//   int y = (srcrect == NULL ? 0 : srcrect->y);
+//   int w = (srcrect == NULL ? src->w : srcrect->w);
+//   int h = (srcrect == NULL ? src->h : srcrect->h);
 
-  assert(dstrect);
-  printf("w:%d dstrect->W:%d | h:%d dstrect->h:%d\n", w, dstrect->w, h, dstrect->h);
-  if(w == dstrect->w && h == dstrect->h) {
-    /* The source rectangle and the destination rectangle
-     * are of the same size. If that is the case, there
-     * is no need to stretch, just copy. */
-    SDL_Rect rect;
-    rect.x = x;
-    rect.y = y;
-    rect.w = w;
-    rect.h = h;
-    SDL_BlitSurface(src, &rect, dst, dstrect);
-    printf("reach here1\n");
-  }
-  else {
-    SDL_BlitSurface(src, srcrect, dst, dstrect);
-  }
+//   assert(dstrect);
+//   if(w == dstrect->w && h == dstrect->h) {
+//     /* The source rectangle and the destination rectangle
+//      * are of the same size. If that is the case, there
+//      * is no need to stretch, just copy. */
+//     SDL_Rect rect;
+//     rect.x = x;
+//     rect.y = y;
+//     rect.w = w;
+//     rect.h = h;
+//     SDL_BlitSurface(src, &rect, dst, dstrect);
+//   }
+//   else {
+//     SDL_BlitSurface(src, srcrect, dst, dstrect);
+//   }
+     SDL_BlitSurface(src, srcrect, dst, dstrect);
 }
 
 void SDL_SetPalette(SDL_Surface *s, int flags, SDL_Color *colors, int firstcolor, int ncolors) {
