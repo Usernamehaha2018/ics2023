@@ -93,7 +93,6 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
       // printf("width:%d,height:%d\n",width,height);
     }
     uint8_t c;
-    uint32_t time_bef = NDL_GetTicks();
     for(int j = 0; j<s->h; j++){
       for(int i = 0;i<s->w;i++){     
             c = s->pixels[ i + j * s->w];   
@@ -104,7 +103,6 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
             m[count++] = 0;
       }
     }
-    time_spend += (NDL_GetTicks()-time_bef);
     // printf("here!\n");
     NDL_DrawRect((uint32_t*)m, x, y, w, h);
   }
