@@ -42,7 +42,7 @@ struct event_state{
   int state;
 };
 static struct event_state key_queue[KEY_QUEUE_LEN];
-static int key_f = 0, key_r = 0, pos = 0;
+static int key_f = 0, key_r = 0, pos = -1;
 
 int SDL_PumpEvent() {
   char s[128];
@@ -53,10 +53,7 @@ int SDL_PumpEvent() {
     if(s[1]=='d'){
       key_queue[key_r].state = 0;
     }
-    else if (s[1]=='u') {
-      printf("hhhh\n\n\n\n");
-      key_queue[key_r].state = 1;
-    }
+    else if (s[1]=='u') key_queue[key_r].state = 1;
     int flag  = 0;
     char *kbd = &s[3];    
     for(uint8_t i= 0;i<83;i++){
@@ -127,11 +124,11 @@ uint8_t* SDL_GetKeyState(int *numkeys) {
   int key_no = -1;
   int key_mask[83] = {0};
   for (int i = key_r; i != pos; i = (i - 1) % KEY_QUEUE_LEN) {
-    if (key_queue[key_r-1].state == 1) {
-      key_mask[key_queue[key_r-1].key] = 1;
+    if (key_queue[i].state == 1) {
+      key_mask[key_queue[i].key] = 1;
     }
-    if (key_queue[key_r-1].state == 0 && !key_mask[key_queue[key_r-1].key]) {
-      key_no = key_queue[key_r-1].key;
+    if (key_queue[i].state == 0 && !key_mask[key_queue[i].key]) {
+      key_no = key_queue[i].key;
       pos = (i - 1) % KEY_QUEUE_LEN;
       break;
     }
