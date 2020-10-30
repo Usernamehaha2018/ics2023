@@ -105,7 +105,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
             m[count++] = 0;
       }
     }
-    NDL_DrawRect((uint32_t*)m, x, y, w, h);
+    NDL_DrawRect((uint32_t*)m, x, y, s->w, s->h);
   }
   else NDL_DrawRect(pixels, x, y, w, h);
   total_time = (NDL_GetTicks()- start_time );
