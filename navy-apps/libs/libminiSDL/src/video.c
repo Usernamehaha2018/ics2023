@@ -52,8 +52,6 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
-  printf("width&height:%d,%d\n",dstrect->w,dstrect->h);
-  printf("width&height:%d,%d\n",dst->w,dst->h);
   assert(dst);
   color &= 0xff;
   int w = (dstrect == NULL ? dst->w : dstrect->w);
@@ -77,9 +75,6 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-  printf("width&height:%d,%d\n",w,h);
-  printf("ssswidth&height:%d,%d\n",s->w,s->h);
-  printf("xh&y:%d,%d\n",x,y);
   if(width==0)start_time = NDL_GetTicks();
   if(!w||!h){
     w = s->w;
