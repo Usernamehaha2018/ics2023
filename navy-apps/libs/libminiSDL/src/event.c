@@ -12,6 +12,30 @@ static const char *keyname[] = {
   _KEYS(keyname)
 };
 
+// i,key:0,73
+// i,key:1,74
+// i,key:2,75
+// i,key:3,76
+// i,key:4,1
+// i,key:5,77
+// i,key:6,69
+// i,key:7,71
+// i,key:8,54
+// i,key:9,70
+// i,key:10,67
+// i,key:11,81
+// i,key:12,82
+// i,key:13,79
+// i,key:14,80
+// i,key:15,32
+// i,key:16,43
+// i,key:17,45
+// i,key:18,31
+// i,key:19,30
+// i,key:20,29
+// i,key:21,46
+// i,key:22,44
+
 #define KEY_QUEUE_LEN 1024
 struct event_state{
   int key;
