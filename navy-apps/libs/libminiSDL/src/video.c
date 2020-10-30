@@ -51,26 +51,26 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
-  assert(dst);
-  color &= 0xff;
-  int w = (dstrect == NULL ? dst->w : dstrect->w);
-  int h = (dstrect == NULL ? dst->h : dstrect->h);  
-  int dx = (dstrect == NULL ? 0 : dstrect->x);
-  int dy = (dstrect == NULL ? 0 : dstrect->y);
-  if(dst->w - dx < w)w = dst->w - dx; 
-  if(dst->h - dy < h)h = dst->h - dy; 
-  for (int i = 0; i < w; i ++)
-    for (int j = 0; j < h; j ++) {
-      // dst->pixels[(dx + i) + (dy + j) * dst->w] = color;
-      if(dst->format->BitsPerPixel==8){
-        // dst->pixels[(dx + i) + (dy + j) * dst->w] = (uint8_t)color;
-      }
-      else{
-        for (int k = 0; k < 4; k ++){
-        dst->pixels[((dx + i) + (dy + j) * dst->w)*4+k] = color;
-        }
-      }
-    }
+  // assert(dst);
+  // color &= 0xff;
+  // int w = (dstrect == NULL ? dst->w : dstrect->w);
+  // int h = (dstrect == NULL ? dst->h : dstrect->h);  
+  // int dx = (dstrect == NULL ? 0 : dstrect->x);
+  // int dy = (dstrect == NULL ? 0 : dstrect->y);
+  // if(dst->w - dx < w)w = dst->w - dx; 
+  // if(dst->h - dy < h)h = dst->h - dy; 
+  // for (int i = 0; i < w; i ++)
+  //   for (int j = 0; j < h; j ++) {
+  //     dst->pixels[(dx + i) + (dy + j) * dst->w] = color;
+  //     if(dst->format->BitsPerPixel==8){
+  //       dst->pixels[(dx + i) + (dy + j) * dst->w] = (uint8_t)color;
+  //     }
+  //     else{
+  //       for (int k = 0; k < 4; k ++){
+  //       dst->pixels[((dx + i) + (dy + j) * dst->w)*4+k] = color;
+  //       }
+  //     }
+  //   }
 }
 static int count =0;
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
@@ -100,7 +100,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
             m[count++] = s->format->palette->colors[c].r;
             m[count++] = s->format->palette->colors[c].g;
             m[count++] = s->format->palette->colors[c].b;
-            m[count++] =  s->format->palette->colors[c].a;
+            m[count++] = s->format->palette->colors[c].a;
       }
     }
     time_spend += (NDL_GetTicks()-time_bef);
