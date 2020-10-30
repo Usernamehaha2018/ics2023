@@ -65,7 +65,8 @@ int SDL_PumpEvent() {
       }
     }  
     if(!flag){assert(0);}
-    key_r = (key_r + 1) % KEY_QUEUE_LEN;
+    key_r = (key_r + 1) % KEY_QUEUE_LEN;    
+    printf("key_l&r:%d,%d\n",key_f,key_r);
     return 1;
   }
   return 0;
@@ -113,6 +114,7 @@ int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
 
 uint8_t* SDL_GetKeyState(int *numkeys) {
   SDL_PumpEvent();  
+  printf("key_l&r:%d,%d\n",key_f,key_r);
   if(key_f!=key_r){
     for(int i=0;i<256;i++)
       {keystate[i] = (i==key_queue[key_f].key?1:0);    
