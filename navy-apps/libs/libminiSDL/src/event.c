@@ -48,6 +48,7 @@ int SDL_PumpEvent() {
   char s[128];
   int flag = 1;
   int ans = NDL_PollEvent(s,128);
+  printf("%s\n", s);
   if(ans){
     if(s[1]=='d'){
       printf("%s,s.\n",s);
@@ -103,7 +104,7 @@ int SDL_WaitEvent(SDL_Event *ev) {
     ev->key.keysym.sym = key_queue[key_f].key;
     ev->type = key_queue[key_f].state;
     key_f = (key_f + 1) % KEY_QUEUE_LEN;
-    printf("eventwaithappen,key_f:%d\n",key_f);
+    // printf("eventwaithappen,key_f:%d\n",key_f);
   }
   return 1;   
 }
@@ -116,10 +117,10 @@ int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
 
 uint8_t* SDL_GetKeyState(int *numkeys) {
   SDL_PumpEvent();  
-  printf("key_l&r:%d,%d\n",key_f,key_r);
+  // printf("key_l&r:%d,%d\n",key_f,key_r);
     for(int i=0;i<256;i++)
       {keystate[i] = (i==key_queue[key_f-1].key?1:0);    
-      if(keystate[i])printf("i:%d\n",i);
+      // if(keystate[i])printf("i:%d\n",i);
       }
   
   return keystate;   
