@@ -84,7 +84,8 @@ int SDL_PollEvent(SDL_Event *ev) {
     ev->key.keysym.sym = key_queue[key_f].key;
     ev->type = key_queue[key_f].state;
     key_f = (key_f + 1) % KEY_QUEUE_LEN;
-  }    
+  }
+  printf("curkey:%d\n",key_queue[key_r].key);    
   return 1;   
 }
 
@@ -115,6 +116,7 @@ uint8_t* SDL_GetKeyState(int *numkeys) {
       }
   }
   else{
+    printf("nokey\n");
     for(int i=0;i<256;i++)
       keystate[i] = 0;   
   }
