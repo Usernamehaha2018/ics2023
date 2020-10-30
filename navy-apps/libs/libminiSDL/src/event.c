@@ -37,19 +37,15 @@ int SDL_PollEvent(SDL_Event *ev) {
        flag = 1;
       }
     }  
-    if(!flag){printf("no\n");assert(0);}
+    if(!flag){assert(0);}
   }
   else{
     return ans;
   }
-  
-
-
   return ans;
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
-  printf("wait here\n");
   char s[128];
   int flag = 1;
   int ans = 0;
@@ -57,7 +53,6 @@ int SDL_WaitEvent(SDL_Event *event) {
   ans = NDL_PollEvent(s,128);
   if(ans){
     if(s[1]=='d'){
-      // printf("%s,s.\n",s);
       event->type = 0;
     }
     else if (s[1]=='u')event->type = 1;
@@ -67,15 +62,11 @@ int SDL_WaitEvent(SDL_Event *event) {
       if(strncmp(keyname[i],(const char*)kbd,strlen(keyname[i]))==0&&strlen((const char*)kbd)-1==strlen(keyname[i])){
        event->key.keysym.sym = i;
        flag =1;
-          //  printf("%s\n",s);
-          // printf("key:%d,%d\n",event->type,event->key.keysym.sym);
       }
     }  
     if(!flag)assert(0);
   }
   }
-
-  printf("waiover!\n");
   return ans;
 }
 
