@@ -75,9 +75,10 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
       }
     }
 }
-static int count =0;
+
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-  count += 1;
+  printf("width&height:%d,%d\n",w,h);
+  printf("width&height:%d,%d\n",s->w,s->h);
   if(width==0)start_time = NDL_GetTicks();
   if(!w||!h){
     w = s->w;
@@ -98,19 +99,16 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     for(int j = 0; j<s->h; j++){
       for(int i = 0;i<s->w;i++){     
             c = s->pixels[ i + j * s->w];   
-            // if(c)printf("%d\n",c);
             m[count++] = s->format->palette->colors[c].b;
             m[count++] = s->format->palette->colors[c].g;
             m[count++] = s->format->palette->colors[c].r;
             m[count++] = 0;
       }
     }
-    // printf("here!\n");
     NDL_DrawRect((uint32_t*)m, x, y, w, h);
   }
   else NDL_DrawRect(pixels, x, y, w, h);
   total_time = (NDL_GetTicks()- start_time );
-  // printf("time_spend:%d,tottal time:%d\n",time_spend,total_time);
 
 }
 
