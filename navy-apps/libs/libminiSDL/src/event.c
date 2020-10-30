@@ -42,7 +42,7 @@ struct event_state{
   int state;
 };
 static struct event_state key_queue[KEY_QUEUE_LEN];
-static int key_f = 0, key_r = 0;
+static int key_f = 0, key_r = 0, tmp = 0;
 
 int SDL_PumpEvent() {
   char s[128];
@@ -85,7 +85,7 @@ int SDL_PollEvent(SDL_Event *ev) {
   if(ev != NULL){     
     ev->key.keysym.sym = key_queue[key_f].key;
     ev->type = key_queue[key_f].state;
-    // key_f = (key_f + 1) % KEY_QUEUE_LEN;
+    key_f = (key_f + 1) % KEY_QUEUE_LEN;
     // printf("eventpollhappen,key_f:%d\n",key_f);
   }
   if(ev==NULL){
@@ -102,7 +102,7 @@ int SDL_WaitEvent(SDL_Event *ev) {
     if(ev != NULL){     
     ev->key.keysym.sym = key_queue[key_f].key;
     ev->type = key_queue[key_f].state;
-    // key_f = (key_f + 1) % KEY_QUEUE_LEN;
+    key_f = (key_f + 1) % KEY_QUEUE_LEN;
     // printf("eventwaithappen,key_f:%d\n",key_f);
   }
   return 1;   
@@ -116,12 +116,13 @@ int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
 
 uint8_t* SDL_GetKeyState(int *numkeys) {
   SDL_PumpEvent();  
-  printf("key_l&r:%d,%d\n",key_f,key_r);
+  // printf("key_l&r:%d,%d\n",key_f,key_r);
   for(int i=0;i<83;i++) {
-    keystate[i] = (i==key_queue[key_f].key?1:0);    
+    keystate[i] = (i==key_queue[tmp].key?1:0);    
       // if(keystate[i])printf("i:%d\n",i);
   }
-  key_f = (key_f + 1) % KEY_QUEUE_LEN;
+  tmp = (tmp + 1) % KEY_QUEUE_LEN;
+  // key_f = (key_f + 1) % KEY_QUEUE_LEN;
     // for (int i = key_f; i != key_r; i = (i + 1) % KEY_QUEUE_LEN) {
     //   if (key_queue[i].state == 0) {
     //     keystate[key_queue[i].key] = 1;
