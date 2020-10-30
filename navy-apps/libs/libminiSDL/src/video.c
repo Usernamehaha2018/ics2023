@@ -63,11 +63,11 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
     for (int j = 0; j < h; j ++) {
       // dst->pixels[(dx + i) + (dy + j) * dst->w] = color;
       if(dst->format->BitsPerPixel==8){
-        dst->pixels[(dx + i) + (dy + j) * dst->w] = (uint8_t)color;
+        // dst->pixels[(dx + i) + (dy + j) * dst->w] = (uint8_t)color;
       }
       else{
         for (int k = 0; k < 4; k ++){
-        // dst->pixels[((dx + i) + (dy + j) * dst->w)*4+k] = color;
+        dst->pixels[((dx + i) + (dy + j) * dst->w)*4+k] = color;
         }
       }
     }
@@ -223,7 +223,6 @@ void SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 }
 
 void SDL_SetPalette(SDL_Surface *s, int flags, SDL_Color *colors, int firstcolor, int ncolors) {
-  printf("SDL_SetPalette\n");
   assert(s);
   assert(s->format);
   assert(s->format->palette);
