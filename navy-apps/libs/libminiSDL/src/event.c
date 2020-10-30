@@ -122,7 +122,7 @@ uint8_t* SDL_GetKeyState(int *numkeys) {
   //     // if(keystate[i])printf("i:%d\n",i);
   // }
   for (int i = 0; i < 83; i++) keystate[i] = 0;
-  for (int i = key_f-1; i != key_r; i = (i + 1) % KEY_QUEUE_LEN) {
+  for (int i = 0; i < KEY_QUEUE_LEN; i++) {
     if (key_queue[i].state = 0) keystate[key_queue[i].key] = 1;
     else keystate[key_queue[i].key] = 0;
   }
