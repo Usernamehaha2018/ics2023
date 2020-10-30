@@ -24,6 +24,7 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
+    if(y>200){while(1);}
     uint32_t *pixels = ctl->pixels;
     uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
     int min_w;
@@ -31,7 +32,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     else min_w = 400-x;
     int cp_bytes = 4 * min_w;
     for (int j = 0; j < h && y + j < 300; j ++) {
-        if(h!=1){while(1);}
+        
         memcpy(&fb[(y + j) * 400 + x], (void*)pixels, cp_bytes);
         pixels += w;
     }
