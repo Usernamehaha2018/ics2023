@@ -124,7 +124,7 @@ uint8_t* SDL_GetKeyState(int *numkeys) {
   for (int i = 0; i < 83; i++) keystate[i] = 0;
   for (int i = 0; i < KEY_QUEUE_LEN; i++) {
     if (key_queue[i].state = 0) keystate[key_queue[i].key] = 1;
-    // else keystate[key_queue[i].key] = 0;
+    else keystate[key_queue[i].key] = 0;
   }
   return keystate;   
 }
