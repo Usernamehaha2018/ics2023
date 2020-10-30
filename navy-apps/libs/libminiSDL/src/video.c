@@ -196,7 +196,6 @@ SDL_Surface* SDL_SetVideoMode(int width, int height, int bpp, uint32_t flags) {
 }
 
 void SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
-  printf("reach here\n");
   assert(src && dst);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
   assert(dst->format->BitsPerPixel == 8);
@@ -217,9 +216,11 @@ void SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
     rect.w = w;
     rect.h = h;
     SDL_BlitSurface(src, &rect, dst, dstrect);
+    printf("reach here1\n");
   }
   else {
     SDL_BlitSurface(src, srcrect, dst, dstrect);
+    printf("reach here2\n");
   }
 }
 
