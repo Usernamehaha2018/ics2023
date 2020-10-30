@@ -243,52 +243,52 @@ void SDL_SetPalette(SDL_Surface *s, int flags, SDL_Color *colors, int firstcolor
 }
 
 static void ConvertPixelsARGB_ABGR(void *dst, void *src, int len) {
-  int i;
-  uint8_t (*pdst)[4] = dst;
-  uint8_t (*psrc)[4] = src;
-  union {
-    uint8_t val8[4];
-    uint32_t val32;
-  } tmp;
-  int first = len & ~0xf;
-  for (i = 0; i < first; i += 16) {
-#define macro(i) \
-    tmp.val32 = *((uint32_t *)psrc[i]); \
-    *((uint32_t *)pdst[i]) = tmp.val32; \
-    pdst[i][0] = tmp.val8[2]; \
-    pdst[i][2] = tmp.val8[0];
+//   int i;
+//   uint8_t (*pdst)[4] = dst;
+//   uint8_t (*psrc)[4] = src;
+//   union {
+//     uint8_t val8[4];
+//     uint32_t val32;
+//   } tmp;
+//   int first = len & ~0xf;
+//   for (i = 0; i < first; i += 16) {
+// #define macro(i) \
+//     tmp.val32 = *((uint32_t *)psrc[i]); \
+//     *((uint32_t *)pdst[i]) = tmp.val32; \
+//     pdst[i][0] = tmp.val8[2]; \
+//     pdst[i][2] = tmp.val8[0];
 
-    macro(i + 0); macro(i + 1); macro(i + 2); macro(i + 3);
-    macro(i + 4); macro(i + 5); macro(i + 6); macro(i + 7);
-    macro(i + 8); macro(i + 9); macro(i +10); macro(i +11);
-    macro(i +12); macro(i +13); macro(i +14); macro(i +15);
-  }
+//     macro(i + 0); macro(i + 1); macro(i + 2); macro(i + 3);
+//     macro(i + 4); macro(i + 5); macro(i + 6); macro(i + 7);
+//     macro(i + 8); macro(i + 9); macro(i +10); macro(i +11);
+//     macro(i +12); macro(i +13); macro(i +14); macro(i +15);
+//   }
 
-  for (; i < len; i ++) {
-    macro(i);
-  }
+//   for (; i < len; i ++) {
+//     macro(i);
+//   }
 }
 
 SDL_Surface *SDL_ConvertSurface(SDL_Surface *src, SDL_PixelFormat *fmt, uint32_t flags) {
-  assert(src->format->BitsPerPixel == 32);
-  assert(src->w * src->format->BytesPerPixel == src->pitch);
-  assert(src->format->BitsPerPixel == fmt->BitsPerPixel);
+  // assert(src->format->BitsPerPixel == 32);
+  // assert(src->w * src->format->BytesPerPixel == src->pitch);
+  // assert(src->format->BitsPerPixel == fmt->BitsPerPixel);
 
-  SDL_Surface* ret = SDL_CreateRGBSurface(flags, src->w, src->h, fmt->BitsPerPixel,
-    fmt->Rmask, fmt->Gmask, fmt->Bmask, fmt->Amask);
+  // SDL_Surface* ret = SDL_CreateRGBSurface(flags, src->w, src->h, fmt->BitsPerPixel,
+  //   fmt->Rmask, fmt->Gmask, fmt->Bmask, fmt->Amask);
 
-  assert(fmt->Gmask == src->format->Gmask);
-  assert(fmt->Amask == 0 || src->format->Amask == 0 || (fmt->Amask == src->format->Amask));
-  ConvertPixelsARGB_ABGR(ret->pixels, src->pixels, src->w * src->h);
+  // assert(fmt->Gmask == src->format->Gmask);
+  // assert(fmt->Amask == 0 || src->format->Amask == 0 || (fmt->Amask == src->format->Amask));
+  // ConvertPixelsARGB_ABGR(ret->pixels, src->pixels, src->w * src->h);
 
-  return ret;
+  // return ret;
 }
 
 uint32_t SDL_MapRGBA(SDL_PixelFormat *fmt, uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-  assert(fmt->BytesPerPixel == 4);
-  uint32_t p = (r << fmt->Rshift) | (g << fmt->Gshift) | (b << fmt->Bshift);
-  if (fmt->Amask) p |= (a << fmt->Ashift);
-  return p;
+  // assert(fmt->BytesPerPixel == 4);
+  // uint32_t p = (r << fmt->Rshift) | (g << fmt->Gshift) | (b << fmt->Bshift);
+  // if (fmt->Amask) p |= (a << fmt->Ashift);
+  // return p;
 }
 
 int SDL_LockSurface(SDL_Surface *s) {
