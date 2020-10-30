@@ -52,6 +52,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
+  printf("width&height:%d,%d\n",dstrect->w,dstrect->h);
+  printf("width&height:%d,%d\n",dst->w,dst->h);
   assert(dst);
   color &= 0xff;
   int w = (dstrect == NULL ? dst->w : dstrect->w);
