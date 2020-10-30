@@ -129,7 +129,7 @@ uint8_t* SDL_GetKeyState(int *numkeys) {
     }
     if (key_queue[key_r-1].state == 0 && !key_mask[key_queue[key_r-1].key]) {
       key_no = key_queue[key_r-1].key;
-      pos = i;
+      pos = (i - 1) % KEY_QUEUE_LEN;
       break;
     }
   }
