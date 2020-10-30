@@ -42,7 +42,7 @@ struct event_state{
   int state;
 };
 static struct event_state key_queue[KEY_QUEUE_LEN];
-static int key_f = 0, key_r = 0, tmp = 0;
+static int key_f = 0, key_r = 0;
 
 int SDL_PumpEvent() {
   char s[128];
@@ -118,11 +118,7 @@ uint8_t* SDL_GetKeyState(int *numkeys) {
   SDL_PumpEvent();  
   printf("key_l&r:%d,%d\n",key_f,key_r);
   for(int i=0;i<83;i++) {
-    if (i == key_queue[tmp].key) {
-      keystate[i] = i;
-      tmp = (tmp + 1) % KEY_QUEUE_LEN;
-    }
-    // keystate[i] = (i==key_queue[key_f].key?1:0);    
+    keystate[i] = (i==key_queue[key_f-1].key?1:0);    
       // if(keystate[i])printf("i:%d\n",i);
   }
   // key_f = (key_f + 1) % KEY_QUEUE_LEN;
