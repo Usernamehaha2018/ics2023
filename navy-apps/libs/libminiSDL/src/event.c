@@ -60,6 +60,7 @@ int SDL_PumpEvent() {
       if(strncmp(keyname[i],(const char*)kbd,strlen(keyname[i]))==0&&strlen((const char*)kbd)-1==strlen(keyname[i])){
        down = i;
        key_queue[key_r].key = i;
+       printf("new_k_r:%d\n",key_queue[key_r].key);
        flag = 1;
       }
     }  
