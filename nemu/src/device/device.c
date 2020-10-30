@@ -31,9 +31,6 @@ void device_update() {
   vga_update_screen();
   SDL_Event event;
   while (SDL_PollEvent(&event)) {
-    uint8_t kf = event.key.keysym.scancode;
-    bool isf_keydown = (event.key.type == SDL_KEYDOWN);
-    printf("down:%d,%d\n",kf,isf_keydown);
     switch (event.type) {
       case SDL_QUIT:
         nemu_state.state = NEMU_QUIT;
@@ -43,7 +40,6 @@ void device_update() {
       case SDL_KEYUP: {
         uint8_t k = event.key.keysym.scancode;
         bool is_keydown = (event.key.type == SDL_KEYDOWN);
-        printf("%d,%d\n",k,is_keydown);
         send_key(k, is_keydown);
         break;
       }
