@@ -10,31 +10,31 @@ static int height = 0;
 static uint32_t time_spend = 0;
 static uint32_t total_time=0,start_time = 0;
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
-  assert(dst && src);
-  assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
-  if(dst->w>200){
-    // printf("width:%d,,%d\n",dst->w,dst->h);
-  }
+  // assert(dst && src);
+  // assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
+  // if(dst->w>200){
+  //   // printf("width:%d,,%d\n",dst->w,dst->h);
+  // }
   int sx = (srcrect == NULL ? 0 : srcrect->x);
   int sy = (srcrect == NULL ? 0 : srcrect->y);
   int dx = (dstrect == NULL ? 0 : dstrect->x);
-  assert(dx>=0);
-  assert(sx>=0);
   int dy = (dstrect == NULL ? 0 : dstrect->y);
-  assert(dy>=0);
-  assert(sy>=0);
+  // assert(dx>=0);
+  // assert(sx>=0);
+  // assert(dy>=0);
+  // assert(sy>=0);
   int w = (srcrect == NULL ? src->w : srcrect->w);
   int h = (srcrect == NULL ? src->h : srcrect->h);
-  if(dst->w - dx < w) { w = dst->w - dx; }
-  if(dst->h - dy < h) { h = dst->h - dy; }
-  if (sx >= src->w) return;
-  if (sy >= src->h) return;
-  if (dx >= dst->w) return;
-  if (dy >= dst->h) return;
-  if (src->w - sx < w) { w = src->w - sx; }
-  if (src->h - sy < h) { h = src->h - sy; }
-  if (dst->w - dx < w) { w = dst->w - dx; }
-  if (dst->h - dy < h) { h = dst->h - dy; }
+  // if(dst->w - dx < w) { w = dst->w - dx; }
+  // if(dst->h - dy < h) { h = dst->h - dy; }
+  // if (sx >= src->w) return;
+  // if (sy >= src->h) return;
+  // if (dx >= dst->w) return;
+  // if (dy >= dst->h) return;
+  // if (src->w - sx < w) { w = src->w - sx; }
+  // if (src->h - sy < h) { h = src->h - sy; }
+  // if (dst->w - dx < w) { w = dst->w - dx; }
+  // if (dst->h - dy < h) { h = dst->h - dy; }
   for (int i = 0; i < w; i ++)
     for (int j = 0; j < h; j ++) {
       if(src->format->BitsPerPixel==8){
@@ -43,8 +43,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
       }
       else{
         for (int k = 0; k < 4; k ++){
-        uint8_t idx = src->pixels[((sx + i) + (sy + j) * src->w)*4+k];
-        dst->pixels[((dx + i) + (dy + j) * dst->w)*4+k] = idx;
+        uint8_t idx = src->pixels[((sx + i) + (sy + j) * src->w)*4 + k];
+        dst->pixels[((dx + i) + (dy + j) * dst->w)*4 + k] = idx;
         }
       }
     }
@@ -176,17 +176,17 @@ SDL_Surface* SDL_CreateRGBSurfaceFrom(void *pixels, int width, int height, int d
 }
 
 void SDL_FreeSurface(SDL_Surface *s) {
-  // if (s != NULL) {
-  //   if (s->format != NULL) {
-  //     if (s->format->palette != NULL) {
-  //       if (s->format->palette->colors != NULL) free(s->format->palette->colors);
-  //       free(s->format->palette);
-  //     }
-  //     free(s->format);
-  //   }
-  //   if (s->pixels != NULL && !(s->flags & SDL_PREALLOC)) free(s->pixels);
-  //   free(s);
-  // }
+  if (s != NULL) {
+    if (s->format != NULL) {
+      if (s->format->palette != NULL) {
+        if (s->format->palette->colors != NULL) free(s->format->palette->colors);
+        free(s->format->palette);
+      }
+      free(s->format);
+    }
+    if (s->pixels != NULL && !(s->flags & SDL_PREALLOC)) free(s->pixels);
+    free(s);
+  }
 }
 
 SDL_Surface* SDL_SetVideoMode(int width, int height, int bpp, uint32_t flags) {
