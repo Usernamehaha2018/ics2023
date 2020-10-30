@@ -60,13 +60,13 @@ int SDL_PumpEvent() {
       if(strncmp(keyname[i],(const char*)kbd,strlen(keyname[i]))==0&&strlen((const char*)kbd)-1==strlen(keyname[i])){
        down = i;
        key_queue[key_r].key = i;
-       printf("new_k_r:%d,r:%d\n",key_queue[key_r].key,key_r);
+      //  printf("new_k_r:%d,r:%d\n",key_queue[key_r].key,key_r);
        flag = 1;
       }
     }  
     if(!flag){assert(0);}
     key_r = (key_r + 1) % KEY_QUEUE_LEN;    
-    printf("key_l&r:%d,%d\n",key_f,key_r);
+    // printf("key_l&r:%d,%d\n",key_f,key_r);
     return 1;
   }
   return 0;
@@ -86,10 +86,10 @@ int SDL_PollEvent(SDL_Event *ev) {
     ev->key.keysym.sym = key_queue[key_f].key;
     ev->type = key_queue[key_f].state;
     key_f = (key_f + 1) % KEY_QUEUE_LEN;
-    printf("eventpollhappen,key_f:%d\n",key_f);
+    // printf("eventpollhappen,key_f:%d\n",key_f);
   }
   if(ev==NULL){
-  printf("curkey:%d\n",key_queue[key_f].key);    
+  // printf("curkey:%d\n",key_queue[key_f].key);    
   if(!key_queue[key_f].key)assert(0);
   }
   return 1;   
