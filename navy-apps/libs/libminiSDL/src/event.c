@@ -119,13 +119,8 @@ uint8_t* SDL_GetKeyState(int *numkeys) {
   printf("key_l&r:%d,%d\n",key_f,key_r);
   for(int i=0;i<83;i++) {
     keystate[i] = (i==key_queue[key_r-1].key?1:0);    
-    if(keystate[i]) printf("i:%d\n",i);
+    // if(keystate[i]) printf("i:%d\n",i);
   }
-  // for (int i = 0; i < 83; i++) keystate[i] = 0;
-  // for (int i = 0; i < KEY_QUEUE_LEN; i++) {
-  //   // printf("%d: %d\n", key_queue[i].key, key_queue[i].state);
-  //   if (key_queue[i].state = 0) keystate[key_queue[i].key] = 1;
-  //   // else keystate[key_queue[i].key] = 0;
-  // }
+  keystate[30] = 1;
   return keystate;   
 }
