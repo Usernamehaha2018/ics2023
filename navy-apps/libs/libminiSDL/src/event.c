@@ -87,6 +87,7 @@ int SDL_PollEvent(SDL_Event *ev) {
     key_f = (key_f + 1) % KEY_QUEUE_LEN;
   }
   printf("curkey:%d\n",key_queue[key_f].key);    
+  if(key_queue[key_f].key)assert(0);
   return 1;   
 }
 
