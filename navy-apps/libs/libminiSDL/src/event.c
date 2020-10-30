@@ -86,7 +86,7 @@ int SDL_PollEvent(SDL_Event *ev) {
     ev->key.keysym.sym = key_queue[key_f].key;
     ev->type = key_queue[key_f].state;
     key_f = (key_f + 1) % KEY_QUEUE_LEN;
-    printf("eventhappen,key_f:%d\n",key_f);
+    printf("eventpollhappen,key_f:%d\n",key_f);
   }
   if(ev==NULL){
   printf("curkey:%d\n",key_queue[key_f].key);    
@@ -103,7 +103,7 @@ int SDL_WaitEvent(SDL_Event *ev) {
     ev->key.keysym.sym = key_queue[key_f].key;
     ev->type = key_queue[key_f].state;
     key_f = (key_f + 1) % KEY_QUEUE_LEN;
-    printf("eventhappen,key_f:%d\n",key_f);
+    printf("eventwaithappen,key_f:%d\n",key_f);
   }
   return 1;   
 }
