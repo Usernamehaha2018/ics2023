@@ -31,7 +31,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     else min_w = 400-x;
     int cp_bytes = 4 * min_w;
     for (int j = 0; j < h && y + j < 300; j ++) {
-      // if(h==1){while(1)
+        if(h!=1){while(1);}
         memcpy(&fb[(y + j) * 400 + x], (void*)pixels, cp_bytes);
         pixels += w;
     }
