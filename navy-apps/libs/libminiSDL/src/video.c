@@ -19,7 +19,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   int sy = (srcrect == NULL ? 0 : srcrect->y);
   int dx = (dstrect == NULL ? 0 : dstrect->x);
   int dy = (dstrect == NULL ? 0 : dstrect->y);
-  printf("x:%d, y%d", sx, sy);
+  printf("x:%d, y:%d\n", dx, dy);
   // assert(dx>=0);
   // assert(sx>=0);
   // assert(dy>=0);
