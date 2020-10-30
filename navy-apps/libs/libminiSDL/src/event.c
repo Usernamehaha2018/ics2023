@@ -48,10 +48,9 @@ int SDL_PumpEvent() {
   char s[128];
   int flag = 1;
   int ans = NDL_PollEvent(s,128);
-  printf("%s\n", s);
   if(ans){
+    printf("%s,s.\n",s);
     if(s[1]=='d'){
-      printf("%s,s.\n",s);
       key_queue[key_r].state = 0;
     }
     else if (s[1]=='u')key_queue[key_r].state = 1;
