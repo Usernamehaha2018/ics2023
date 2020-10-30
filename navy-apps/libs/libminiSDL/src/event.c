@@ -53,14 +53,17 @@ int SDL_PumpEvent() {
     if(s[1]=='d'){
       key_queue[key_r].state = 0;
     }
-    else if (s[1]=='u')key_queue[key_r].state = 1;
+    else if (s[1]=='u') {
+      printf("hhhh\n\n\n\n");
+      key_queue[key_r].state = 1;
+    }
     int flag  = 0;
     char *kbd = &s[3];    
     for(uint8_t i= 0;i<83;i++){
       if(strncmp(keyname[i],(const char*)kbd,strlen(keyname[i]))==0&&strlen((const char*)kbd)-1==strlen(keyname[i])){
        down = i;
        key_queue[key_r].key = i;
-       printf("new_k_r:%d,r:%d\n",key_queue[key_r].key,key_r);
+      //  printf("new_k_r:%d,r:%d\n",key_queue[key_r].key,key_r);
        flag = 1;
       }
     }  
