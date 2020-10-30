@@ -78,7 +78,8 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   printf("width&height:%d,%d\n",w,h);
-  printf("width&height:%d,%d\n",s->w,s->h);
+  printf("ssswidth&height:%d,%d\n",s->w,s->h);
+  printf("xh&y:%d,%d\n",x,y);
   if(width==0)start_time = NDL_GetTicks();
   if(!w||!h){
     w = s->w;
@@ -93,7 +94,6 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
       m = (uint8_t*)malloc(4*s->h*s->w);
       height = s->h;
       width = s->w;
-      // printf("width:%d,height:%d\n",width,height);
     }
     uint8_t c;
     for(int j = 0; j<s->h; j++){
