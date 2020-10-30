@@ -96,7 +96,6 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   for(int i = 0;i<h; i ++){
     _draw_screen((void *)pixels, screen_w*(x+i)+y, 4*w);
     pixels += w;
-    printf("sizeof pixels:%d\n",sizeof(pixels));
   }
 }
 
