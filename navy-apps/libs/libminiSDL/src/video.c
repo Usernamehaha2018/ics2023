@@ -39,8 +39,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   for (int i = 0; i < w; i ++)
     for (int j = 0; j < h; j ++) {
       if(src->format->BitsPerPixel==8){
-        uint8_t idx = src->pixels[(sy + i) + (sx + j) * src->w];
-        dst->pixels[(dx + i) + (dy + j) * dst->w] = idx;
+        uint8_t idx = src->pixels[(sx + i) + (sy + j) * src->w];
+        dst->pixels[(dy + i) + (dx + j) * dst->w] = idx;
       }
       else{
         for (int k = 0; k < 4; k ++){
