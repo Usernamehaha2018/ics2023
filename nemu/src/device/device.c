@@ -1,4 +1,5 @@
 #include <common.h>
+#include <stdio.h>
 
 #ifdef HAS_IOE
 

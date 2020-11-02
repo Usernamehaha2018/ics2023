@@ -2,6 +2,7 @@
 #include "../local-include/decode.h"
 #include "all-instr.h"
 #include <isa.h>
+#include <memory/vaddr.h>
 
 static inline void set_width(DecodeExecState *s, int width) {
   if (width == -1) return;
@@ -54,7 +55,7 @@ static inline def_EHelper(gp5) {
 /* 0x0f 0x01*/
 static inline def_EHelper(gp7) {
   switch (s->isa.ext_opcode) {
-    EMPTY(0) EMPTY(1) EMPTY(2) EMPTY(3)
+    EMPTY(0) EMPTY(1) EMPTY(2) IDEXW(0x3,empt,lidt,-1)
     EMPTY(4) EMPTY(5) EMPTY(6) EMPTY(7)
   }
 }
@@ -72,6 +73,7 @@ static inline def_EHelper(2byte_esc) {
     IDEX (0x86, J, jcc)
     IDEX (0x87, J, jcc)
     IDEX (0x88, J, jcc)
+    IDEX (0x89, J, jcc)
     IDEX (0x8c, J, jcc)
     IDEX (0x8d, J, jcc)
     IDEX (0x8e, J, jcc)
@@ -79,10 +81,13 @@ static inline def_EHelper(2byte_esc) {
     IDEXW(0x92, setcc_E, setcc, 1)
     IDEXW(0x94, setcc_E, setcc, 1)
     IDEXW(0x95, setcc_E, setcc, 1)
+    IDEXW(0x96, setcc_E, setcc, 1)
     IDEXW(0x9f, setcc_E, setcc, 1)
     IDEXW(0x9d, setcc_E, setcc, 1)
     IDEXW(0x9e, setcc_E, setcc, 1)
+    IDEX (0xa4, Ib_G2E, shld)
     IDEX (0xa5, cl_G2E, shld)
+    IDEX (0xac, Ib_G2E, shrd)
     IDEX (0xaf, E2G, imul2)
     IDEX (0xbd, E2G, bsr)
     IDEXW(0xbe, E2G, movsx, 1)
@@ -92,28 +97,25 @@ static inline def_EHelper(2byte_esc) {
     default: exec_inv(s);
   }
 }
-
+// uint32_t a,prev_a=0,prev_pc;
 static inline void fetch_decode_exec(DecodeExecState *s) {
   uint8_t opcode;
 again:
   opcode = instr_fetch(&s->seq_pc, 1); // 取指
   s->opcode = opcode;  //操作码
-  //printf("%x\n",cpu.pc);
-//   if (opcode == 0xd3) printf("op:%x,pc:%x\n",opcode,cpu.pc);
-// if(opcode==0xd3){
-//     isa_reg_display();
-//   }
-//   if(opcode==0x90){
-    
-//   }
-  /*
-   * I:imm
-   * r:reg
-   * G:register
-   * E:r/m
-   * a:al ax
-   * 0:moff
-   */
+  // a  = vaddr_read(0x1d37d94,4);
+  // if(prev_a!=a){
+  //   printf("cpu.pc:%x\n",prev_pc);
+  //   prev_a = a;
+  // }
+  // prev_pc = cpu.pc;
+  // if(
+  //   ans != nex_ans){printf("cpu.pc:%x,prevpc:%x\n",cpu.pc,prev_pc);
+  //   if(prev_pc==0x3039a32)isa_reg_display();
+  //  printf("prev ans:%x,next ans:%x\n",ans,nex_ans);
+  //  ans= nex_ans;
+  // }
+
   switch (opcode) {
     IDEXW (0x00, G2E, add, 1)
     IDEXW (0x02, E2G, add, 1)
@@ -126,6 +128,7 @@ again:
     IDEX (0x09, G2E, or)
     IDEX (0x0b, E2G, or)
     IDEX (0x11, G2E, adc)
+    IDEXW(0x12, E2G, adc, 1)
     IDEX (0x13, E2G, adc)
     IDEX (0x19, G2E, sbb)
     IDEXW(0x20, G2E, and, 1)
@@ -163,7 +166,9 @@ again:
     IDEX (0x49, r, dec)
     IDEX (0x4a, r, dec)
     IDEX (0x4b, r, dec)
+    IDEX (0x4d, r, dec)
     IDEX (0x4e, r, dec)
+    IDEX (0x4f, r, dec)
     IDEX (0x50, r, push)
     IDEX (0x51, r, push)
     IDEX (0x52, r, push)
@@ -179,8 +184,10 @@ again:
     IDEX (0x5d, r, pop)
     IDEX (0x5e, r, pop)
     IDEX (0x5f, r, pop)
+    EX   (0x60, pusha)
+    EX   (0x61, popa)
     IDEX (0x68, I, push)
-    IDEX (0x69, I2r, imul1)
+    IDEX (0x69, I_E2G, imul3)
     IDEX (0x6b, SI_E2G, imul3)
     IDEXW(0x6a, I, push, 1)
     IDEXW(0x72, J, jcc, 1)
@@ -214,7 +221,9 @@ again:
     IDEXW(0xa2, a2O, mov, 1)
     IDEX (0xa3, a2O, mov)
     IDEXW(0xa4, empt, movsb, 1)
+    EX   (0xa5, movsw)
     IDEXW(0xa8, I2a, test, 1)
+    IDEX (0xa9, I2a, test)
     IDEXW(0xb0, mov_I2r, mov, 1)
     IDEXW(0xb1, mov_I2r, mov, 1)
     IDEXW(0xb2, mov_I2r, mov, 1)
@@ -237,6 +246,8 @@ again:
     IDEXW(0xc6, mov_I2E, mov, 1)
     IDEX (0xc7, mov_I2E, mov)
     EX   (0xc9, leave)
+    IDEXW(0xcd, I, sys_int, 1)
+    EX   (0xcf, iret)
     IDEXW(0xd0, gp2_1_E, gp2, 1)
     IDEX (0xd1, gp2_1_E, gp2)
     IDEXW(0xd2, gp2_cl2E, gp2, 1)

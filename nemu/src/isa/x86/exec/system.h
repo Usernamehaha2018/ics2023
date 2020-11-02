@@ -1,9 +1,17 @@
 #include <monitor/difftest.h>
 #include <isa.h>
+// mychange
+#include<cpu/exec.h>
 
 static inline def_EHelper(lidt) {
-  TODO();
-
+  if (s->isa.is_operand_size_16){   
+    cpu.idtr.limit = vaddr_read(*s->isa.mbase, 2);
+    cpu.idtr.base = vaddr_read(*s->isa.mbase+2, 3);
+  }
+  else{
+    cpu.idtr.limit = vaddr_read(*s->isa.mbase, 2);
+    cpu.idtr.base = vaddr_read(*s->isa.mbase+2, 4);
+  }
   print_asm_template1(lidt);
 }
 
@@ -23,9 +31,8 @@ static inline def_EHelper(mov_cr2r) {
 #endif
 }
 
-static inline def_EHelper(int) {
-  TODO();
-
+static inline def_EHelper(sys_int) {
+  raise_intr(s,*ddest,s->seq_pc);
   print_asm("int %s", id_dest->str);
 
 #ifndef __DIFF_REF_NEMU__
@@ -34,14 +41,17 @@ static inline def_EHelper(int) {
 }
 
 static inline def_EHelper(iret) {
-  TODO();
-
+  rtl_pop(s, &s->jmp_pc);
+  rtl_pop(s, &cpu.cs);
+  rtl_pop(s, &cpu.eflags.eflag);
+  rtl_j(s, s->jmp_pc);
   print_asm("iret");
 
 #ifndef __DIFF_REF_NEMU__
   difftest_skip_ref();
 #endif
 }
+
 
 uint32_t pio_read_l(ioaddr_t);
 uint32_t pio_read_w(ioaddr_t);

@@ -31,7 +31,6 @@ static inline void load_addr(DecodeExecState *s, ModR_M *m, Operand *rm) {
   sword_t disp = 0;
   int disp_size = 4;
   int base_reg = -1, index_reg = -1, scale = 0;
-
   if (m->R_M == R_ESP) {
     SIB sib;
     sib.val = instr_fetch(&s->seq_pc, 1);
@@ -101,9 +100,6 @@ void read_ModR_M(DecodeExecState *s, Operand *rm, bool load_rm_val, Operand *reg
   ModR_M m;
   m.val = instr_fetch(&s->seq_pc, 1);
   s->isa.ext_opcode = m.opcode;
-  // if(cpu.pc>=0x133d74&&cpu.pc<=0x133d7a){
-  // printf("%d\n",reg==NULL);
-  // printf("%d\n",m.mod==3);}
   if (reg != NULL) operand_reg(s, reg, load_reg_val, m.reg, reg->width);
   if (m.mod == 3) operand_reg(s, rm, load_rm_val, m.R_M, rm->width);
   else {

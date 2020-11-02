@@ -4,11 +4,12 @@ static inline def_EHelper(mov) {
 }
 
 static inline def_EHelper(push) {
-  rtl_sext(s, id_dest->preg, id_dest->preg, id_dest->width);
+  rtl_sext(s, s0, id_dest->preg, id_dest->width);
   // printf("push-val:%x", id_dest->val);
-  rtl_push(s, id_dest->preg);
+  rtl_push(s, s0);
   print_asm_template1(push);
 }
+
 
 static inline def_EHelper(pop) {
   rtl_pop(s, s0);
@@ -17,14 +18,33 @@ static inline def_EHelper(pop) {
 }
 
 static inline def_EHelper(pusha) {
-  TODO();
-
+  if (!s->isa.is_operand_size_16) {
+  *s0 = cpu.esp;
+  rtl_push(s,&cpu.eax);
+  rtl_push(s,&cpu.ecx);
+  rtl_push(s,&cpu.edx);
+  rtl_push(s,&cpu.ebx);
+  rtl_push(s,s0);
+  rtl_push(s,&cpu.ebp);
+  rtl_push(s,&cpu.esi);
+  rtl_push(s,&cpu.edi);
   print_asm("pusha");
+  }
+  else{
+    TODO();
+  }
 }
 
 static inline def_EHelper(popa) {
-  TODO();
-
+  
+  rtl_pop(s, &cpu.edi);
+  rtl_pop(s, &cpu.esi);
+  rtl_pop(s, &cpu.ebp);
+  rtl_pop(s, s0);
+  rtl_pop(s, &cpu.ebx);
+  rtl_pop(s, &cpu.edx);
+  rtl_pop(s, &cpu.ecx);
+  rtl_pop(s, &cpu.eax);
   print_asm("popa");
 }
 
@@ -37,8 +57,7 @@ static inline def_EHelper(leave) {
 static inline def_EHelper(cltd) {
   if (s->isa.is_operand_size_16) {
     rtl_lr(s, s0, R_AX, 2);
-    *s0 = (int32_t) *s0;
-    if (*s0 < 0)
+    if ((int32_t)*s0 < 0)
       *s1 = 0xffff;
     else
       *s1 = 0;
@@ -46,8 +65,7 @@ static inline def_EHelper(cltd) {
   }
   else {
     rtl_lr(s, s0, R_EAX, 4);
-    *s0 = (int32_t) *s0;
-    if (*s0 < 0)
+    if ((int32_t)*s0<0)
       *s1 = 0xffffffff;
     else
       *s1 = 0;
@@ -87,14 +105,27 @@ static inline def_EHelper(movzx) {
 }
 
 static inline def_EHelper(lea) {
-  rtl_addi(s, ddest, s->isa.mbase, s->isa.moff);
-  operand_write(s, id_dest, ddest);
+  rtl_addi(s, s0, s->isa.mbase, s->isa.moff);
+  operand_write(s, id_dest, s0);
   print_asm_template2(lea);
 }
 
 static inline def_EHelper(movsb){
   int increment = 1;
   
+  rtl_lr(s,s0, R_ESI, 4);
+  rtl_lm(s, s1, s0, 0, increment);
+  rtl_lr(s,s0, R_EDI, 4);
+  rtl_sm(s,s0, 0, s1, increment);
+  rtl_sr(s, R_EDI, s0, 4);
+  cpu.esi += increment;
+  cpu.edi += increment;
+  print_asm("movsb" );
+}
+
+
+static inline def_EHelper(movsw){
+  int increment = s->isa.is_operand_size_16 ? 2 : 4;
   rtl_lr(s,s0, R_ESI, 4);
   rtl_lm(s, s1, s0, 0, increment);
   rtl_lr(s,s0, R_EDI, 4);
