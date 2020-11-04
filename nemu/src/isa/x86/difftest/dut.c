@@ -2,7 +2,6 @@
 #include <monitor/difftest.h>
 #include "../local-include/reg.h"
 #include "difftest.h"
-
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   if(cpu.eax == ref_r->eax&&cpu.ebx == ref_r->ebx
   // &&cpu.ecx == ref_r->ecx
@@ -21,4 +20,5 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 }
 
 void isa_difftest_attach() {
+  
 }

@@ -49,6 +49,7 @@ ARCHIVE  = $(WORK_DIR)/build/$(NAME)-$(ISA).a
 ### Add default libraries for ISA != native
 ifneq ($(ISA), native)
 LIBS += libc libos
+CFLAGS += -U_FORTIFY_SOURCE
 else
 WL = -Wl,
 endif
@@ -164,7 +165,7 @@ $(CLEAN_ALL):
 .PHONY: clean-all $(CLEAN_ALL)
 
 ### Build fsimg and ramdisk for Nanos-lite
-APPS =  nslider menu nterm bird pal nslider
+APPS =  nslider menu nterm bird pal nslider am-kernels
 TESTS = dummy hello file-test time-test event-test bmp-test
 
 fsimg: $(addprefix apps/, $(APPS)) $(addprefix tests/, $(TESTS))
