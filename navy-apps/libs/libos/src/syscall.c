@@ -92,6 +92,14 @@ int _signal(void *buf, size_t len){
   return _syscall_(SYS_signal, 4,(intptr_t)buf, (intptr_t)len);
 }
 
+int _get_key_direct(void *buf){
+  return _syscall_(SYS_key_direct, (intptr_t)buf, 0, 0);
+}
+
+int _draw_direct(void *buf){
+  return _syscall_(SYS_draw_direct, (intptr_t)buf, 0, 0);
+}
+
 
 int _get_screen_size(void *buf, size_t len){
   return _syscall_(SYS_get_hw, 5,(intptr_t)buf, (intptr_t)len);

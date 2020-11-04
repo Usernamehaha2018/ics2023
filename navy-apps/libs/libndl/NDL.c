@@ -10,6 +10,8 @@ int _signal(void *buf, size_t len);
 int _get_screen_size(void *buf, size_t len);
 int _draw_screen(void *buf, size_t offset, size_t len);
 int _get_key(void *buf);
+int _get_key_direct(void *buf);
+int _draw_direct(void *buf);
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
@@ -34,6 +36,9 @@ int NDL_PollEvent(char *buf, int len) {
 }
 int NDL_get_key(char *buf) {
   return _get_key(buf);
+}
+int NDL_get_key_direct(void *buf){
+  _get_key_direct((void*)buf);
 }
 
 void get_width(char* buf, int* width, int* height){
@@ -97,6 +102,11 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
     _draw_screen((void *)pixels, screen_w*(x+i)+y, 4*w);
     pixels += w;
   }
+}
+
+void NDL_draw_direct(void *buf){
+  _draw_direct(buf);
+
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {

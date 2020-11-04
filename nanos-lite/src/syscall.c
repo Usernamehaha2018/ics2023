@@ -9,6 +9,7 @@ int fs_close(int fd);
 int mm_brk(uintptr_t brk);
 void __am_timer_get_time(AM_TIMER_UPTIME_T *uptime);
 void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd);
+void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl);
 size_t fb_write(const void *buf, size_t offset, size_t len);
 int fs_stat(int fd);
 size_t events_get(void *buf);
@@ -86,6 +87,16 @@ void sys_get_keystate(Context *c){
   c->GPRx = 0;
 }
 
+void sys_get_key_direct(Context *c){
+  AM_INPUT_KEYBRD_T* kbd = (AM_INPUT_KEYBRD_T*)c->GPR2;
+  __am_input_keybrd(kbd);
+}
+
+void sys_draw_direct(Context *c){
+  AM_GPU_FBDRAW_T *ctl = (AM_GPU_FBDRAW_T *)c->GPR2;
+  __am_gpu_fbdraw(ctl);
+}
+
 
 
 
@@ -108,6 +119,8 @@ void do_syscall(Context *c) {
     case 20: sys_get_screen_size(c);break;
     case 21: sys_draw_screen(c);break;
     case 22: sys_get_keystate(c);break;
+    case 23: sys_get_key_direct(c);break;
+    case 24: sys_draw_direct(c);break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 }

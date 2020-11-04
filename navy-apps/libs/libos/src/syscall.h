@@ -1,7 +1,6 @@
 #ifndef __SYSCALL_H__
 #define __SYSCALL_H__
-
-enum {
+  enum {
   SYS_exit,  //
   SYS_yield, //
   SYS_open, //
@@ -24,7 +23,8 @@ enum {
   SYS_gettimeofday, //
   SYS_get_hw,
   SYS_draw_screen,
-  SYS_get_kbd,
+  SYS_get_kbd,  
+  SYS_key_direct,  
+  SYS_draw_direct,
 };
-
 #endif
