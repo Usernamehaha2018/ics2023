@@ -38,7 +38,7 @@ void init_proc() {
 
   Log("Initializing processes...");
 
-  naive_uload(NULL, "/bin/typing-game");
+  naive_uload(NULL, "/bin/coremark");
 
 }
 
